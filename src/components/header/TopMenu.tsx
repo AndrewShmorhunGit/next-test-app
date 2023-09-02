@@ -5,7 +5,7 @@ import { appShadows, container } from "app/styles/services/styles";
 import main from "app/styles/modules/main.module.css";
 import { palette } from "app/styles/services/palette";
 import { Clock } from "components/lib/Clock";
-export const headerHight: number = 10;
+// import { FormSearch } from "components/lib/Bootstrap";
 
 export function TopMenu() {
   const { day, date, dayOfMonth } = getDate();
@@ -20,7 +20,7 @@ export function TopMenu() {
       <div style={{ ...container }}>
         <div
           style={{
-            height: `${headerHight}rem`,
+            height: "10rem",
             display: "flex",
             justifyContent: "space-between",
           }}

@@ -1,5 +1,3 @@
-import React from "react";
-
 export function getDate() {
   const [day, month, dayOfMonth, year] = new Date()
     .toLocaleDateString("en-US", {

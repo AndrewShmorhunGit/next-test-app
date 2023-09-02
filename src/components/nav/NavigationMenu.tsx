@@ -1,10 +1,9 @@
 "use client";
-import { headerHight } from "components/header/TopMenu";
 import { SettingsLogo } from "components/lib/Logos";
 import { appShadows, flexCenter } from "app/styles/services/styles";
 import { palette } from "app/styles/services/palette";
-import styles from "app/styles/modules/main.module.css";
 import Link from "next/link";
+import { useEffect, useState } from "react";
 
 export function NavigationMenu() {
   const navigation = [
@@ -15,19 +14,19 @@ export function NavigationMenu() {
     { name: "settings", link: "", active: false },
   ];
 
+  const [isWindowHeight, setWindowHeight] = useState(500);
+  useEffect(() => {
+    setWindowHeight(global.innerHeight);
+  }, [global.innerHeight]);
+
   return (
     <div
       id="navigation"
       style={{
         gridTemplateRows: "2",
         gridTemplateColumns: "1/2",
-        // height: "minMax(100vh, 160rem)",
-        // maxHeight: "180rem",
         display: "block",
-        minHeight:
-          window.innerHeight >= 400
-            ? `calc(100vh - ${headerHight}rem)`
-            : "100%",
+        minHeight: isWindowHeight >= 400 ? `calc(100vh - 10rem)` : "100%",
         boxShadow: appShadows.header,
         paddingBottom: "8rem",
       }}

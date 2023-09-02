@@ -1,3 +1,4 @@
+"use client";
 import { flexCenter } from "app/styles/services/styles";
 
 export const footerHight = 5.2;

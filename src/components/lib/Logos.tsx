@@ -1,3 +1,5 @@
+"use client";
+
 import { ILogos } from "../../interfaces/ILogos";
 
 export function SettingsLogo({

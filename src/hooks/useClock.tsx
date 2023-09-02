@@ -1,12 +1,13 @@
 "use client";
 import React, { useEffect } from "react";
 
-export function Clock() {
-  // let time = new Date().toLocaleTimeString().slice(0, -3);
-  const [isTime, setTime] = React.useState("");
+export function useClock() {
+  const getTime = () => new Date().toLocaleTimeString().slice(0, -3);
+  const time = getTime();
+  const [isTime, setTime] = React.useState(time);
 
   const updateTime = () => {
-    let time = new Date().toLocaleTimeString().slice(0, -3);
+    let time = getTime();
     setTime(time);
   };
   useEffect(() => {

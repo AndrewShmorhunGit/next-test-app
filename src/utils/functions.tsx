@@ -18,3 +18,29 @@ export function getDate() {
     dayOfMonth: dayOfMonth.slice(0, -1),
   };
 }
+
+export function transformDateFormat(dateString: string): string[] {
+  const [year, month, day] = dateString.split("-");
+
+  const format1 = `${month} / ${day} / ${year}`;
+  const format2 = `${day} / ${month}`;
+
+  const monthNames = [
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "May",
+    "Jun",
+    "Jul",
+    "Aug",
+    "Sep",
+    "Oct",
+    "Nov",
+    "Dec",
+  ];
+
+  const format3 = `${day} / ${monthNames[Number(month) - 1]} / ${year}`;
+
+  return [format1, format2, format3];
+}

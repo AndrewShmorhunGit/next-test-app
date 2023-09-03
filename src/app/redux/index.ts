@@ -1,5 +1,6 @@
-import { useAppDispatch } from "hooks/useAppDispatch";
-import { useSelector } from "react-redux";
+"use client";
+import { useAppDispatch, useAppSelector } from "hooks/useAppDispatch";
+
 import { setModal } from "app/redux/features/modal/modal.slice";
 import { increment } from "app/redux/features/counter/counter.slice";
 import {
@@ -8,10 +9,10 @@ import {
 } from "app/redux/features/navigation/navigation.slice";
 
 export {
-  useAppDispatch,
-  useSelector,
+  useAppSelector as useSelector,
   setModal,
   increment,
   selectNav,
   unselectNav,
+  useAppDispatch,
 };

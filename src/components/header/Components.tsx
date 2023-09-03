@@ -5,9 +5,7 @@ import { appShadows, container, flexCenter } from "app/styles/services/styles";
 import { useClock } from "hooks/useClock";
 import { ClocksLogo, ShieldLogo } from "components/lib/Logos";
 import { getDate } from "utils/functions";
-import { useAppDispatch } from "hooks/useAppDispatch";
-import { increment } from "app/redux/features/counter/counter.slice";
-import { useSelector } from "react-redux";
+import { useSelector, increment, useAppDispatch } from "app/redux";
 import { RootState } from "app/redux/store";
 import { useMedia } from "hooks/useMedia";
 import { PiUsersBold } from "react-icons/pi";
@@ -23,6 +21,7 @@ export function TopMenuWrapper({ children }: { children: React.ReactNode }) {
   return (
     <div
       style={{
+        maxWidth: "100vw",
         boxShadow: appShadows.header,
         background: palette.background_main,
         gridColumn: "1/3",
@@ -105,7 +104,6 @@ export function FormSearch() {
 
 export function InfoBlock() {
   const count = useSelector((state: RootState) => state.counter.value);
-  useAppDispatch();
   const dispatch = useAppDispatch();
   const { isMedia } = useMedia();
   const { day, date, dayOfMonth } = getDate();

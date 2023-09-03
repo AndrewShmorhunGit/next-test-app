@@ -1,23 +1,39 @@
-"use client"
-import { palette } from "app/styles/services/palette";
+"use client";
+import { useAppDispatch, selectNav } from "app/redux";
+import { flexCenter } from "app/styles/services/styles";
 import { MainHeader } from "components/lib/Components";
+import { Button } from "components/modal/Components";
+
 import Link from "next/link";
 
 export function ErrorPage() {
+  const dispatch = useAppDispatch();
   return (
-    <div style={{ minHeight: "100%", minWidth: "100%", display: "grid" }}>
-      <div style={{ alignSelf: "center" }}>
-        <MainHeader text={"Ooops, something went wrong 😕"} />
-      </div>
-      <Link
-        href={"/"}
+    <div
+      style={{
+        minHeight: "100%",
+        display: "grid",
+      }}
+    >
+      <div
         style={{
-          padding: "2rem 4rem",
-          border: `${palette.error} 0.2rem solid`,
+          alignSelf: "center",
+          margin: "0 auto",
+          display: "flex",
+          flexDirection: "column",
+          gap: "2rem",
+          width: "16rem",
         }}
       >
-        Go home
-      </Link>
+        <MainHeader text={"It Is an Error 😪"} />
+        <Link href={"/"} style={{ ...flexCenter, textDecoration: "none" }}>
+          <Button
+            type={"error"}
+            content={"home"}
+            clickHandler={() => dispatch(selectNav(null))}
+          />
+        </Link>
+      </div>
     </div>
   );
 }

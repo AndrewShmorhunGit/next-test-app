@@ -1,17 +1,11 @@
 "use client";
 
-import { RootState } from "app/redux/store";
 import { MainHeader } from "components/lib/Components";
-import { useAppDispatch } from "hooks/useAppDispatch";
-import { useSelector } from "react-redux";
-import { setModal } from "app/redux/features/modal/modal.slice";
-import { palette } from "app/styles/services/palette";
+import { setModal, useAppDispatch } from "app/redux";
 import { Button } from "components/modal/Components";
 
 export function HomePage() {
-  const isModal = useSelector((state: RootState) => state.modal.value);
-  const dispatch = useAppDispatch();
-
+  const dispatch = useAppDispatch()
   return (
     <div
       style={{

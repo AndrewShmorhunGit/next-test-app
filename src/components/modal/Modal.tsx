@@ -8,11 +8,9 @@ import { GrFormClose } from "react-icons/Gr";
 import { absoluteCenter, appShadows } from "app/styles/services/styles";
 import { useClickOutside } from "hooks/useClickOutside";
 import { setModal, useAppDispatch, useSelector } from "app/redux";
-// import { useMedia } from "hooks/useMedia";
 
 export function Modal() {
   const refClickOutside = React.useRef<HTMLDivElement | null>(null);
-
   const isModal = useSelector((state: RootState) => state.modal.value);
   const dispatch = useAppDispatch();
   useClickOutside(refClickOutside, () => dispatch(setModal("none")));
@@ -36,7 +34,6 @@ export function Modal() {
         ref={refClickOutside}
         style={{
           width: "80rem",
-          // height: "32rem",
           background: palette.background_main,
           cursor: "auto",
           transform: "translate(0, -5rem)",

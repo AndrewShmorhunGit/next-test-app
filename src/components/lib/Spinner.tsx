@@ -1,3 +1,4 @@
+"use client";
 import spinner from "content/logos/spinner.svg";
 
 const spin = {

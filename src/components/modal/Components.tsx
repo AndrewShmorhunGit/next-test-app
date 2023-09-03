@@ -1,6 +1,7 @@
 import { setModal, useAppDispatch } from "app/redux";
 import { palette } from "app/styles/services/palette";
 import { createGrid, flexCenter } from "app/styles/services/styles";
+import { Button } from "components/lib/Components";
 import { GiConfirmed } from "react-icons/gi";
 
 export function ModalTestContent() {
@@ -91,54 +92,4 @@ export function ModalTestContent() {
     </div>
   );
 }
-
-export function Button({
-  type,
-  content,
-  clickHandler,
-}: {
-  type: "primary" | "secondary" | "modal";
-  content: string | React.ReactNode;
-  clickHandler?: Function;
-}) {
-  const variants = {
-    primary: { background: palette.background_main, color: palette.error },
-    secondary: {
-      background: palette.main_primary,
-      color: palette.white,
-    },
-    modal: {
-      background: palette.background_main,
-      color: palette.error,
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "center",
-      gap: "1.2rem",
-    },
-  };
-
-  return (
-    <button
-      className="hover"
-      style={{
-        border: "none",
-        fontWeight: "700",
-        textTransform: "uppercase",
-        fontSize: "1.6rem",
-        padding: "2rem 4rem",
-        borderRadius: "10rem",
-        cursor: "pointer",
-        letterSpacing: "0.1rem",
-        ...variants[type],
-      }}
-      onClick={() =>
-        clickHandler
-          ? clickHandler()
-          : typeof content === "string" &&
-            console.log(`button "${content}" clicked`)
-      }
-    >
-      {content}
-    </button>
-  );
-}
+export { Button };

@@ -8,7 +8,7 @@ import {
 import { RiSettings5Fill } from "react-icons/ri";
 import { HiArrowSmLeft } from "react-icons/hi";
 import { getNavigationData } from "data/static.components";
-import { useSelector } from "react-redux";
+import { useSelector, useAppDispatch, selectNav } from "app/redux";
 import Link from "next/link";
 import React from "react";
 import { RootState } from "app/redux/store";
@@ -159,16 +159,19 @@ export function Settings() {
 }
 
 export function Menu() {
+  const select = useSelector((state: RootState) => state.navigation.selector);
+  const dispatch = useAppDispatch();
+
   return (
     <div
       style={{
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
-        gap: "1.6rem",
+        gap: "1.2rem",
       }}
     >
-      {navigation.map(({ name, link, active }) => {
+      {navigation.map(({ name, link }) => {
         return (
           <Link
             key={name}
@@ -184,11 +187,12 @@ export function Menu() {
               textAlign: "center",
               cursor: "pointer",
               textTransform: "uppercase",
-              borderBottom: active
-                ? `solid 0.4rem ${palette.main_primary_dark}`
-                : "none",
+              borderBottom: `solid 0.4rem ${
+                select === name ? palette.main_primary_dark : "transparent"
+              }`,
             }}
             href={`/${link}`}
+            onClick={() => dispatch(selectNav(name))}
           >
             {name}
           </Link>

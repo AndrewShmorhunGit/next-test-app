@@ -6,6 +6,7 @@ import { useAppDispatch } from "hooks/useAppDispatch";
 import { useSelector } from "react-redux";
 import { setModal } from "app/redux/features/modal/modal.slice";
 import { palette } from "app/styles/services/palette";
+import { Button } from "components/modal/Components";
 
 export function HomePage() {
   const isModal = useSelector((state: RootState) => state.modal.value);
@@ -29,18 +30,11 @@ export function HomePage() {
         }}
       >
         <MainHeader text={"Home 🙂"} />
-        <button
-          style={{
-            fontSize: "2rem",
-            padding: "2rem 2,4rem",
-            display: "block",
-            border: `${palette.main_primary_dark} 0.2rem solid`,
-            cursor: "pointer",
-          }}
-          onClick={() => dispatch(setModal("test"))}
-        >
-          Open Modal
-        </button>
+        <Button
+          type={"secondary"}
+          content={"modal"}
+          clickHandler={() => dispatch(setModal("test"))}
+        />
       </div>
     </div>
   );

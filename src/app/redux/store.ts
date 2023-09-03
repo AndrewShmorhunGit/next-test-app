@@ -2,10 +2,12 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import counterReducer from "./features/counter/counter.slice";
 import modalReducer from "./features/modal/modal.slice";
+import navigationReducer from "./features/navigation/navigation.slice";
 
 export const rootReducer = combineReducers({
   counter: counterReducer,
   modal: modalReducer,
+  navigation: navigationReducer,
 });
 
 export function setupStore() {
@@ -14,9 +16,6 @@ export function setupStore() {
     // [api.reducerPath]: api.reducer,
   });
 }
-
-// export type RootState = ReturnType<typeof store.getState>;
-// export type AppDispatch = typeof store.dispatch;
 
 export type RootState = ReturnType<typeof rootReducer>;
 export type AppStore = ReturnType<typeof setupStore>;

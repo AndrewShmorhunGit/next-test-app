@@ -2,22 +2,20 @@
 
 import React from "react";
 import { palette } from "app/styles/services/palette";
-import { useAppDispatch } from "hooks/useAppDispatch";
-import { useSelector } from "react-redux";
-import { setModal } from "app/redux/features/modal/modal.slice";
 import { RootState } from "app/redux/store";
 import { ModalTestContent } from "./Components";
-
 import { GrFormClose } from "react-icons/Gr";
-
 import { absoluteCenter, appShadows } from "app/styles/services/styles";
+import { useClickOutside } from "hooks/useClickOutside";
+import { setModal, useAppDispatch, useSelector } from "app/redux";
 // import { useMedia } from "hooks/useMedia";
 
 export function Modal() {
-  // const { isMedia } = useMedia();
+  const refClickOutside = React.useRef<HTMLDivElement | null>(null);
+
   const isModal = useSelector((state: RootState) => state.modal.value);
-  useAppDispatch();
   const dispatch = useAppDispatch();
+  useClickOutside(refClickOutside, () => dispatch(setModal("none")));
   return (
     <div
       style={{
@@ -35,9 +33,10 @@ export function Modal() {
       }}
     >
       <div
+        ref={refClickOutside}
         style={{
           width: "80rem",
-          height: "32rem",
+          // height: "32rem",
           background: palette.background_main,
           cursor: "auto",
           transform: "translate(0, -5rem)",
@@ -47,15 +46,7 @@ export function Modal() {
         }}
       >
         {isModal === "test" && <ModalTestContent />}
-        <div>
-          <h2>Operation block</h2>
-        </div>
-        <div>
-          <h2>Position block</h2>
-        </div>
-        <div>
-          <h2>Action block</h2>
-        </div>
+
         <div
           style={{
             position: "absolute",

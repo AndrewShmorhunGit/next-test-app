@@ -1,9 +1,11 @@
 "use client";
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import counterReducer from "./features/counter/counter.slice";
+import modalReducer from "./features/modal/modal.slice";
 
 export const rootReducer = combineReducers({
   counter: counterReducer,
+  modal: modalReducer,
 });
 
 export function setupStore() {

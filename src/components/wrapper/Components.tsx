@@ -1,7 +1,9 @@
 "use client";
+import { RootState } from "app/redux/store";
 import { Footer } from "components/footer/Footer";
 import { Modal } from "components/modal/Modal";
 import React from "react";
+import { useSelector } from "react-redux";
 
 export function LayoutSubWrapper({ children }: { children: React.ReactNode }) {
   return (
@@ -18,12 +20,12 @@ export function LayoutSubWrapper({ children }: { children: React.ReactNode }) {
 }
 
 export function PageWrapper({ children }: { children: React.ReactNode }) {
+  const isModal = useSelector((state: RootState) => state.modal.value);
+
   return (
     <div>
-      {/* <Modal /> */}
-      <div style={{ height: "90%", overflow: "hidden", background: "red" }}>
-        {children}
-      </div>
+      {isModal !== "none" && <Modal />}
+      <div style={{ height: "90%", overflow: "hidden" }}>{children}</div>
       <FooterExtraWrapper>
         <Footer />
       </FooterExtraWrapper>

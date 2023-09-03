@@ -1,3 +1,5 @@
+"use client";
+
 import { palette } from "app/styles/services/palette";
 import { appShadows, container, flexCenter } from "app/styles/services/styles";
 import { useClock } from "hooks/useClock";

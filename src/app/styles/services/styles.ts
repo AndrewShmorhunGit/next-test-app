@@ -1,7 +1,14 @@
-// Absolute
-
 import { mq } from "./media-queries";
 import { palette } from "./palette";
+
+// Absolute
+
+export const absoluteCenter = {
+  position: "absolute",
+  left: "50%",
+  top: "50%",
+  transform: "translate(-50%, -50%)",
+};
 
 // Flex
 

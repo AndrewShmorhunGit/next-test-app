@@ -8,7 +8,7 @@ export const getNavigationData = () => {
   const navigationData = [
     { name: "income", link: "products", active: false },
     { name: "groups", link: "orders", active: true },
-    { name: "products", link: "", active: false },
+    { name: "products", link: "error", active: false },
     { name: "users", link: "", active: false },
     { name: "settings", link: "", active: false },
   ];

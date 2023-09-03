@@ -1,18 +1,43 @@
 "use client";
 import { palette } from "app/styles/services/palette";
-import { appShadows, flexCenter } from "app/styles/services/styles";
-// import { SettingsLogo } from "components/lib/Logos";
+import {
+  absoluteCenter,
+  appShadows,
+  flexCenter,
+} from "app/styles/services/styles";
 import { RiSettings5Fill } from "react-icons/ri";
 import { HiArrowSmLeft } from "react-icons/hi";
 import { getNavigationData } from "data/static.components";
-
+import { useSelector } from "react-redux";
 import Link from "next/link";
 import React from "react";
+import { RootState } from "app/redux/store";
 
 const { navigationData: navigation } = getNavigationData();
 
 export function MenuWrapper({ children }: { children: React.ReactNode }) {
-  const [isToggle, setOpen] = React.useState(true);
+  // toggle navigation management
+  const isModal = useSelector((state: RootState) => state.modal.value);
+
+  const [isToggle, setToggle] = React.useState(true);
+
+  const [isSaveToggle, setSaveToggle] = React.useState(true);
+
+  React.useEffect(() => {
+    if (isToggle) {
+      if (isModal !== "none") {
+        setSaveToggle(true);
+        setToggle(false);
+      }
+      return;
+    } else {
+      setSaveToggle(false);
+      if (isModal === "none") setToggle(isSaveToggle);
+      return;
+    }
+  }, [isModal]);
+
+  // size management
   const [isWindowHeight, setWindowHeight] = React.useState(500);
 
   React.useEffect(() => {
@@ -23,7 +48,6 @@ export function MenuWrapper({ children }: { children: React.ReactNode }) {
     <div
       id="navigation"
       style={{
-        // transform: `translateX(${isOpen ? "0rem" : "-90%"})`,
         transition: `${isToggle ? 1 : 0.2}s min-width ease`,
         minWidth: isToggle ? "20rem" : "2rem",
         gridTemplateRows: "2",
@@ -48,7 +72,7 @@ export function MenuWrapper({ children }: { children: React.ReactNode }) {
           border: `solid 0.2rem ${palette.main_primary_dark}`,
           borderRight: "none",
         }}
-        onClick={() => setOpen(!isToggle)}
+        onClick={() => isModal === "none" && setToggle(!isToggle)}
       >
         <HiArrowSmLeft
           style={{
@@ -67,7 +91,7 @@ export function MenuWrapper({ children }: { children: React.ReactNode }) {
       <div
         style={{
           opacity: isToggle ? 1 : 0,
-          transition: `${isToggle ? 2 : 0.4}s opacity ease`,
+          transition: `${isToggle ? 1 : 0.4}s opacity ease`,
         }}
       >
         {isToggle ? children : null}
@@ -126,10 +150,7 @@ export function Settings() {
           size={16}
           color={palette.main_primary_dark}
           style={{
-            position: "absolute",
-            left: "50%",
-            top: "50%",
-            transform: "translate(-50%, -50%)",
+            ...absoluteCenter,
           }}
         />
       </div>

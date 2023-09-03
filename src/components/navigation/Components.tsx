@@ -1,7 +1,9 @@
 "use client";
 import { palette } from "app/styles/services/palette";
 import { appShadows, flexCenter } from "app/styles/services/styles";
-import { SettingsLogo } from "components/lib/Logos";
+// import { SettingsLogo } from "components/lib/Logos";
+import { RiSettings5Fill } from "react-icons/ri";
+import { HiArrowSmLeft } from "react-icons/hi";
 import { getNavigationData } from "data/static.components";
 
 import Link from "next/link";
@@ -10,6 +12,7 @@ import React from "react";
 const { navigationData: navigation } = getNavigationData();
 
 export function MenuWrapper({ children }: { children: React.ReactNode }) {
+  const [isToggle, setOpen] = React.useState(true);
   const [isWindowHeight, setWindowHeight] = React.useState(500);
 
   React.useEffect(() => {
@@ -20,15 +23,55 @@ export function MenuWrapper({ children }: { children: React.ReactNode }) {
     <div
       id="navigation"
       style={{
+        // transform: `translateX(${isOpen ? "0rem" : "-90%"})`,
+        transition: `${isToggle ? 1 : 0.2}s min-width ease`,
+        minWidth: isToggle ? "20rem" : "2rem",
         gridTemplateRows: "2",
         gridTemplateColumns: "1/2",
         display: "block",
-        minHeight: isWindowHeight >= 400 ? `calc(100vh - 10rem)` : "100%",
+        minHeight: isWindowHeight >= 400 ? `calc(100vh - 10rem)` : "100vh",
         boxShadow: appShadows.header,
         paddingBottom: "8rem",
+        position: "relative",
       }}
     >
-      {children}
+      <div
+        style={{
+          position: "absolute",
+          right: 0,
+          top: "2rem",
+          width: "2rem",
+          height: "2rem",
+          background: palette.background_main,
+          borderTopLeftRadius: "50%",
+          borderBottomLeftRadius: "50%",
+          border: `solid 0.2rem ${palette.main_primary_dark}`,
+          borderRight: "none",
+        }}
+        onClick={() => setOpen(!isToggle)}
+      >
+        <HiArrowSmLeft
+          style={{
+            position: "absolute",
+            left: "60%",
+            top: "50%",
+            transform: isToggle
+              ? "translate(-50%, -50%)"
+              : "translate(-50%, -50%) rotate(0.5turn)",
+            cursor: "pointer",
+          }}
+          size={16}
+          color={palette.main_primary_dark}
+        />
+      </div>
+      <div
+        style={{
+          opacity: isToggle ? 1 : 0,
+          transition: `${isToggle ? 2 : 0.4}s opacity ease`,
+        }}
+      >
+        {isToggle ? children : null}
+      </div>
     </div>
   );
 }
@@ -36,7 +79,7 @@ export function MenuWrapper({ children }: { children: React.ReactNode }) {
 export function User() {
   return (
     <div style={{ padding: "8rem 4rem", ...flexCenter }}>
-      <div style={{ position: "relative" }}>
+      <div style={{ position: "relative", width: "9.6rem" }}>
         <UserImage />
         <Settings />
       </div>
@@ -50,13 +93,14 @@ export function UserImage() {
       style={{
         background: palette.background_third,
         overflow: "hidden",
-        width: "12rem",
-        height: "12rem",
+        width: "9.6rem",
+        height: "9.6rem",
         borderRadius: "50%",
+        position: "relative",
       }}
     >
       <img
-        style={{ width: "12rem", height: "12rem" }}
+        style={{ width: "9.6rem", height: "9.6rem" }}
         src={
           "https://res.cloudinary.com/natalie-cakes/image/upload/v1693496671/dzenCode/user_ajakc7.jpg"
         }
@@ -67,27 +111,27 @@ export function UserImage() {
 
 export function Settings() {
   return (
-    <div
-      style={{
-        boxShadow: appShadows.settings,
-        background: palette.background_second,
-        width: "4rem",
-        height: "4rem",
-        borderRadius: "50%",
-        position: "absolute",
-        right: "0rem",
-        bottom: "0rem",
-      }}
-    >
+    <div style={{ position: "absolute", right: "0rem", bottom: "0rem" }}>
       <div
         style={{
-          position: "absolute",
-          left: "50%",
-          top: "50%",
-          transform: "translate(-50%, -50%)",
+          boxShadow: appShadows.settings,
+          background: palette.background_second,
+          width: "2.8rem",
+          height: "2.8rem",
+          borderRadius: "50%",
+          position: "relative",
         }}
       >
-        <SettingsLogo height={20} width={20} fill={palette.text_dark} />
+        <RiSettings5Fill
+          size={16}
+          color={palette.main_primary_dark}
+          style={{
+            position: "absolute",
+            left: "50%",
+            top: "50%",
+            transform: "translate(-50%, -50%)",
+          }}
+        />
       </div>
     </div>
   );
@@ -106,6 +150,7 @@ export function Menu() {
       {navigation.map(({ name, link, active }) => {
         return (
           <Link
+            key={name}
             style={{
               display: "block",
               textDecoration: "none",

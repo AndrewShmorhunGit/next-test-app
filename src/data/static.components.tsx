@@ -19,7 +19,7 @@ export const getFooterData = () => {
   const footerHight = 5.2;
 
   const content =
-    "Developed by Shmorhun Andrew for testing porpoises. All rights reserved";
+    "Developed by Shmorhun Andrew for testing porpoises. All rights reserved.";
 
   const year = new Date().getFullYear();
 

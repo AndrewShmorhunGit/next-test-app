@@ -1,8 +1,10 @@
+"use client";
 import { useState, useEffect, useCallback } from "react";
 import { IMedia, IMediaSettings } from "../interfaces/IMedia";
 
 export const useMedia = (): IMediaSettings => {
-  const [isWindowSize, setWindowSize] = useState<number>(window.innerWidth);
+  const width = global.innerWidth;
+  const [isWindowSize, setWindowSize] = useState<number>(width);
 
   const checkMQSize = (): "big" | "medium" | "small" | "mini" => {
     if (isWindowSize >= 1200) return "big";
@@ -17,7 +19,7 @@ export const useMedia = (): IMediaSettings => {
     checkMQSize()
   );
   const handleWindowResize = useCallback(() => {
-    const size = window.innerWidth;
+    const size = global.innerWidth;
     setWindowSize(size);
     if (size >= 1200) return setIsMQ("big");
     if (size < 1200 && size >= 960) return setIsMQ("medium");
@@ -27,9 +29,9 @@ export const useMedia = (): IMediaSettings => {
   }, []);
 
   useEffect(() => {
-    window.addEventListener("resize", handleWindowResize);
+    global.addEventListener("resize", handleWindowResize);
     return () => {
-      window.removeEventListener("resize", handleWindowResize);
+      global.removeEventListener("resize", handleWindowResize);
     };
   }, [handleWindowResize]);
 

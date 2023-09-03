@@ -1,14 +1,15 @@
+"use client";
 import { Footer } from "components/footer/Footer";
+import { Modal } from "components/modal/Modal";
 import React from "react";
 
 export function LayoutSubWrapper({ children }: { children: React.ReactNode }) {
   return (
     <div
       style={{
-        height: "100%",
         display: "grid",
-        gridTemplateColumns: "1fr 5fr",
-        gridTemplateRows: "10rem 1fr",
+        gridTemplateColumns: "1fr 100fr",
+        gridTemplateRows: "10rem 100fr",
       }}
     >
       {children}
@@ -19,7 +20,10 @@ export function LayoutSubWrapper({ children }: { children: React.ReactNode }) {
 export function PageWrapper({ children }: { children: React.ReactNode }) {
   return (
     <div>
-      <div style={{ height: "90%" }}>{children}</div>
+      {/* <Modal /> */}
+      <div style={{ height: "90%", overflow: "hidden", background: "red" }}>
+        {children}
+      </div>
       <FooterExtraWrapper>
         <Footer />
       </FooterExtraWrapper>

@@ -1,12 +1,7 @@
 "use client";
-import { Footer } from "components/footer/Footer";
 import { TopMenu } from "components/header/TopMenu";
 import { NavigationMenu } from "components/navigation/NavigationMenu";
-import {
-  PageWrapper,
-  LayoutSubWrapper,
-  FooterExtraWrapper,
-} from "./Components";
+import { PageWrapper, LayoutSubWrapper } from "./Components";
 
 export function LayoutWrapper({ children }: { children: React.ReactNode }) {
   return (

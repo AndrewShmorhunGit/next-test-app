@@ -8,7 +8,7 @@ import {
 import { RiSettings5Fill } from "react-icons/ri";
 import { HiArrowSmLeft } from "react-icons/hi";
 import { getNavigationData } from "data/static.components";
-import { useSelector, useAppDispatch, selectNav } from "app/redux";
+import { useSelector, useAppDispatch, selectNav, toggleNav } from "app/redux";
 import Link from "next/link";
 import React from "react";
 import { RootState } from "app/redux/store";
@@ -18,8 +18,9 @@ const { navigationData: navigation } = getNavigationData();
 export function MenuWrapper({ children }: { children: React.ReactNode }) {
   // toggle navigation management
   const isModal = useSelector((state: RootState) => state.modal.value);
-
-  const [isToggle, setToggle] = React.useState(true);
+  const isToggle = useSelector((state: RootState) => state.navigation.toggle);
+  const dispatch = useAppDispatch();
+  // const [isToggle, ] = React.useState(true);
 
   const [isSaveToggle, setSaveToggle] = React.useState(true);
 
@@ -27,12 +28,12 @@ export function MenuWrapper({ children }: { children: React.ReactNode }) {
     if (isToggle) {
       if (isModal !== "none") {
         setSaveToggle(true);
-        setToggle(false);
+        dispatch(toggleNav(false));
       }
       return;
     } else {
       setSaveToggle(false);
-      if (isModal === "none") setToggle(isSaveToggle);
+      if (isModal === "none") dispatch(toggleNav(isSaveToggle));
       return;
     }
   }, [isModal]);
@@ -57,7 +58,14 @@ export function MenuWrapper({ children }: { children: React.ReactNode }) {
         boxShadow: appShadows.header,
         paddingBottom: "8rem",
         position: "relative",
+        cursor:
+          isModal === "none" && isToggle === false ? "pointer" : "default",
       }}
+      onClick={() =>
+        isModal === "none" &&
+        isToggle === false &&
+        dispatch(toggleNav(!isToggle))
+      }
     >
       <div
         style={{
@@ -71,8 +79,10 @@ export function MenuWrapper({ children }: { children: React.ReactNode }) {
           borderBottomLeftRadius: "50%",
           border: `solid 0.2rem ${palette.main_primary_dark}`,
           borderRight: "none",
+          zIndex: "9",
+          cursor: "pointer",
         }}
-        onClick={() => isModal === "none" && setToggle(!isToggle)}
+        onClick={() => isModal === "none" && dispatch(toggleNav(!isToggle))}
       >
         <HiArrowSmLeft
           style={{
@@ -82,27 +92,34 @@ export function MenuWrapper({ children }: { children: React.ReactNode }) {
             transform: isToggle
               ? "translate(-50%, -50%)"
               : "translate(-50%, -50%) rotate(0.5turn)",
-            cursor: "pointer",
           }}
           size={16}
           color={palette.main_primary_dark}
         />
       </div>
-      <div
+      {/* <div
         style={{
           opacity: isToggle ? 1 : 0,
           transition: `${isToggle ? 1 : 0.4}s opacity ease`,
         }}
-      >
-        {isToggle ? children : null}
-      </div>
+      > */}
+      {children}
+      {/* </div> */}
     </div>
   );
 }
 
 export function User() {
+  const isToggle = useSelector((state: RootState) => state.navigation.toggle);
   return (
-    <div style={{ padding: "8rem 4rem", ...flexCenter }}>
+    <div
+      style={{
+        padding: "8rem 4rem",
+        ...flexCenter,
+        transition: `${isToggle ? 1 : 0.5}s transform ease`,
+        transform: isToggle ? "translateX(0rem)" : "translateX(-20rem)",
+      }}
+    >
       <div style={{ position: "relative", width: "9.6rem" }}>
         <UserImage />
         <Settings />
@@ -160,6 +177,7 @@ export function Settings() {
 
 export function Menu() {
   const select = useSelector((state: RootState) => state.navigation.selector);
+  const isToggle = useSelector((state: RootState) => state.navigation.toggle);
   const dispatch = useAppDispatch();
 
   return (
@@ -169,6 +187,8 @@ export function Menu() {
         flexDirection: "column",
         alignItems: "center",
         gap: "1.2rem",
+        transition: `${isToggle ? 1 : 0.5}s transform ease`,
+        transform: isToggle ? "translateX(0rem)" : "translateX(-20rem)",
       }}
     >
       {navigation.map(({ name, link }) => {

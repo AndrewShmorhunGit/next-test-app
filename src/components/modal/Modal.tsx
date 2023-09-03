@@ -3,17 +3,19 @@
 import React from "react";
 import { palette } from "app/styles/services/palette";
 import { RootState } from "app/redux/store";
-import { ModalTestContent } from "./Components";
-import { GrFormClose } from "react-icons/Gr";
+import { ModalDeleteProduct, ModalTestContent } from "./Components";
+import { IoMdClose } from "react-icons/io";
 import { absoluteCenter, appShadows } from "app/styles/services/styles";
 import { useClickOutside } from "hooks/useClickOutside";
 import { setModal, useAppDispatch, useSelector } from "app/redux";
 
 export function Modal() {
   const refClickOutside = React.useRef<HTMLDivElement | null>(null);
-  const isModal = useSelector((state: RootState) => state.modal.value);
+  const isModal = useSelector((state: RootState) => state.modal);
   const dispatch = useAppDispatch();
-  useClickOutside(refClickOutside, () => dispatch(setModal("none")));
+  useClickOutside(refClickOutside, () =>
+    dispatch(setModal({ value: "none", data: null }))
+  );
   return (
     <div
       style={{
@@ -22,9 +24,10 @@ export function Modal() {
         minHeight: "100%",
         minWidth: "100%",
         display: "flex",
+        // inset: 0,
         alignItems: "center",
         justifyContent: "center",
-        background: "rgba(0, 0, 0, 0.5)",
+        // background: "rgba(0, 0, 0, 0.5)",
         cursor: "pointer",
         zIndex: 1,
         opacity: 1,
@@ -42,7 +45,10 @@ export function Modal() {
           flexDirection: "column",
         }}
       >
-        {isModal === "test" && <ModalTestContent />}
+        {isModal.value === "test" && <ModalTestContent />}
+        {isModal.value === "delete" && isModal.data !== null && (
+          <ModalDeleteProduct product={isModal.data} />
+        )}
 
         <div
           style={{
@@ -57,15 +63,15 @@ export function Modal() {
             display: "grid",
             cursor: "pointer",
           }}
-          onClick={() => dispatch(setModal("none"))}
+          onClick={() => dispatch(setModal({ value: "none", data: null }))}
         >
-          <GrFormClose
+          <IoMdClose
             style={{
               ...absoluteCenter,
               opacity: 0.5,
             }}
             color={palette.text_dark}
-            size={24}
+            size={20}
           />
         </div>
       </div>

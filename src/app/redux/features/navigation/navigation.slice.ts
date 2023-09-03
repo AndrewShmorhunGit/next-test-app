@@ -2,8 +2,9 @@
 
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialState: { selector: string | null } = {
+const initialState: { selector: string | null; toggle: boolean } = {
   selector: null,
+  toggle: true,
 };
 
 export const navigationSlice = createSlice({
@@ -13,12 +14,15 @@ export const navigationSlice = createSlice({
     selectNav: (state, action) => {
       state.selector = action.payload;
     },
-    unselectNav: (state, action) => {
+    unselectNav: (state) => {
       state.selector = null;
+    },
+    toggleNav: (state, action) => {
+      state.toggle = action.payload;
     },
   },
 });
 
-export const { selectNav, unselectNav } = navigationSlice.actions;
+export const { selectNav, unselectNav, toggleNav } = navigationSlice.actions;
 
 export default navigationSlice.reducer;

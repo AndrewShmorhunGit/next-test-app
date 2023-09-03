@@ -6,6 +6,7 @@ import { increment } from "app/redux/features/counter/counter.slice";
 import {
   selectNav,
   unselectNav,
+  toggleNav,
 } from "app/redux/features/navigation/navigation.slice";
 
 export {
@@ -14,5 +15,6 @@ export {
   increment,
   selectNav,
   unselectNav,
+  toggleNav,
   useAppDispatch,
 };

@@ -3,7 +3,7 @@ import { RootState } from "app/redux/store";
 import { Footer } from "components/footer/Footer";
 import { Modal } from "components/modal/Modal";
 import React from "react";
-import { useSelector } from "react-redux";
+import { useSelector } from "app/redux";
 
 export function LayoutSubWrapper({ children }: { children: React.ReactNode }) {
   return (
@@ -12,6 +12,7 @@ export function LayoutSubWrapper({ children }: { children: React.ReactNode }) {
         display: "grid",
         gridTemplateColumns: "1fr 100fr",
         gridTemplateRows: "10rem 100fr",
+        // minHeight: "1000rem",
       }}
     >
       {children}
@@ -21,11 +22,17 @@ export function LayoutSubWrapper({ children }: { children: React.ReactNode }) {
 
 export function PageWrapper({ children }: { children: React.ReactNode }) {
   const isModal = useSelector((state: RootState) => state.modal.value);
-
   return (
     <div>
       {isModal !== "none" && <Modal />}
-      <div style={{ height: "90%", overflow: "hidden" }}>{children}</div>
+      <div
+        style={{
+          height: "90%",
+          overflow: "hidden",
+        }}
+      >
+        {children}
+      </div>
       <FooterExtraWrapper>
         <Footer />
       </FooterExtraWrapper>

@@ -1,8 +1,10 @@
+"use client";
 import { palette } from "app/styles/services/palette";
 import { createGrid, flexCenter } from "app/styles/services/styles";
 import { ICatProduct } from "interfaces/IProducts";
 import { BsTrashFill } from "react-icons/bs";
 import { transformDateFormat } from "utils/functions";
+import { setModal, useAppDispatch } from "app/redux";
 
 const StatusIndicator = ({ status }: { status: string }) => (
   <div style={{ alignSelf: "center", paddingLeft: "1.6rem" }}>
@@ -69,8 +71,10 @@ const DateRange = ({ from, to }: { from: string; to: string }) => (
 );
 
 export function Product({ product }: { product: ICatProduct }) {
+  const dispatch = useAppDispatch();
   return (
     <div
+      onClick={() => console.log(product)}
       style={{
         ...createGrid(
           "4rem 6rem 36rem 6rem 10rem 6rem minmax(9rem,18rem) minmax(16rem,32rem) 18rem 24rem 15rem 6rem",
@@ -79,6 +83,7 @@ export function Product({ product }: { product: ICatProduct }) {
         padding: "0.8rem 2.4rem",
         background: palette.background_main,
         columnGap: "2.8rem",
+        borderRadius: "0.4rem",
       }}
     >
       <StatusIndicator status={product.status} />
@@ -145,7 +150,12 @@ export function Product({ product }: { product: ICatProduct }) {
         <span>{transformDateFormat(product.date.from)[2]}</span>
       </div>
       <div style={{ alignSelf: "center" }}>
-        <BsTrashFill />
+        <BsTrashFill
+          size={16}
+          color={palette.text_dark}
+          style={{ cursor: "pointer" }}
+          onClick={() => dispatch(setModal({ value: "delete", data: product }))}
+        />
       </div>
     </div>
   );

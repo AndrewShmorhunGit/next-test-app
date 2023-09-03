@@ -1,3 +1,4 @@
+"use client";
 import { palette } from "app/styles/services/palette";
 import { AiFillGithub, AiFillLinkedin } from "react-icons/ai";
 

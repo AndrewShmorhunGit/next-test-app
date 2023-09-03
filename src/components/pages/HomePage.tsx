@@ -1,11 +1,10 @@
 "use client";
 
-import { MainHeader } from "components/lib/Components";
+import { Button, MainHeader } from "components/lib/Components";
 import { setModal, useAppDispatch } from "app/redux";
-import { Button } from "components/modal/Components";
 
 export function HomePage() {
-  const dispatch = useAppDispatch()
+  const dispatch = useAppDispatch();
   return (
     <div
       style={{
@@ -27,7 +26,7 @@ export function HomePage() {
         <Button
           type={"secondary"}
           content={"modal"}
-          clickHandler={() => dispatch(setModal("test"))}
+          clickHandler={() => dispatch(setModal({ value: "test", data: null }))}
         />
       </div>
     </div>

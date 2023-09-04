@@ -100,13 +100,18 @@ body {
   overflow-x: hidden;
 }
 
-/* a {
-  color: inherit;
-  text-decoration: none;
+.scroll-bar::-webkit-scrollbar {
+  width: 1rem;
+  height: 1rem;
 }
 
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
-  }
-} */
+.scroll-bar::-webkit-scrollbar-track {
+  background: #ffffff;
+  border-radius: 1rem;
+}
+
+.scroll-bar::-webkit-scrollbar-thumb {
+  background: lightgray;
+  opacity: 50%;
+  border-radius: 1rem;
+}

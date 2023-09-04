@@ -12,15 +12,16 @@ import { useSelector, useAppDispatch, selectNav, toggleNav } from "app/redux";
 import Link from "next/link";
 import React from "react";
 import { RootState } from "app/redux/store";
+import { useMedia } from "hooks/useMedia";
 
 const { navigationData: navigation } = getNavigationData();
 
 export function MenuWrapper({ children }: { children: React.ReactNode }) {
+  const { setMedia } = useMedia();
   // toggle navigation management
   const isModal = useSelector((state: RootState) => state.modal.value);
   const isToggle = useSelector((state: RootState) => state.navigation.toggle);
   const dispatch = useAppDispatch();
-  // const [isToggle, ] = React.useState(true);
 
   const [isSaveToggle, setSaveToggle] = React.useState(true);
 
@@ -49,14 +50,14 @@ export function MenuWrapper({ children }: { children: React.ReactNode }) {
     <div
       id="navigation"
       style={{
-        transition: `${isToggle ? 1 : 0.2}s min-width ease`,
+        transition: `${isToggle ? 0.3 : 0.2}s min-width ease`,
         minWidth: isToggle ? "20rem" : "2rem",
         gridTemplateRows: "2",
         gridTemplateColumns: "1/2",
         display: "block",
         minHeight: isWindowHeight >= 400 ? `calc(100vh - 10rem)` : "100vh",
         boxShadow: appShadows.header,
-        paddingBottom: "6rem",
+        paddingBottom: `${setMedia(8, 6, 5.2, 4)}rem`,
         position: "relative",
         cursor:
           isModal === "none" && isToggle === false ? "pointer" : "default",
@@ -103,13 +104,14 @@ export function MenuWrapper({ children }: { children: React.ReactNode }) {
 }
 
 export function User() {
+  const { setMedia } = useMedia();
   const isToggle = useSelector((state: RootState) => state.navigation.toggle);
   return (
     <div
       style={{
-        padding: "6rem 4rem",
+        padding: `${setMedia(8, 6, 5.2, 4)}rem 4rem`,
         ...flexCenter,
-        transition: `${isToggle ? 1 : 0.5}s transform ease`,
+        transition: `${isToggle ? 0.5 : 0.3}s transform ease`,
         transform: isToggle ? "translateX(0rem)" : "translateX(-20rem)",
       }}
     >
@@ -180,7 +182,7 @@ export function Menu() {
         flexDirection: "column",
         alignItems: "center",
         gap: "1.2rem",
-        transition: `${isToggle ? 1 : 0.5}s transform ease`,
+        transition: `${isToggle ? 0.5 : 0.3}s transform ease`,
         transform: isToggle ? "translateX(0rem)" : "translateX(-20rem)",
       }}
     >

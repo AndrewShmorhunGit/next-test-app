@@ -1,4 +1,5 @@
 export interface ICatProduct {
+  id: string;
   image: string;
   position: { name: string; code: string };
   status: "available" | "not available";

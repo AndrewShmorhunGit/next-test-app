@@ -16,7 +16,7 @@ export default function ProductsPage() {
   return (
     <div
       style={{
-        padding: "4rem 8rem 0rem 4rem",
+        padding: "2rem 3.2rem",
         maxWidth: isToggle ? "calc(100vw - 20rem)" : "100vw",
         background: setMedia("inherit", "green", "blue", "yellow"),
       }}
@@ -38,6 +38,7 @@ export default function ProductsPage() {
         </div>
       </div>
       <div
+        className="scroll-bar"
         style={{
           maxHeight: "calc(100vh - 30rem)",
           overflowY: "scroll",

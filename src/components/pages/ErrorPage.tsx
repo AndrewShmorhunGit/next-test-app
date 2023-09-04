@@ -2,7 +2,7 @@
 import { useAppDispatch, selectNav } from "app/redux";
 import { flexCenter } from "app/styles/services/styles";
 import { MainHeader } from "components/lib/Components";
-import { Button } from "components/modal/Components";
+import { Button } from "components/lib/Components";
 
 import Link from "next/link";
 

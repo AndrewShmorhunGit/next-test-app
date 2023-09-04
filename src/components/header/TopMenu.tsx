@@ -1,6 +1,6 @@
 "use client";
 
-import { FormSearch, InfoBlock, MainLogo, TopMenuWrapper } from "./Components";
+import { FormSearch, InfoBlock, MainLogo, TopMenuWrapper } from "./Client";
 
 export function TopMenu() {
   return (

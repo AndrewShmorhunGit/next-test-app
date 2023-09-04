@@ -27,6 +27,9 @@ export function PageWrapper({ children }: { children: React.ReactNode }) {
       <div
         style={{
           overflow: "hidden",
+          display: "flex",
+          justifyContent: "center",
+          minHeight: "90%",
         }}
       >
         {children}

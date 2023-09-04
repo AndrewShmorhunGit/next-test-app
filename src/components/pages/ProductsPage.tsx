@@ -2,16 +2,16 @@
 
 import { useSelector } from "app/redux";
 import { RootState } from "app/redux/store";
-import { createGrid } from "app/styles/services/styles";
-import { Product } from "components/products/Components";
-import { catProducts } from "data/products";
-import { useMedia } from "hooks/useMedia";
+import { Products } from "components/products/Server";
 // import { useLocalStorageState } from "hooks/useLocalStorageState";
+import { useMedia } from "hooks/useMedia";
 
 export default function ProductsPage() {
-  // const [isState, setState] = useLocalStorageState({});
+  // const [isProducts, setProducts] = useLocalStorageState("products");
   const isToggle = useSelector((state: RootState) => state.navigation.toggle);
-  const products = catProducts;
+
+  console.log(process.env.PRODUCTS_API_URL);
+
   const { isMedia, setMedia } = useMedia();
   return (
     <div
@@ -29,7 +29,7 @@ export default function ProductsPage() {
           paddingBottom: "6rem",
         }}
       >
-        <h1>Products / {products.length} </h1>
+        {/* <h1>Products / {products.length} </h1> */}
         <div>
           <label htmlFor="">
             status
@@ -45,20 +45,7 @@ export default function ProductsPage() {
           overflowX: "scroll",
         }}
       >
-        <div
-          style={{
-            minHeight: "100rem",
-            maxHeight: "60rem",
-            paddingBottom: "2rem",
-            paddingRight: "2rem",
-            rowGap: "1.6rem",
-            ...createGrid(1, 100),
-          }}
-        >
-          {products.map((product) => {
-            return <Product key={product.position.name} product={product} />;
-          })}
-        </div>
+        <Products />
       </div>
     </div>
   );

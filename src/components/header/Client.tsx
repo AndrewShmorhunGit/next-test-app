@@ -1,7 +1,7 @@
 "use client";
 
 import { palette } from "app/styles/services/palette";
-import { appShadows, container, flexCenter } from "app/styles/services/styles";
+import { container, flexCenter } from "app/styles/services/styles";
 import { useClock } from "hooks/useClock";
 import { ClocksLogo, ShieldLogo } from "components/lib/Logos";
 import { getDate } from "utils/functions";
@@ -9,24 +9,15 @@ import { useSelector, increment, useAppDispatch } from "app/redux";
 import { RootState } from "app/redux/store";
 import { useMedia } from "hooks/useMedia";
 import { PiUsersBold } from "react-icons/pi";
+import { TopMenuServerWrapper } from "./Server";
+import { getHeaderData } from "data/static.components";
+
+const { styles } = getHeaderData();
 
 export function TopMenuWrapper({ children }: { children: React.ReactNode }) {
   const { isMedia } = useMedia();
-  const styles = {
-    height: "10rem",
-    display: "flex",
-    justifyContent: "space-between",
-    alignItems: "center",
-  };
   return (
-    <div
-      style={{
-        maxWidth: "100vw",
-        boxShadow: appShadows.header,
-        background: palette.background_main,
-        gridColumn: "1/3",
-      }}
-    >
+    <TopMenuServerWrapper>
       <div
         style={
           isMedia.mini
@@ -36,7 +27,7 @@ export function TopMenuWrapper({ children }: { children: React.ReactNode }) {
       >
         {children}
       </div>
-    </div>
+    </TopMenuServerWrapper>
   );
 }
 

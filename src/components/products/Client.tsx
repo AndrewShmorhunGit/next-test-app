@@ -1,4 +1,3 @@
-"use client";
 import { palette } from "app/styles/services/palette";
 import { createGrid, flexCenter } from "app/styles/services/styles";
 import { ICatProduct } from "interfaces/IProducts";

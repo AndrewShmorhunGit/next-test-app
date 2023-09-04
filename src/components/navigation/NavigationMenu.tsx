@@ -1,6 +1,6 @@
 "use client";
 
-import { Menu, MenuWrapper, User } from "./Components";
+import { Menu, MenuWrapper, User } from "./Client";
 
 export function NavigationMenu() {
   return (

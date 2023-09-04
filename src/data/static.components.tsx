@@ -36,3 +36,13 @@ export const getFooterData = () => {
   ];
   return { links, content, year, footerHight };
 };
+
+export const getHeaderData = () => {
+  const styles = {
+    height: "10rem",
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
+  };
+  return { styles };
+};

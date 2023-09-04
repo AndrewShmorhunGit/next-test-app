@@ -1,11 +1,14 @@
 "use client";
 
-import { FooterLinks, FooterWrapper } from "./Components";
+import { FooterWrapper } from "./Client";
+import { FooterLinks } from "./Server";
 
-export function Footer() {
+function Footer() {
   return (
     <FooterWrapper>
       <FooterLinks />
     </FooterWrapper>
   );
 }
+
+export { Footer };

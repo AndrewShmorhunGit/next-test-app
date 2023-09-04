@@ -4,11 +4,11 @@ import React from "react";
 
 export function useLocalStorageState(
   key: string,
-  defaultValue: string | Function = "",
+  defaultValue: any | Function = "",
   { serialize = JSON.stringify, deserialize = JSON.parse } = {}
 ) {
   const [state, setState] = React.useState(() => {
-    const valueInLocalStorage = window.localStorage.getItem(key);
+    const valueInLocalStorage = global.localStorage.getItem(key);
     if (valueInLocalStorage) {
       return deserialize(valueInLocalStorage);
     }
@@ -23,13 +23,13 @@ export function useLocalStorageState(
   React.useEffect(() => {
     const prevKey = prevKeyRef.current;
     if (prevKey !== key) {
-      window.localStorage.removeItem(prevKey);
+      global.localStorage.removeItem(prevKey);
     }
     prevKeyRef.current = key;
   }, [key]);
 
   React.useEffect(() => {
-    window.localStorage.setItem(key, serialize(state));
+    global.localStorage.setItem(key, serialize(state));
   }, [key, state, serialize]);
 
   return [state, setState];

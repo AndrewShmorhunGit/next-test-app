@@ -56,7 +56,7 @@ export function MenuWrapper({ children }: { children: React.ReactNode }) {
         display: "block",
         minHeight: isWindowHeight >= 400 ? `calc(100vh - 10rem)` : "100vh",
         boxShadow: appShadows.header,
-        paddingBottom: "8rem",
+        paddingBottom: "6rem",
         position: "relative",
         cursor:
           isModal === "none" && isToggle === false ? "pointer" : "default",
@@ -97,14 +97,7 @@ export function MenuWrapper({ children }: { children: React.ReactNode }) {
           color={palette.main_primary_dark}
         />
       </div>
-      {/* <div
-        style={{
-          opacity: isToggle ? 1 : 0,
-          transition: `${isToggle ? 1 : 0.4}s opacity ease`,
-        }}
-      > */}
       {children}
-      {/* </div> */}
     </div>
   );
 }
@@ -114,7 +107,7 @@ export function User() {
   return (
     <div
       style={{
-        padding: "8rem 4rem",
+        padding: "6rem 4rem",
         ...flexCenter,
         transition: `${isToggle ? 1 : 0.5}s transform ease`,
         transform: isToggle ? "translateX(0rem)" : "translateX(-20rem)",

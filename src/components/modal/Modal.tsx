@@ -27,10 +27,10 @@ export function Modal() {
         // inset: 0,
         alignItems: "center",
         justifyContent: "center",
-        // background: "rgba(0, 0, 0, 0.5)",
+        background: "rgba(0, 0, 0, 0.5)",
         cursor: "pointer",
         zIndex: 1,
-        opacity: 1,
+        // opacity: 1,
       }}
     >
       <div

@@ -12,7 +12,6 @@ export function LayoutSubWrapper({ children }: { children: React.ReactNode }) {
         display: "grid",
         gridTemplateColumns: "1fr 100fr",
         gridTemplateRows: "10rem 100fr",
-        // minHeight: "1000rem",
       }}
     >
       {children}
@@ -27,7 +26,6 @@ export function PageWrapper({ children }: { children: React.ReactNode }) {
       {isModal !== "none" && <Modal />}
       <div
         style={{
-          height: "90%",
           overflow: "hidden",
         }}
       >

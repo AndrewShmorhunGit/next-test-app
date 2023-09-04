@@ -1,5 +1,4 @@
 "use client";
-
 import { io as ClientIO } from "socket.io-client";
 import { createContext, useContext, useEffect, useState } from "react";
 import { useAppDispatch, increment, decrement } from "app/redux";
@@ -22,7 +21,7 @@ export const SocketProvider = ({ children }: { children: React.ReactNode }) => {
   const dispatch = useAppDispatch();
   const [isSocket, setSocket] = useState(null);
   const [isConnected, setIsConnected] = useState(false);
-  console.log(isSocket);
+
   useEffect(() => {
     const socketInstance = new (ClientIO as any)(
       process.env.NEXT_PUBLIC_SITE_URL!,
@@ -31,6 +30,8 @@ export const SocketProvider = ({ children }: { children: React.ReactNode }) => {
         addTrailingSlash: false,
       }
     );
+
+    console.log(socketInstance);
 
     socketInstance.on("connect", () => {
       setIsConnected(true);

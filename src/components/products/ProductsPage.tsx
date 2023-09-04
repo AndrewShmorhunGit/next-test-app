@@ -12,7 +12,7 @@ export default function ProductsPage() {
 
   console.log(process.env.PRODUCTS_API_URL);
 
-  const { isMedia, setMedia } = useMedia();
+  const { setMedia } = useMedia();
   return (
     <div
       style={{

@@ -1,4 +1,4 @@
-import { ErrorPage } from "components/pages/ErrorPage";
+import { ErrorPage } from "components/error/ErrorPage";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {

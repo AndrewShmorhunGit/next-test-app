@@ -2,7 +2,11 @@
 import { useAppDispatch, useAppSelector } from "hooks/useAppDispatch";
 
 import { setModal } from "app/redux/features/modal/modal.slice";
-import { increment, decrement } from "app/redux/features/counter/counter.slice";
+import {
+  increment,
+  decrement,
+  setCount,
+} from "app/redux/features/counter/counter.slice";
 import {
   selectNav,
   unselectNav,
@@ -13,6 +17,7 @@ export {
   useAppSelector as useSelector,
   setModal,
   increment,
+  setCount,
   decrement,
   selectNav,
   unselectNav,

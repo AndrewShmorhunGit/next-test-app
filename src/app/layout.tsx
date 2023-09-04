@@ -4,6 +4,7 @@ import { LayoutWrapper } from "components/wrapper/Wrapper";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { SocketProvider } from "providers/socket.provider";
+import { ClerkProvider } from "@clerk/nextjs";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -18,14 +19,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className="no-touch">
-      <body className={inter.className}>
-        <Providers>
-          <SocketProvider>
-            <LayoutWrapper>{children}</LayoutWrapper>
-          </SocketProvider>
-        </Providers>
-      </body>
-    </html>
+    <ClerkProvider>
+      <html lang="en" className="no-touch">
+        <body className={inter.className}>
+          <Providers>
+            <SocketProvider>
+              <LayoutWrapper>{children}</LayoutWrapper>
+            </SocketProvider>
+          </Providers>
+        </body>
+      </html>
+    </ClerkProvider>
   );
 }

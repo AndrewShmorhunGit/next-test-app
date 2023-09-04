@@ -1,4 +1,4 @@
-import ProductsPage from "components/pages/ProductsPage";
+import ProductsPage from "components/products/ProductsPage";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {

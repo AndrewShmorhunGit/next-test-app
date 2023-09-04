@@ -12,7 +12,8 @@ import { PiUsersBold } from "react-icons/pi";
 import { TopMenuServerWrapper } from "./Server";
 import { getHeaderData } from "data/static.components";
 import { useSocket } from "providers/socket.provider";
-
+// import { count } from "providers";
+// console.log(count);
 const { styles } = getHeaderData();
 
 export function TopMenuWrapper({ children }: { children: React.ReactNode }) {
@@ -133,7 +134,7 @@ export function InfoBlock() {
         <div>
           <PiUsersBold
             style={{ cursor: "pointer" }}
-            onClick={() => dispatch(increment())}
+            // onClick={() => dispatch(increment())}
             size={18}
             color={isConnected ? palette.main_primary_dark : palette.error}
           />

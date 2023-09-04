@@ -11,6 +11,7 @@ import { useMedia } from "hooks/useMedia";
 import { PiUsersBold } from "react-icons/pi";
 import { TopMenuServerWrapper } from "./Server";
 import { getHeaderData } from "data/static.components";
+import { useSocket } from "providers/socket.provider";
 
 const { styles } = getHeaderData();
 
@@ -95,6 +96,7 @@ export function FormSearch() {
 
 export function InfoBlock() {
   const count = useSelector((state: RootState) => state.counter.value);
+  const { isConnected } = useSocket();
   const dispatch = useAppDispatch();
   const { isMedia } = useMedia();
   const { day, date, dayOfMonth } = getDate();
@@ -133,7 +135,7 @@ export function InfoBlock() {
             style={{ cursor: "pointer" }}
             onClick={() => dispatch(increment())}
             size={18}
-            color={palette.main_primary_dark}
+            color={isConnected ? palette.main_primary_dark : palette.error}
           />
         </div>
         <p>{count}</p>

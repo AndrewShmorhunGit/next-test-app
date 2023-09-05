@@ -142,7 +142,6 @@ export function UserImage() {
           left: "50%",
           top: "50%",
           transform: "translate(-50%, -50%) scale(5)",
-          // transform: "scale(3)",
         }}
       >
         <UserButton afterSignOutUrl="/" />

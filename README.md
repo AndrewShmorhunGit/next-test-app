@@ -4,7 +4,7 @@
 - [ ] Order page
 - [ ] Responsive Products
 - [ ] Products Styles
-- [ ] Add socket.io
+- [x] Add socket.io
 - [ ] Products filter
 - [ ] i18n
 - [ ] Unit tests

@@ -2,6 +2,7 @@
 
 import { Button, MainHeader } from "components/lib/Components";
 import { setModal, useAppDispatch } from "app/redux";
+import { UserButton } from "@clerk/nextjs";
 
 export function HomePage() {
   const dispatch = useAppDispatch();
@@ -23,6 +24,7 @@ export function HomePage() {
         }}
       >
         <MainHeader text={"Home 🙂"} />
+
         <Button
           type={"secondary"}
           content={"modal"}

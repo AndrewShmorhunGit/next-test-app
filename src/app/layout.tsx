@@ -1,6 +1,5 @@
 import "app/styles/globals.css";
 import Providers from "app/redux/provider";
-import { LayoutWrapper } from "components/wrapper/Wrapper";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { SocketProvider } from "providers/socket.provider";
@@ -20,15 +19,13 @@ export default function RootLayout({
 }) {
   return (
     <ClerkProvider>
-      <html lang="en" className="no-touch">
-        <body className={inter.className}>
-          <Providers>
-            <SocketProvider>
-              <LayoutWrapper>{children}</LayoutWrapper>
-            </SocketProvider>
-          </Providers>
-        </body>
-      </html>
+      <Providers>
+        <html lang="en" className="no-touch">
+          <body className={inter.className}>
+            <SocketProvider>{children}</SocketProvider>
+          </body>
+        </html>
+      </Providers>
     </ClerkProvider>
   );
 }

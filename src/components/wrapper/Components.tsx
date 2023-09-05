@@ -6,6 +6,7 @@ import React from "react";
 import { useSelector } from "app/redux";
 
 export function LayoutSubWrapper({ children }: { children: React.ReactNode }) {
+  const isModal = useSelector((store) => store.modal.value);
   return (
     <div
       style={{

@@ -14,7 +14,7 @@ export const absoluteCenter = {
 
 export const flexCenter = {
   display: "flex",
-  alginItems: "center",
+  alignItems: "center",
   justifyContent: "center",
 };
 

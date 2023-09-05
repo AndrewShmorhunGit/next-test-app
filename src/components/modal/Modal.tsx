@@ -16,12 +16,13 @@ export function Modal() {
   useClickOutside(refClickOutside, () =>
     dispatch(setModal({ value: "none", data: null }))
   );
+
   return (
     <div
       style={{
         boxShadow: "border-box",
         position: "fixed",
-        minHeight: "100%",
+        height: "100%",
         minWidth: "100%",
         display: "flex",
         // inset: 0,

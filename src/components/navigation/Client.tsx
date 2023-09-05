@@ -13,6 +13,7 @@ import Link from "next/link";
 import React from "react";
 import { RootState } from "app/redux/store";
 import { useMedia } from "hooks/useMedia";
+import { UserButton } from "@clerk/nextjs";
 
 const { navigationData: navigation } = getNavigationData();
 
@@ -80,7 +81,7 @@ export function MenuWrapper({ children }: { children: React.ReactNode }) {
           borderBottomLeftRadius: "50%",
           border: `solid 0.2rem ${palette.main_primary_dark}`,
           borderRight: "none",
-          zIndex: "9",
+          zIndex: "2",
           cursor: "pointer",
         }}
         onClick={() => isModal === "none" && dispatch(toggleNav(!isToggle))}
@@ -135,12 +136,17 @@ export function UserImage() {
         position: "relative",
       }}
     >
-      <img
-        style={{ width: "9.6rem", height: "9.6rem" }}
-        src={
-          "https://res.cloudinary.com/natalie-cakes/image/upload/v1693496671/dzenCode/user_ajakc7.jpg"
-        }
-      />
+      <div
+        style={{
+          position: "absolute",
+          left: "50%",
+          top: "50%",
+          transform: "translate(-50%, -50%) scale(5)",
+          // transform: "scale(3)",
+        }}
+      >
+        <UserButton afterSignOutUrl="/" />
+      </div>
     </div>
   );
 }

@@ -1,11 +1,6 @@
 "use client";
 import { palette } from "app/styles/services/palette";
-import {
-  absoluteCenter,
-  appShadows,
-  flexCenter,
-} from "app/styles/services/styles";
-import { RiSettings5Fill } from "react-icons/ri";
+import { appShadows, flexCenter } from "app/styles/services/styles";
 import { HiArrowSmLeft } from "react-icons/hi";
 import { getNavigationData } from "data/static.components";
 import { useSelector, useAppDispatch, selectNav, toggleNav } from "app/redux";
@@ -13,7 +8,7 @@ import Link from "next/link";
 import React from "react";
 import { RootState } from "app/redux/store";
 import { useMedia } from "hooks/useMedia";
-import { UserButton } from "@clerk/nextjs";
+import { Settings, UserImage } from "./Server";
 
 const { navigationData: navigation } = getNavigationData();
 
@@ -117,60 +112,10 @@ export function User() {
       }}
     >
       <div style={{ position: "relative", width: "9.6rem" }}>
-        <UserImage />
-        <Settings />
-      </div>
-    </div>
-  );
-}
-
-export function UserImage() {
-  return (
-    <div
-      style={{
-        background: palette.background_third,
-        overflow: "hidden",
-        width: "9.6rem",
-        height: "9.6rem",
-        borderRadius: "50%",
-        position: "relative",
-      }}
-    >
-      <div
-        style={{
-          position: "absolute",
-          left: "50%",
-          top: "50%",
-          transform: "translate(-50%, -50%) scale(5)",
-          // transform: "scale(3)",
-        }}
-      >
-        <UserButton afterSignOutUrl="/" />
-      </div>
-    </div>
-  );
-}
-
-export function Settings() {
-  return (
-    <div style={{ position: "absolute", right: "0rem", bottom: "0rem" }}>
-      <div
-        style={{
-          boxShadow: appShadows.settings,
-          background: palette.background_second,
-          width: "2.8rem",
-          height: "2.8rem",
-          borderRadius: "50%",
-          position: "relative",
-        }}
-      >
-        <RiSettings5Fill
-          size={16}
-          color={palette.main_primary_dark}
-          style={{
-            ...absoluteCenter,
-          }}
-        />
+        <>
+          <UserImage />
+          <Settings />
+        </>
       </div>
     </div>
   );

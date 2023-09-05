@@ -1,8 +1,5 @@
+"use client";
 import { palette } from "app/styles/services/palette";
-
-export function MainHeader({ text }: { text: string }) {
-  return <h1 style={{ textAlign: "center" }}>{text}</h1>;
-}
 
 export function Button({
   type,

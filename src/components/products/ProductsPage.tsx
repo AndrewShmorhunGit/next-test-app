@@ -1,16 +1,10 @@
-"use client";
-
 import { useSelector } from "app/redux";
 import { RootState } from "app/redux/store";
 import { Products } from "components/products/Server";
-// import { useLocalStorageState } from "hooks/useLocalStorageState";
 import { useMedia } from "hooks/useMedia";
 
 export default function ProductsPage() {
-  // const [isProducts, setProducts] = useLocalStorageState("products");
   const isToggle = useSelector((state: RootState) => state.navigation.toggle);
-
-  console.log(process.env.PRODUCTS_API_URL);
 
   const { setMedia } = useMedia();
   return (

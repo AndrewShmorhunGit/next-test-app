@@ -1,15 +1,18 @@
+/** @jsxImportSource theme-ui */
+"use client";
 import { MainHeader } from "components/lib/Components";
+import { Button } from "theme-ui";
 
 export function HomePage() {
   return (
     <div
-      style={{
+      sx={{
         minHeight: "100%",
         display: "grid",
       }}
     >
       <div
-        style={{
+        sx={{
           alignSelf: "center",
           margin: "0 auto",
           display: "flex",
@@ -19,6 +22,7 @@ export function HomePage() {
         }}
       >
         <MainHeader text={"Home 🙂"} />
+        <Button />
       </div>
     </div>
   );

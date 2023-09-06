@@ -1,3 +1,4 @@
+/** @jsxImportSource theme-ui */
 import { flexCenter } from "app/styles/services/styles";
 import { getFooterData } from "data/static.components";
 import Link from "next/link";
@@ -27,14 +28,14 @@ function FooterLinks() {
 export function FooterWrapper({ children }: { children: React.ReactNode }) {
   return (
     <div
-      style={{
+      sx={{
         maxHeight: `${footerHight}rem`,
         display: "flex",
         flexDirection: "column",
         gap: "0.8rem",
       }}
     >
-      <div style={{ ...flexCenter, gap: "2rem" }}>{children}</div>
+      <div sx={{ ...flexCenter, gap: "2rem" }}>{children}</div>
       <FooterText />
     </div>
   );

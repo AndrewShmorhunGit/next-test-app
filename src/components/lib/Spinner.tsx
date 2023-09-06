@@ -1,4 +1,6 @@
+/** @jsxImportSource theme-ui */
 import spinner from "content/logos/spinner.svg";
+import Image from "next/image";
 
 const spin = {
   "0": {
@@ -10,9 +12,9 @@ const spin = {
 };
 
 export const Spinner = ({ size }: { size: number }) => (
-  <img
+  <Image
     className="spinner"
-    style={{
+    sx={{
       animation: `{ 
   }}`,
       // animation: `linear 1s infinite ${spin}`,

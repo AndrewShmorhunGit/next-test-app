@@ -1,3 +1,4 @@
+/** @jsxImportSource theme-ui */
 "use client";
 import { palette } from "app/styles/services/palette";
 
@@ -7,7 +8,7 @@ export function Button({
   clickHandler,
 }: {
   type: "primary" | "secondary" | "modal" | "error";
-  content: string | React.ReactNode;
+  content: string | React.ReactNode[];
   clickHandler?: Function;
 }) {
   const variants = {
@@ -33,7 +34,7 @@ export function Button({
   return (
     <button
       className="hover"
-      style={{
+      sx={{
         border: "none",
         fontWeight: "700",
         textTransform: "uppercase",
@@ -51,7 +52,11 @@ export function Button({
             console.log(`button "${content}" clicked`)
       }
     >
-      {content}
+      {typeof content === "string"
+        ? content
+        : content.map((el, index) => {
+            return <div key={index}>{el}</div>;
+          })}
     </button>
   );
 }

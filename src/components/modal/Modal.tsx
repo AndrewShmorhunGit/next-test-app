@@ -1,10 +1,9 @@
+/** @jsxImportSource theme-ui */
 "use client";
 import React from "react";
 import { palette } from "app/styles/services/palette";
 import { RootState } from "app/redux/store";
 import { ModalDeleteProduct } from "./Server";
-import { IoMdClose } from "react-icons/io";
-import { absoluteCenter, appShadows } from "app/styles/services/styles";
 import { useClickOutside } from "hooks/useClickOutside";
 import { setModal, useAppDispatch, useSelector } from "app/redux";
 
@@ -18,7 +17,7 @@ export function Modal() {
 
   return (
     <div
-      style={{
+      sx={{
         boxShadow: "border-box",
         position: "fixed",
         height: "100%",
@@ -35,7 +34,7 @@ export function Modal() {
     >
       <div
         ref={refClickOutside}
-        style={{
+        sx={{
           width: "80rem",
           background: palette.background_main,
           cursor: "auto",

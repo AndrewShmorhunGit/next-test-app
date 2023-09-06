@@ -1,13 +1,15 @@
+/** @jsxImportSource theme-ui */
 import { createGrid } from "app/styles/services/styles";
 import { transformDateFormat } from "utils/functions";
 import { ICatProduct } from "interfaces/IProducts";
 import { palette } from "app/styles/services/palette";
 import { DeleteProductButton } from "./Client";
+import Image from "next/image"
 
 const StatusIndicator = ({ status }: { status: string }) => (
-  <div style={{ alignSelf: "center", paddingLeft: "1.6rem" }}>
+  <div sx={{ alignSelf: "center", paddingLeft: "1.6rem" }}>
     <div
-      style={{
+      sx={{
         width: "0.8rem",
         height: "0.8rem",
         background:
@@ -25,9 +27,9 @@ const ProductImage = ({
   image: string;
   altText: string;
 }) => (
-  <div style={{ alignSelf: "center" }}>
-    <img
-      style={{ maxHeight: "3.2rem", borderRadius: "1.4rem" }}
+  <div sx={{ alignSelf: "center" }}>
+    <Image
+      sx={{ maxHeight: "3.2rem", borderRadius: "1.4rem" }}
       src={image}
       alt={altText}
     />
@@ -35,9 +37,9 @@ const ProductImage = ({
 );
 
 const ProductInfo = ({ name, code }: { name: string; code: string }) => (
-  <div style={{ alignSelf: "center", paddingLeft: "2rem" }}>
+  <div sx={{ alignSelf: "center", paddingLeft: "2rem" }}>
     <p
-      style={{
+      sx={{
         textDecoration: "underline lightgrey",
         color: "darkgrey",
         fontSize: "1.2rem",
@@ -47,7 +49,7 @@ const ProductInfo = ({ name, code }: { name: string; code: string }) => (
       {name}
     </p>
     <p
-      style={{
+      sx={{
         textDecoration: "underline lightgrey",
         color: "grey",
         fontSize: "1.2rem",
@@ -60,7 +62,7 @@ const ProductInfo = ({ name, code }: { name: string; code: string }) => (
 );
 
 const DateRange = ({ from, to }: { from: string; to: string }) => (
-  <div style={{ alignSelf: "center", ...createGrid("3rem 1fr", 2) }}>
+  <div sx={{ alignSelf: "center", ...createGrid("3rem 1fr", 2) }}>
     <p>from</p>
     <span>{from}</span>
     <p>to</p>
@@ -72,7 +74,7 @@ export function Product({ product }: { product: ICatProduct }) {
   return (
     <div
       onClick={() => console.log(product)}
-      style={{
+      sx={{
         ...createGrid(
           "4rem 6rem 36rem 6rem 10rem 6rem minmax(9rem,18rem) minmax(16rem,32rem) 18rem 24rem 15rem 6rem",
           1
@@ -87,9 +89,9 @@ export function Product({ product }: { product: ICatProduct }) {
       <ProductImage image={product.image} altText={product.position.name} />
 
       <ProductInfo name={product.position.name} code={product.position.code} />
-      <div style={{ alignSelf: "center", color: "blue" }}>
+      <div sx={{ alignSelf: "center", color: "blue" }}>
         <p
-          style={{
+          sx={{
             color:
               product.status === "available"
                 ? palette.main_primary
@@ -104,16 +106,16 @@ export function Product({ product }: { product: ICatProduct }) {
         from={transformDateFormat(product.date.from)[0]}
         to={transformDateFormat(product.date.from)[0]}
       />
-      <div style={{ alignSelf: "center" }}>
+      <div sx={{ alignSelf: "center" }}>
         <p>{product.state.new ? "new" : "used"}</p>
       </div>
-      <div style={{ alignSelf: "center" }}>
+      <div sx={{ alignSelf: "center" }}>
         <p>{product.price.usd}$</p>
         <p>{product.price.usd * 38}₴</p>
       </div>
-      <div style={{ alignSelf: "center" }}>
+      <div sx={{ alignSelf: "center" }}>
         <p
-          style={{
+          sx={{
             fontSize: "1.6rem",
             textDecoration: "underline lightgrey",
             color: palette.text_light,
@@ -122,9 +124,9 @@ export function Product({ product }: { product: ICatProduct }) {
           {product.group}
         </p>
       </div>
-      <div style={{ alignSelf: "center" }}>
+      <div sx={{ alignSelf: "center" }}>
         <p
-          style={{
+          sx={{
             fontSize: "1.6rem",
             textDecoration: "underline lightgrey",
           }}
@@ -132,9 +134,9 @@ export function Product({ product }: { product: ICatProduct }) {
           {product.supplier}
         </p>
       </div>
-      <div style={{ alignSelf: "center" }}>
+      <div sx={{ alignSelf: "center" }}>
         <p
-          style={{
+          sx={{
             fontSize: "1.6rem",
             textDecoration: "underline lightgrey",
           }}
@@ -142,7 +144,7 @@ export function Product({ product }: { product: ICatProduct }) {
           {product.income}
         </p>
       </div>
-      <div style={{ alignSelf: "center" }}>
+      <div sx={{ alignSelf: "center" }}>
         <p>{transformDateFormat(product.date.from)[1]}</p>
         <span>{transformDateFormat(product.date.from)[2]}</span>
       </div>
@@ -155,7 +157,7 @@ export const Products = async () => {
   // const products = await httpProducts();
   return (
     <div
-      style={{
+      sx={{
         minHeight: "100rem",
         maxHeight: "60rem",
         paddingBottom: "2rem",

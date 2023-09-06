@@ -1,3 +1,4 @@
+/** @jsxImportSource theme-ui */
 "use client";
 
 import { palette } from "app/styles/services/palette";
@@ -5,13 +6,11 @@ import { container, flexCenter } from "app/styles/services/styles";
 import { useClock } from "hooks/useClock";
 import { ClocksLogo, ShieldLogo } from "components/lib/Logos";
 import { getDate } from "utils/functions";
-import { useSelector, increment, useAppDispatch } from "app/redux";
-import { RootState } from "app/redux/store";
+import { increment, useAppDispatch } from "app/redux";
 import { useMedia } from "hooks/useMedia";
-import { PiUsersBold } from "react-icons/pi";
 import { TopMenuServerWrapper } from "./Server";
 import { getHeaderData } from "data/static.components";
-import { useSocket } from "providers/socket.provider";
+import { SocketConnection } from "./SocketConnection";
 
 const { styles } = getHeaderData();
 
@@ -20,7 +19,7 @@ export function TopMenuWrapper({ children }: { children: React.ReactNode }) {
   return (
     <TopMenuServerWrapper>
       <div
-        style={
+        sx={
           isMedia.mini
             ? { ...styles, padding: "0 4rem" }
             : { ...container, ...styles }
@@ -36,7 +35,7 @@ export function MainLogo() {
   const { setMedia } = useMedia();
   return (
     <div
-      style={{
+      sx={{
         boxSizing: "border-box",
         height: "0rem",
         display: "flex",
@@ -49,9 +48,9 @@ export function MainLogo() {
         height={setMedia(48, 44, 40, 32)}
         width={setMedia(48, 48, 40, 32)}
       />
-      <div style={flexCenter}>
+      <div sx={flexCenter}>
         <p
-          style={{
+          sx={{
             fontSize: `${setMedia(1.4, 1.2, 1)}rem`,
             textTransform: "uppercase",
             fontWeight: 700,
@@ -74,7 +73,7 @@ export function FormSearch() {
           type="text"
           id="#search"
           placeholder="Search"
-          style={{
+          sx={{
             display: isMedia.small || isMedia.mini ? "none" : "flex",
             borderRadius: "0.4rem",
             paddingLeft: "0.4rem",
@@ -95,14 +94,12 @@ export function FormSearch() {
 }
 
 export function InfoBlock() {
-  const count = useSelector((state: RootState) => state.counter.value);
-  const { isConnected } = useSocket();
   const { isMedia } = useMedia();
   const { day, date, dayOfMonth } = getDate();
-  const { time } = useClock();
+
   return (
     <div
-      style={{
+      sx={{
         display: "grid",
         gridAutoColumns: "3fr 1fr",
         gridAutoRows: "1fr 1fr",
@@ -113,7 +110,7 @@ export function InfoBlock() {
       }}
     >
       <p
-        style={{
+        sx={{
           display: isMedia.mini ? "none" : "flex",
           gridColumn: "1",
           gridRow: "1",
@@ -122,36 +119,29 @@ export function InfoBlock() {
         {day}
       </p>
       <div
-        style={{
+        sx={{
           gridColumn: "2",
           gridRow: "1",
           display: "flex",
           gap: "1.2rem",
         }}
       >
-        <div>
-          <PiUsersBold
-            style={{ cursor: "pointer" }}
-            size={18}
-            color={isConnected ? palette.main_primary_dark : palette.error}
-          />
-        </div>
-        <p>{count}</p>
+        <SocketConnection />
       </div>
 
       <div
-        style={{
+        sx={{
           gridColumn: "1",
           gridRow: "2",
           gap: "0.8rem",
           display: isMedia.mini ? "none" : "flex",
         }}
       >
-        <p style={{ fontWeight: 700 }}>{dayOfMonth + " "}</p>
+        <p sx={{ fontWeight: 700 }}>{dayOfMonth + " "}</p>
         <p>{date}</p>
       </div>
       <div
-        style={{
+        sx={{
           gridColumn: "2",
           gridRow: "2",
           display: "flex",
@@ -161,8 +151,13 @@ export function InfoBlock() {
         <div>
           <ClocksLogo height={18} width={18} fill={palette.main_primary_dark} />
         </div>
-        <p>{time}</p>
+        <Clocks />
       </div>
     </div>
   );
+}
+
+export function Clocks() {
+  const { time } = useClock();
+  return <p>{time}</p>;
 }

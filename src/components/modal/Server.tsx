@@ -1,36 +1,39 @@
+/** @jsxImportSource theme-ui */
 import { palette } from "app/styles/services/palette";
 import { createGrid, flexCenter } from "app/styles/services/styles";
 import { ICatProduct } from "interfaces/IProducts";
 import { BsTrashFill } from "react-icons/bs";
 import { GiConfirmed } from "react-icons/gi";
 import { CloseModalButton } from "./Client";
+import Image from "next/image";
+
 import { Button } from "components/lib/Client";
 
 export function ModalTestContent() {
   return (
-    <div style={{ display: "flex", flexDirection: "column" }}>
+    <div sx={{ display: "flex", flexDirection: "column" }}>
       <div
-        style={{
+        sx={{
           height: "8rem",
           padding: "2.4rem 3.2rem",
           borderBottom: `0.1rem lightgrey solid`,
         }}
       >
-        <h2 style={{ color: palette.text_dark, fontSize: "1.6rem" }}>
+        <h2 sx={{ color: palette.text_dark, fontSize: "1.6rem" }}>
           Are you sure that you want to do something?
         </h2>
       </div>
       <div
-        style={{
+        sx={{
           ...createGrid("4rem 6rem auto", 1),
           padding: "0.8rem 2.4rem",
 
           columnGap: "2.8rem",
         }}
       >
-        <div style={{ alignSelf: "center", paddingLeft: "1.6rem" }}>
+        <div sx={{ alignSelf: "center", paddingLeft: "1.6rem" }}>
           <div
-            style={{
+            sx={{
               ...flexCenter,
               width: "0.8rem",
               height: "0.8rem",
@@ -39,16 +42,16 @@ export function ModalTestContent() {
             }}
           ></div>
         </div>
-        <div style={{ alignSelf: "center" }}>
+        <div sx={{ alignSelf: "center" }}>
           <img
-            style={{ maxHeight: "3.2rem" }}
+            sx={{ maxHeight: "3.2rem" }}
             src="https://www.petconnection.ie/Files/127308/Img/11/WHISKAS-7-Cat-Pouches-Fish-Favourites-In-Jelly-12x85g-big.jpg"
             alt="whiskas"
           />
         </div>
-        <div style={{ alignSelf: "center", paddingLeft: "2rem" }}>
+        <div sx={{ alignSelf: "center", paddingLeft: "2rem" }}>
           <p
-            style={{
+            sx={{
               textDecoration: "underline lightgrey",
               color: palette.text_dark,
               fontSize: "1.2rem",
@@ -59,7 +62,7 @@ export function ModalTestContent() {
             x 85g
           </p>
           <p
-            style={{
+            sx={{
               textDecoration: "underline lightgrey",
               color: "grey",
               fontSize: "1.2rem",
@@ -71,7 +74,7 @@ export function ModalTestContent() {
         </div>
       </div>
       <div
-        style={{
+        sx={{
           height: "10rem",
           background: palette.main_primary,
           display: "flex",
@@ -92,29 +95,29 @@ export function ModalTestContent() {
 
 export function ModalDeleteProduct({ product }: { product: ICatProduct }) {
   return (
-    <div style={{ display: "flex", flexDirection: "column" }}>
+    <div sx={{ display: "flex", flexDirection: "column" }}>
       <div
-        style={{
+        sx={{
           height: "8rem",
           padding: "2.4rem 3.2rem",
           borderBottom: `0.1rem lightgrey solid`,
         }}
       >
-        <h2 style={{ color: palette.text_dark, fontSize: "1.6rem" }}>
+        <h2 sx={{ color: palette.text_dark, fontSize: "1.6rem" }}>
           Are you sure that you want to delete this income?
         </h2>
       </div>
       <div
-        style={{
+        sx={{
           ...createGrid("4rem 6rem auto", 1),
           padding: "0.8rem 2.4rem",
 
           columnGap: "2.8rem",
         }}
       >
-        <div style={{ alignSelf: "center", paddingLeft: "1.6rem" }}>
+        <div sx={{ alignSelf: "center", paddingLeft: "1.6rem" }}>
           <div
-            style={{
+            sx={{
               ...flexCenter,
               width: "0.8rem",
               height: "0.8rem",
@@ -123,16 +126,16 @@ export function ModalDeleteProduct({ product }: { product: ICatProduct }) {
             }}
           ></div>
         </div>
-        <div style={{ alignSelf: "center" }}>
-          <img
-            style={{ maxHeight: "3.2rem" }}
+        <div sx={{ alignSelf: "center" }}>
+          <Image
+            sx={{ maxHeight: "3.2rem" }}
             src={product.image}
             alt={product.position.name}
           />
         </div>
-        <div style={{ alignSelf: "center", paddingLeft: "2rem" }}>
+        <div sx={{ alignSelf: "center", paddingLeft: "2rem" }}>
           <p
-            style={{
+            sx={{
               textDecoration: "underline lightgrey",
               color: palette.text_dark,
               fontSize: "1.2rem",
@@ -142,7 +145,7 @@ export function ModalDeleteProduct({ product }: { product: ICatProduct }) {
             {product.position.name}
           </p>
           <p
-            style={{
+            sx={{
               textDecoration: "underline lightgrey",
               color: "grey",
               fontSize: "1.2rem",
@@ -154,7 +157,7 @@ export function ModalDeleteProduct({ product }: { product: ICatProduct }) {
         </div>
       </div>
       <div
-        style={{
+        sx={{
           height: "10rem",
           background: palette.main_primary,
           display: "flex",

@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@clerk/nextjs": "^4.23.4",
+    "@emotion/react": "^11.11.1",
     "@reduxjs/toolkit": "^1.9.5",
     "@types/node": "20.5.7",
     "@types/react": "18.2.21",
@@ -23,6 +24,7 @@
     "react-redux": "^8.1.2",
     "socket.io": "^4.7.2",
     "socket.io-client": "^4.7.2",
+    "theme-ui": "^0.16.1",
     "typescript": "5.2.2"
   }
 }

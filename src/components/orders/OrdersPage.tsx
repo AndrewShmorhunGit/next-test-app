@@ -1,12 +1,21 @@
+/** @jsxImportSource theme-ui */
 "use client";
 
-import { useMedia } from "hooks/useMedia";
+import { Box, Flex, Heading, Button } from "theme-ui";
 
 export function OrdersPage() {
-  const { setMedia } = useMedia();
   return (
-    <div style={{ background: setMedia("inherit", "green", "blue", "yellow") }}>
-      <h1>Order Page</h1>
-    </div>
+    <>
+      <Box p={4} bg="highlight">
+        <Flex
+          sx={{
+            alignItems: "center",
+          }}
+        >
+          <Heading>Components</Heading>
+          <Button ml="auto">Beep</Button>
+        </Flex>
+      </Box>
+    </>
   );
 }

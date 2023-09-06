@@ -1,4 +1,3 @@
-"use client";
 import { TopMenu } from "components/header/TopMenu";
 import { NavigationMenu } from "components/navigation/NavigationMenu";
 import { PageWrapper, LayoutSubWrapper } from "./Components";

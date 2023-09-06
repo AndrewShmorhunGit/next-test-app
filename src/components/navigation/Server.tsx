@@ -1,3 +1,4 @@
+/** @jsxImportSource theme-ui */
 import { RiSettings5Fill } from "react-icons/ri";
 import { UserButton } from "@clerk/nextjs";
 import { palette } from "app/styles/services/palette";
@@ -6,7 +7,7 @@ import { absoluteCenter, appShadows } from "app/styles/services/styles";
 export function UserImage() {
   return (
     <div
-      style={{
+      sx={{
         background: palette.background_third,
         overflow: "hidden",
         width: "9.6rem",
@@ -16,7 +17,7 @@ export function UserImage() {
       }}
     >
       <div
-        style={{
+        sx={{
           position: "absolute",
           left: "50%",
           top: "50%",
@@ -31,9 +32,9 @@ export function UserImage() {
 
 export function Settings() {
   return (
-    <div style={{ position: "absolute", right: "0rem", bottom: "0rem" }}>
+    <div sx={{ position: "absolute", right: "0rem", bottom: "0rem" }}>
       <div
-        style={{
+        sx={{
           boxShadow: appShadows.settings,
           background: palette.background_second,
           width: "2.8rem",
@@ -45,7 +46,7 @@ export function Settings() {
         <RiSettings5Fill
           size={16}
           color={palette.main_primary_dark}
-          style={{
+          sx={{
             ...absoluteCenter,
           }}
         />

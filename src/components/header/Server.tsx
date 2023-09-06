@@ -1,3 +1,4 @@
+/** @jsxImportSource theme-ui */
 import { palette } from "app/styles/services/palette";
 import { appShadows } from "app/styles/services/styles";
 
@@ -8,7 +9,7 @@ export function TopMenuServerWrapper({
 }) {
   return (
     <div
-      style={{
+      sx={{
         maxWidth: "100vw",
         boxShadow: appShadows.header,
         background: palette.background_main,

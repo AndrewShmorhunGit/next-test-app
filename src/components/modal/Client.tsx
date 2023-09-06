@@ -1,8 +1,9 @@
+/** @jsxImportSource theme-ui */
 "use client";
 import { setModal, useAppDispatch } from "app/redux";
 import { palette } from "app/styles/services/palette";
 import { appShadows, absoluteCenter } from "app/styles/services/styles";
-import { Button } from "components/lib/Components";
+import { Button } from "components/lib/Client";
 import { IoMdClose } from "react-icons/io";
 
 export function CloseModalButton() {
@@ -20,7 +21,7 @@ export function ModalCloseX() {
   const dispatch = useAppDispatch();
   return (
     <div
-      style={{
+      sx={{
         position: "absolute",
         width: "3.2rem",
         height: "3.2rem",
@@ -35,7 +36,7 @@ export function ModalCloseX() {
       onClick={() => dispatch(setModal({ value: "none", data: null }))}
     >
       <IoMdClose
-        style={{
+        sx={{
           ...absoluteCenter,
           opacity: 0.5,
         }}

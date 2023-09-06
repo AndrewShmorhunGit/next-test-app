@@ -1,3 +1,4 @@
+/** @jsxImportSource theme-ui */
 "use client";
 import { palette } from "app/styles/services/palette";
 import { appShadows, flexCenter } from "app/styles/services/styles";
@@ -21,7 +22,7 @@ export function MenuWrapper({ children }: { children: React.ReactNode }) {
 
   const [isSaveToggle, setSaveToggle] = React.useState(true);
 
-  React.useEffect(() => {
+  const handleNavToggle = () => {
     if (isToggle) {
       if (isModal !== "none") {
         setSaveToggle(true);
@@ -33,19 +34,23 @@ export function MenuWrapper({ children }: { children: React.ReactNode }) {
       if (isModal === "none") dispatch(toggleNav(isSaveToggle));
       return;
     }
-  }, [isModal]);
+  };
+
+  React.useEffect(() => {
+    handleNavToggle();
+  }, [isModal, handleNavToggle]);
 
   // size management
   const [isWindowHeight, setWindowHeight] = React.useState(500);
 
   React.useEffect(() => {
     setWindowHeight(global.innerHeight);
-  }, [global.innerHeight]);
+  }, []);
 
   return (
     <div
       id="navigation"
-      style={{
+      sx={{
         transition: `${isToggle ? 0.3 : 0.2}s min-width ease`,
         minWidth: isToggle ? "20rem" : "2rem",
         gridTemplateRows: "2",
@@ -65,7 +70,7 @@ export function MenuWrapper({ children }: { children: React.ReactNode }) {
       }
     >
       <div
-        style={{
+        sx={{
           position: "absolute",
           right: 0,
           top: "2rem",
@@ -82,7 +87,7 @@ export function MenuWrapper({ children }: { children: React.ReactNode }) {
         onClick={() => isModal === "none" && dispatch(toggleNav(!isToggle))}
       >
         <HiArrowSmLeft
-          style={{
+          sx={{
             position: "absolute",
             left: "60%",
             top: "50%",
@@ -104,16 +109,16 @@ export function User() {
   const isToggle = useSelector((state: RootState) => state.navigation.toggle);
   return (
     <div
-      style={{
+      sx={{
         padding: `${setMedia(8, 6, 5.2, 4)}rem 4rem`,
         ...flexCenter,
         transition: `${isToggle ? 0.5 : 0.3}s transform ease`,
         transform: isToggle ? "translateX(0rem)" : "translateX(-20rem)",
       }}
     >
-      <div style={{ position: "relative", width: "9.6rem" }}>
+      <div sx={{ position: "relative", width: "9.6rem" }}>
         <>
-          <UserImage />
+          {/* <UserImage /> */}
           <Settings />
         </>
       </div>
@@ -128,7 +133,7 @@ export function Menu() {
 
   return (
     <div
-      style={{
+      sx={{
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
@@ -141,7 +146,7 @@ export function Menu() {
         return (
           <Link
             key={name}
-            style={{
+            sx={{
               display: "block",
               textDecoration: "none",
               padding: "0 0.4rem",

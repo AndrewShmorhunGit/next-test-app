@@ -1,22 +1,12 @@
-import { useSelector } from "app/redux";
-import { RootState } from "app/redux/store";
+/** @jsxImportSource theme-ui */
 import { Products } from "components/products/Server";
-import { useMedia } from "hooks/useMedia";
+import { ProductsPageWrapper } from "./Client";
 
 export default function ProductsPage() {
-  const isToggle = useSelector((state: RootState) => state.navigation.toggle);
-
-  const { setMedia } = useMedia();
   return (
-    <div
-      style={{
-        padding: "2rem 3.2rem",
-        maxWidth: isToggle ? "calc(100vw - 20rem)" : "100vw",
-        background: setMedia("inherit", "green", "blue", "yellow"),
-      }}
-    >
+    <ProductsPageWrapper>
       <div
-        style={{
+        sx={{
           display: "flex",
           flexDirection: "row",
           gap: "6rem",
@@ -33,7 +23,7 @@ export default function ProductsPage() {
       </div>
       <div
         className="scroll-bar"
-        style={{
+        sx={{
           maxHeight: "calc(100vh - 30rem)",
           overflowY: "scroll",
           overflowX: "scroll",
@@ -41,6 +31,6 @@ export default function ProductsPage() {
       >
         <Products />
       </div>
-    </div>
+    </ProductsPageWrapper>
   );
 }

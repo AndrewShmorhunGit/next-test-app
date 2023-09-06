@@ -43,7 +43,7 @@ export function ModalTestContent() {
           ></div>
         </div>
         <div sx={{ alignSelf: "center" }}>
-          <img
+          <Image
             sx={{ maxHeight: "3.2rem" }}
             src="https://www.petconnection.ie/Files/127308/Img/11/WHISKAS-7-Cat-Pouches-Fish-Favourites-In-Jelly-12x85g-big.jpg"
             alt="whiskas"

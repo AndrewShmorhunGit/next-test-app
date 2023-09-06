@@ -1,8 +1,9 @@
+/** @jsxImportSource theme-ui */
 "use client";
 import { palette } from "app/styles/services/palette";
 import { useSelector } from "app/redux";
 import { RootState } from "app/redux/store";
-import { PiUsersBold } from "react-icons/pi";
+import { BiSolidServer } from "react-icons/bi";
 import { useSocket } from "providers/socket.provider";
 
 export function SocketConnection() {
@@ -11,13 +12,17 @@ export function SocketConnection() {
   return (
     <>
       <div>
-        <PiUsersBold
+        <BiSolidServer
           style={{ cursor: "pointer" }}
-          size={18}
+          size={16}
           color={isConnected ? palette.main_primary_dark : palette.error}
         />
       </div>
-      <p>{count}</p>
+      <p
+        sx={{ color: isConnected ? palette.main_primary_dark : palette.error }}
+      >
+        {isConnected ? "Connected" : "Disconnected"}
+      </p>
     </>
   );
 }

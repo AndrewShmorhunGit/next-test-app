@@ -6,11 +6,10 @@ import { container, flexCenter } from "app/styles/services/styles";
 import { useClock } from "hooks/useClock";
 import { ClocksLogo, ShieldLogo } from "components/lib/Logos";
 import { getDate } from "utils/functions";
-import { increment, useAppDispatch } from "app/redux";
 import { useMedia } from "hooks/useMedia";
-import { TopMenuServerWrapper } from "./Server";
 import { getHeaderData } from "data/static.components";
 import { SocketConnection } from "./SocketConnection";
+import { TopMenuServerWrapper } from "./Server";
 
 const { styles } = getHeaderData();
 
@@ -103,7 +102,7 @@ export function InfoBlock() {
         display: "grid",
         gridAutoColumns: "3fr 1fr",
         gridAutoRows: "1fr 1fr",
-        maxWidth: "20rem",
+        maxWidth: "24rem",
         fontSize: "1.4rem",
         fontWeight: 500,
         columnGap: "0.4rem",

@@ -1,5 +1,5 @@
-import { flexCenter } from "app/styles/services/styles";
-
+/** @jsxImportSource theme-ui */
+"use client";
 export default function RootLayout({
   children,
 }: {
@@ -7,8 +7,8 @@ export default function RootLayout({
 }) {
   return (
     <div
-      style={{
-        minHeight: "100vh",
+      sx={{
+        // minHeight: "100vh",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",

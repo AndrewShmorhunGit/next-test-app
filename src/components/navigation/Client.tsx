@@ -5,11 +5,12 @@ import { appShadows, flexCenter } from "app/styles/services/styles";
 import { HiArrowSmLeft } from "react-icons/hi";
 import { getNavigationData } from "data/static.components";
 import { useSelector, useAppDispatch, selectNav, toggleNav } from "app/redux";
-import Link from "next/link";
-import React from "react";
+import React, { useCallback } from "react";
 import { RootState } from "app/redux/store";
 import { useMedia } from "hooks/useMedia";
-import { Settings, UserImage } from "./Server";
+import { Settings } from "./Server";
+import NavLink from "next/link";
+import { AuthUserMenu } from "./AuthUserButton";
 
 const { navigationData: navigation } = getNavigationData();
 
@@ -22,7 +23,7 @@ export function MenuWrapper({ children }: { children: React.ReactNode }) {
 
   const [isSaveToggle, setSaveToggle] = React.useState(true);
 
-  const handleNavToggle = () => {
+  const handleNavToggle = useCallback(() => {
     if (isToggle) {
       if (isModal !== "none") {
         setSaveToggle(true);
@@ -34,7 +35,7 @@ export function MenuWrapper({ children }: { children: React.ReactNode }) {
       if (isModal === "none") dispatch(toggleNav(isSaveToggle));
       return;
     }
-  };
+  }, [dispatch, isModal, isSaveToggle, isToggle]);
 
   React.useEffect(() => {
     handleNavToggle();
@@ -118,7 +119,6 @@ export function User() {
     >
       <div sx={{ position: "relative", width: "9.6rem" }}>
         <>
-          {/* <UserImage /> */}
           <Settings />
         </>
       </div>
@@ -126,10 +126,34 @@ export function User() {
   );
 }
 
+export function UserImage() {
+  return (
+    <div
+      sx={{
+        background: palette.background_third,
+        overflow: "hidden",
+        width: "9.6rem",
+        height: "9.6rem",
+        borderRadius: "50%",
+        position: "relative",
+      }}
+    >
+      <div
+        sx={{
+          position: "absolute",
+          left: "50%",
+          top: "50%",
+          transform: "translate(-50%, -50%) scale(5)",
+        }}
+      >
+        <AuthUserMenu />
+      </div>
+    </div>
+  );
+}
+
 export function Menu() {
-  const select = useSelector((state: RootState) => state.navigation.selector);
   const isToggle = useSelector((state: RootState) => state.navigation.toggle);
-  const dispatch = useAppDispatch();
 
   return (
     <div
@@ -143,32 +167,45 @@ export function Menu() {
       }}
     >
       {navigation.map(({ name, link }) => {
-        return (
-          <Link
-            key={name}
-            sx={{
-              display: "block",
-              textDecoration: "none",
-              padding: "0 0.4rem",
-              border: "none",
-              background: "transparent",
-              color: palette.text_dark,
-              fontSize: "1.6rem",
-              fontWeight: "600",
-              textAlign: "center",
-              cursor: "pointer",
-              textTransform: "uppercase",
-              borderBottom: `solid 0.4rem ${
-                select === name ? palette.main_primary_dark : "transparent"
-              }`,
-            }}
-            href={`/${link}`}
-            onClick={() => dispatch(selectNav(name))}
-          >
-            {name}
-          </Link>
-        );
+        return <NavigationLink key={name} name={name} link={link} />;
       })}
     </div>
+  );
+}
+
+function NavigationLink({
+  name,
+  link,
+}: {
+  name: string;
+  link: string;
+}): React.JSX.Element {
+  const select = useSelector((state: RootState) => state.navigation.selector);
+  const dispatch = useAppDispatch();
+
+  return (
+    <NavLink
+      key={name}
+      sx={{
+        display: "block",
+        textDecoration: "none",
+        padding: "0 0.4rem",
+        border: "none",
+        background: "transparent",
+        color: palette.text_dark,
+        fontSize: "1.6rem",
+        fontWeight: "600",
+        textAlign: "center",
+        cursor: "pointer",
+        textTransform: "uppercase",
+        borderBottom: `solid 0.4rem ${
+          select === name ? palette.main_primary_dark : "transparent"
+        }`,
+      }}
+      href={`/${link}`}
+      onClick={() => dispatch(selectNav(name))}
+    >
+      {name}
+    </NavLink>
   );
 }

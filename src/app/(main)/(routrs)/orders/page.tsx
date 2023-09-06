@@ -1,5 +1,5 @@
 import { OrdersPage } from "components/orders/OrdersPage";
-import { Metadata } from "next";
+import { Metadata } from "next/types";
 
 export const metadata: Metadata = {
   title: "Orders",

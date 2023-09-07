@@ -1,7 +1,9 @@
 /** @jsxImportSource theme-ui */
 // import { UserButton } from "@clerk/nextjs";
+import user from "data/content/images/navigation/user.jpg";
+
 import Image from "next/image";
-import { Avatar } from "theme-ui";
+import { Box } from "theme-ui";
 
 export function AuthUserMenu() {
   return (
@@ -13,21 +15,9 @@ export function AuthUserMenu() {
     //     transform: "translate(-50%, -50%) scale(5)",
     //   }}
     // >
-    // {/* <UserButton afterSignOutUrl={"/login"} /> */}
-    <>
-      <Avatar
-        src={
-          "https://tse4.mm.bing.net/th?id=OIP.H4BrVLytennIKdVCJcxsIQAAAA&pid=Api&P=0&h=180"
-        }
-        sx={{ backgroundColor: "white" }}
-      />
-      <Image
-        src={
-          "https://tse4.mm.bing.net/th?id=OIP.H4BrVLytennIKdVCJcxsIQAAAA&pid=Api&P=0&h=180"
-        }
-        alt={""}
-      />
-    </>
+    // {/* <UserButton afterSignOutUrl=
     // </div>
+
+    <Image width={96} height={96} src={user} alt={"avatar"} />
   );
 }

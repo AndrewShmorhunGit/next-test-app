@@ -11,10 +11,7 @@ export function ErrorPage() {
         minHeight: "100%",
       }}
     >
-      <h2
-        sx={{ variant: "styles.headers.page" }}
-        children={"It Is an Error!"}
-      />
+      <h2 sx={{ variant: "styles.headers.page" }}>It Is an Error!</h2>
       <ErrorButton />
     </FlexBox>
   );

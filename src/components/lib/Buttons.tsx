@@ -1,8 +1,9 @@
 /** @jsxImportSource theme-ui */
 "use client";
 
-import { selectNav, useAppDispatch } from "app/redux";
+import { selectNav, setModal, useAppDispatch } from "app/redux";
 import Link from "next/link";
+import { GiConfirmed } from "react-icons/gi";
 import { Button } from "theme-ui";
 
 function ErrorButton() {
@@ -23,4 +24,25 @@ function ErrorButton() {
   );
 }
 
-export { ErrorButton };
+function CloseModalButton() {
+  const dispatch = useAppDispatch();
+  return (
+    <Button
+      sx={{ variant: "styles.buttons.modal" }}
+      children={"cancel"}
+      onClick={() => dispatch(setModal({ value: "none", data: null }))}
+    />
+  );
+}
+
+function ModalDeleteButton() {
+  return (
+    <Button
+      sx={{ variant: "styles.buttons.modal" }}
+      children={[<GiConfirmed size={12} sx={{ color: "error" }} />, "delete"]}
+      onClick={() => console.log("del")}
+    />
+  );
+}
+
+export { ErrorButton, CloseModalButton, ModalDeleteButton };

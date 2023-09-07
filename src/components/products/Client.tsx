@@ -4,7 +4,6 @@ import { palette } from "app/styles/services/palette";
 import { ICatProduct } from "interfaces/IProducts";
 import { BsTrashFill } from "react-icons/bs";
 import { setModal, useAppDispatch, useSelector } from "app/redux";
-import { useMedia } from "hooks/useMedia";
 import { RootState } from "app/redux/store";
 
 export function DeleteProductButton({ product }: { product: ICatProduct }) {
@@ -27,13 +26,12 @@ export function ProductsPageWrapper({
   children: React.ReactNode;
 }) {
   const isToggle = useSelector((state: RootState) => state.navigation.toggle);
-  const { setMedia } = useMedia();
   return (
     <div
       sx={{
-        padding: "2rem 3.2rem",
+        p: "2rem 3.2rem",
         maxWidth: isToggle ? "calc(100vw - 20rem)" : "100vw",
-        background: setMedia("inherit", "green", "blue", "yellow"),
+        bg: ["inherit", "green", "blue", "yellow"],
       }}
     >
       {children}

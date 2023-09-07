@@ -8,8 +8,7 @@ import { getHeaderData } from "data/static.components";
 import { LuClock3 } from "react-icons/lu";
 import { Grid } from "theme-ui";
 import { getDate } from "utils/functions";
-import { Clocks } from "./Client";
-import { SocketConnection } from "./SocketConnection";
+import { Clocks, SocketConnection } from "./Client";
 
 const { styles } = getHeaderData();
 const { day, date, dayOfMonth } = getDate();

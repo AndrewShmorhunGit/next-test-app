@@ -10,7 +10,7 @@ export default function ProductsPage() {
           display: "flex",
           flexDirection: "row",
           gap: "6rem",
-          paddingBottom: "6rem",
+          pb: "6rem",
         }}
       >
         {/* <h1>Products / {products.length} </h1> */}

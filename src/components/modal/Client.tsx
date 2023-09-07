@@ -1,19 +1,36 @@
 /** @jsxImportSource theme-ui */
 "use client";
-import { setModal, useAppDispatch } from "app/redux";
-import { palette } from "app/styles/services/palette";
+import { setModal, useAppDispatch, useSelector } from "app/redux";
+import { RootState } from "app/redux/store";
 import { appShadows, absoluteCenter } from "app/styles/services/styles";
-import { Button } from "components/lib/Client";
+import { useClickOutside } from "hooks/useClickOutside";
+import React from "react";
 import { IoMdClose } from "react-icons/io";
+import { ModalDeleteProduct } from "./Server";
 
-export function CloseModalButton() {
+export function ModalContent() {
+  const refClickOutside = React.useRef<HTMLDivElement | null>(null);
+  const isModal = useSelector((state: RootState) => state.modal);
   const dispatch = useAppDispatch();
+  useClickOutside(refClickOutside, () =>
+    dispatch(setModal({ value: "none", data: null }))
+  );
   return (
-    <Button
-      type={"secondary"}
-      content={"cancel"}
-      clickHandler={() => dispatch(setModal({ value: "none", data: null }))}
-    />
+    <div
+      ref={refClickOutside}
+      sx={{
+        variant: "styles.box.flex.center",
+        width: "80rem",
+        bg: "background.main",
+        cursor: "auto",
+        transform: "translate(0, -5rem)",
+        position: "relative",
+      }}
+    >
+      {isModal.value === "delete" && isModal.data !== null && (
+        <ModalDeleteProduct product={isModal.data} />
+      )}
+    </div>
   );
 }
 
@@ -28,8 +45,8 @@ export function ModalCloseX() {
         top: "-1.6rem",
         right: "-1.6rem",
         borderRadius: "50%",
-        background: palette.background_second,
-        boxShadow: appShadows.header,
+        bg: "second",
+        boxShadow: "standard",
         display: "grid",
         cursor: "pointer",
       }}
@@ -39,8 +56,8 @@ export function ModalCloseX() {
         sx={{
           ...absoluteCenter,
           opacity: 0.5,
+          color: "text.main",
         }}
-        color={palette.text_dark}
         size={20}
       />
     </div>

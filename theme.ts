@@ -72,7 +72,13 @@ export const theme: Theme = {
     container: 102.4,
     narrow: 51.2,
   },
-  borders: {},
+  borders: {
+    lightgrey: "0.1rem lightgrey solid",
+    nav: {
+      active: "solid 0.4rem primary.main",
+      transparent: "solid 0.4rem transparent",
+    },
+  },
   radii: ["50%", ".4rem", ".8rem", "1.2rem", "2rem", "10rem"],
   shadows: {
     standard: ".4rem .4rem .8rem rgba(0, 0, 0, 0.25)",
@@ -123,6 +129,7 @@ export const theme: Theme = {
         borderRadius: "10rem",
         cursor: "pointer",
         letterSpacing: "buttons",
+        transition: "all .4s ease",
       },
       primary: {
         variant: "styles.buttons.standard",
@@ -130,6 +137,7 @@ export const theme: Theme = {
         color: "text.main",
         "&:hover": {
           bg: "background.third",
+          color: "primary.main",
         },
       },
       modal: {

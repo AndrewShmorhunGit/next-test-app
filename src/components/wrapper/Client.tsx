@@ -50,9 +50,7 @@ export function FooterExtraWrapper({
   return (
     <div
       sx={{
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
+        variant: "styles.box.flex.center",
         height: "10%",
       }}
     >

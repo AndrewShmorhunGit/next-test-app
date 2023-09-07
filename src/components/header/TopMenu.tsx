@@ -1,12 +1,16 @@
 "use client";
-
-import { FormSearch, InfoBlock, MainLogo, TopMenuWrapper } from "./Client";
+import {
+  HeaderFormSearch,
+  TopMenuWrapper,
+  MainLogo,
+  InfoBlock,
+} from "./Server";
 
 export function TopMenu() {
   return (
     <TopMenuWrapper>
       <MainLogo />
-      <FormSearch />
+      <HeaderFormSearch />
       <InfoBlock />
     </TopMenuWrapper>
   );

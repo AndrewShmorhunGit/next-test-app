@@ -8,10 +8,9 @@ export default function RootLayout({
   return (
     <div
       sx={{
-        // minHeight: "100vh",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
+        minHeight: "100vh",
+        variant: "styles.box.flex.center",
+        p: 4,
       }}
     >
       {children}

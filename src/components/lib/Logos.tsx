@@ -1,4 +1,7 @@
-import { ILogos } from "../../interfaces/ILogos";
+/** @jsxImportSource theme-ui */
+import { useMagicLink } from "@clerk/nextjs";
+import { useMedia } from "hooks/useMedia";
+import { ILogos } from "interfaces/ILogos";
 
 export function SettingsLogo({
   width = "48",
@@ -21,15 +24,12 @@ export function SettingsLogo({
   );
 }
 
-export function ShieldLogo({
-  width = "48",
-  height = "48",
-  fill = "white",
-}: ILogos): JSX.Element {
+export function ShieldLogo(): JSX.Element {
+  const { setMedia } = useMedia();
   return (
     <svg
-      width={`${width}`}
-      height={`${height}`}
+      width={setMedia(48, 44)}
+      height={setMedia(48, 44)}
       viewBox="0 0 96 96"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
@@ -121,27 +121,6 @@ export function ListCanLogo({
         stroke-width="66.6667"
         stroke-linecap="round"
         stroke-linejoin="round"
-      />
-    </svg>
-  );
-}
-
-export function ClocksLogo({
-  width = "48",
-  height = "48",
-  fill = "black",
-}: ILogos): JSX.Element {
-  return (
-    <svg
-      width={`${width}`}
-      height={`${height}`}
-      viewBox="0 0 96 96"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        d="M47.844 7.50026C26.3012 7.58643 8.9142 25.1161 9.00035 46.6559C9.08651 68.1958 26.6132 85.5858 48.156 85.4996C69.6929 85.4135 87.0859 67.8838 86.9997 46.344C86.9136 24.8041 69.3839 7.4141 47.844 7.50026ZM47.8114 78.082C30.4145 78.1515 16.2552 64.1051 16.1856 46.7082C16.116 29.3113 30.1625 15.152 47.5594 15.0825C64.9532 15.0129 79.1155 29.0594 79.1851 46.4562C79.2547 63.8531 65.2052 78.0124 47.8114 78.082ZM56.7975 48.3578L47.8576 48.3935L47.7972 33.2977C47.7907 31.6597 46.4564 30.333 44.8184 30.3395C43.1804 30.3461 41.8537 31.6804 41.8603 33.3214L41.9325 51.3843C41.9391 53.0252 43.2734 54.3459 44.9144 54.3393L56.8213 54.2917C58.4623 54.2852 59.7859 52.9539 59.7794 51.3129C59.7728 49.6749 58.4385 48.3512 56.7975 48.3578Z"
-        fill={fill}
       />
     </svg>
   );

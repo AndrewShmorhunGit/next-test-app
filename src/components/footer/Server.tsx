@@ -1,8 +1,8 @@
 /** @jsxImportSource theme-ui */
-import { flexCenter } from "app/styles/services/styles";
 import { getFooterData } from "data/static.components";
 import Link from "next/link";
 import { FooterText } from "./Client";
+import { FlexBox } from "components/lib/Boxes";
 
 const { footerHight, links } = getFooterData();
 
@@ -27,18 +27,19 @@ function FooterLinks() {
 
 export function FooterWrapper({ children }: { children: React.ReactNode }) {
   return (
-    <div
+    <FlexBox
       sx={{
         maxHeight: `${footerHight}rem`,
-        display: "flex",
-        flexDirection: "column",
         gap: "0.4rem",
-        paddingBottom: "0.8rem",
+        pb: 1,
       }}
+      flex={"column"}
     >
-      <div sx={{ ...flexCenter, gap: "2rem" }}>{children}</div>
+      <div sx={{ variant: "styles.box.flex.center", gap: "2rem" }}>
+        {children}
+      </div>
       <FooterText />
-    </div>
+    </FlexBox>
   );
 }
 

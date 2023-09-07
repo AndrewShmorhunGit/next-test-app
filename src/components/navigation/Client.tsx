@@ -143,7 +143,8 @@ export function UserImage() {
           position: "absolute",
           left: "50%",
           top: "50%",
-          transform: "translate(-50%, -50%) scale(5)",
+          transform: "translate(-50%, -50%)",
+          //  scale(5)
         }}
       >
         <AuthUserMenu />

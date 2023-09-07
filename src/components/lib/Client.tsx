@@ -27,7 +27,7 @@ export function Button({
     },
     error: {
       background: palette.error,
-      color: palette.white,
+      color: "white",
     },
   };
 
@@ -35,14 +35,7 @@ export function Button({
     <button
       className="hover"
       sx={{
-        border: "none",
-        fontWeight: "700",
-        textTransform: "uppercase",
-        fontSize: "1.6rem",
-        padding: "2rem 4rem",
-        borderRadius: "10rem",
-        cursor: "pointer",
-        letterSpacing: "0.1rem",
+        variant: "styles.buttons.standard",
         ...variants[type],
       }}
       onClick={() =>

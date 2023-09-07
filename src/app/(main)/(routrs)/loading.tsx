@@ -1,23 +1,16 @@
+/** @jsxImportSource theme-ui */
+"use client";
+import { Spinner } from "components/lib/Spinner";
+
 const Loading = () => {
   return (
     <div
-      style={{
+      sx={{
         minHeight: "100%",
-        display: "grid",
+        variant: "styles.box.flex.center",
       }}
     >
-      <div
-        style={{
-          alignSelf: "center",
-          margin: "0 auto",
-          display: "flex",
-          flexDirection: "column",
-          gap: "2rem",
-          width: "16rem",
-        }}
-      >
-        <h1 style={{ fontSize: "4rem" }}>Loading...</h1>
-      </div>
+      <Spinner size={16} />
     </div>
   );
 };

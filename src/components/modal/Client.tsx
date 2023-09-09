@@ -2,7 +2,7 @@
 "use client";
 import { setModal, useAppDispatch, useSelector } from "app/redux";
 import { RootState } from "app/redux/store";
-import { appShadows, absoluteCenter } from "app/styles/services/styles";
+import { absoluteCenter } from "app/styles/services/styles";
 import { useClickOutside } from "hooks/useClickOutside";
 import React from "react";
 import { IoMdClose } from "react-icons/io";
@@ -19,8 +19,8 @@ export function ModalContent() {
     <div
       ref={refClickOutside}
       sx={{
-        variant: "styles.box.flex.center",
         width: "80rem",
+        height: "auto",
         bg: "background.main",
         cursor: "auto",
         transform: "translate(0, -5rem)",
@@ -45,7 +45,7 @@ export function ModalCloseX() {
         top: "-1.6rem",
         right: "-1.6rem",
         borderRadius: "50%",
-        bg: "second",
+        bg: "background.second",
         boxShadow: "standard",
         display: "grid",
         cursor: "pointer",
@@ -55,8 +55,9 @@ export function ModalCloseX() {
       <IoMdClose
         sx={{
           ...absoluteCenter,
-          opacity: 0.5,
+          zIndex: 10,
           color: "text.main",
+          opacity: 0.6,
         }}
         size={20}
       />

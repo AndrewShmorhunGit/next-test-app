@@ -3,11 +3,13 @@ import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import counterReducer from "./features/counter/counter.slice";
 import modalReducer from "./features/modal/modal.slice";
 import navigationReducer from "./features/navigation/navigation.slice";
+import productsReducer from "./features/products/products.slice";
 
 export const rootReducer = combineReducers({
   counter: counterReducer,
   modal: modalReducer,
   navigation: navigationReducer,
+  products: productsReducer,
 });
 
 export function setupStore() {

@@ -12,6 +12,7 @@ import {
   unselectNav,
   toggleNav,
 } from "app/redux/features/navigation/navigation.slice";
+import { productsToggle } from "app/redux/features/products/products.slice";
 
 export {
   useAppSelector as useSelector,
@@ -22,5 +23,6 @@ export {
   selectNav,
   unselectNav,
   toggleNav,
+  productsToggle,
   useAppDispatch,
 };

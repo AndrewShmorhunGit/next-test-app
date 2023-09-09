@@ -18,6 +18,6 @@ export function AuthUserMenu() {
     // {/* <UserButton afterSignOutUrl=
     // </div>
 
-    <Image width={96} height={96} src={user} alt={"avatar"} />
+    <Image width={100} height={100} src={user} alt={"avatar"} />
   );
 }

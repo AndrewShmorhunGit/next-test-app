@@ -8,6 +8,7 @@ import React, { useCallback } from "react";
 import { RootState } from "app/redux/store";
 import { Settings, UserImage } from "./Server";
 import NavLink from "next/link";
+import { mq } from "app/styles/services/media-queries";
 
 const { navigationData: navigation } = getNavigationData();
 
@@ -50,6 +51,7 @@ export function MenuWrapper({ children }: { children: React.ReactNode }) {
       sx={{
         transition: `${isToggle ? 0.3 : 0.2}s min-width ease`,
         minWidth: isToggle ? "20rem" : "2rem",
+        pt: "4rem",
         gridTemplateRows: "2",
         gridTemplateColumns: "1/2",
         display: "block",
@@ -58,6 +60,8 @@ export function MenuWrapper({ children }: { children: React.ReactNode }) {
         position: "relative",
         cursor:
           isModal === "none" && isToggle === false ? "pointer" : "default",
+        [mq.medium]: { pt: "3.2rem" },
+        [mq.small]: { pt: "2.8rem" },
       }}
       onClick={() =>
         isModal === "none" &&
@@ -84,7 +88,7 @@ export function MenuWrapper({ children }: { children: React.ReactNode }) {
       >
         <HiArrowSmLeft
           sx={{
-            color: "primary.main",
+            color: "text.main",
             position: "absolute",
             left: "60%",
             top: "50%",
@@ -164,14 +168,14 @@ function NavigationLink({
         background: "transparent",
         color: "text.main",
         fontSize: 2,
-        fontWeight: "600",
+        fontWeight: "nav",
         textAlign: "center",
         cursor: "pointer",
         textTransform: "uppercase",
         borderBottom: `solid 0.4rem ${
           select === name ? palette.main_primary_dark : "transparent"
         }`,
-        "&:hover": { borderBottom: "solid 0.4rem #689e30" },
+        "&:hover": { borderBottom: "solid 0.4rem #689e30", color: "text.main" },
       }}
       href={`/${link}`}
       onClick={() => dispatch(selectNav(name))}

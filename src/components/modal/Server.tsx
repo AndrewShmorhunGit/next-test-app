@@ -3,8 +3,9 @@
 import { palette } from "app/styles/services/palette";
 import { createGrid, flexCenter } from "app/styles/services/styles";
 import { ICatProduct } from "interfaces/IProducts";
-import Image from "next/image";
+// import Image from "next/image";
 import { CloseModalButton, ModalDeleteButton } from "components/lib/Buttons";
+import { ModalCloseX } from "./Client";
 
 export function ModalBackground({ children }: { children: React.ReactNode }) {
   return (
@@ -12,8 +13,7 @@ export function ModalBackground({ children }: { children: React.ReactNode }) {
       sx={{
         variant: "styles.box.flex.center",
         position: "fixed",
-        // height: "100%",
-        height: "100vh",
+        height: "100%",
         minWidth: "100%",
         background: "rgba(0, 0, 0, 0.5)",
         cursor: "pointer",
@@ -31,6 +31,7 @@ export function ModalDeleteProduct({ product }: { product: ICatProduct }) {
         message={"Are you sure that you want to delete this income?"}
       />
       <ModalBody product={product} />
+      <ModalCloseX />
       <ModalFooterWrapper>
         <CloseModalButton />
         <ModalDeleteButton />
@@ -65,7 +66,7 @@ export function ModalFooterWrapper({
         background: palette.main_primary,
         display: "flex",
         justifyContent: "flex-end",
-        padding: "2.4rem",
+        p: "2.4rem",
         gap: "2rem",
       }}
     >
@@ -78,13 +79,17 @@ function ModalBody({ product }: { product: ICatProduct }) {
   return (
     <div
       sx={{
+        p: "1.6rem 2.4rem",
         ...createGrid("4rem 6rem auto", 1),
-        padding: "0.8rem 2.4rem",
-
         columnGap: "2.8rem",
       }}
     >
-      <div sx={{ alignSelf: "center", paddingLeft: "1.6rem" }}>
+      <div
+        sx={{
+          alignSelf: "center",
+          paddingLeft: "1.6rem",
+        }}
+      >
         <div
           sx={{
             ...flexCenter,
@@ -96,7 +101,7 @@ function ModalBody({ product }: { product: ICatProduct }) {
         ></div>
       </div>
       <div sx={{ alignSelf: "center" }}>
-        <Image
+        <img
           sx={{ maxHeight: "3.2rem" }}
           src={product.image}
           alt={product.position.name}

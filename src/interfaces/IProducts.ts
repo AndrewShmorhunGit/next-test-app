@@ -16,4 +16,5 @@ export interface ICatProduct {
   group: string;
   income: string;
   supplier: string;
+  guaranty?: string;
 }

@@ -28,15 +28,21 @@ export const theme: Theme = {
   },
   colors: {
     background: { main: "#ffffff", second: "#f0f3f5", third: "#cfd8dc" },
-    text: { main: "#343A40", error: "#d02b28", light: "lightgrey" },
+    text: {
+      main: "#343A40",
+      error: "#d02b28",
+      light: "grey",
+      tables: "#495057",
+    },
     error: "#d02b28",
     primary: { main: "#7cb342", second: "#689e30" },
     // Dark theme
     modes: {
       dark: {
+        // change to bg
         background: { main: "#ffffff", second: "#f0f3f5", third: "#cfd8dc" },
 
-        text: { main: "#343A40", error: "#d02b28", light: "lightgrey" },
+        text: { main: "#343A40", error: "#d02b28", light: "grey" },
         error: "#d02b28",
         primary: { main: "#7cb342", second: "#689e30" },
       },
@@ -54,6 +60,8 @@ export const theme: Theme = {
   ],
   fontWeights: {
     body: 400,
+    tables: 500,
+    nav: 600,
     heading: 700,
     bold: 700,
   },
@@ -84,6 +92,7 @@ export const theme: Theme = {
     standard: ".4rem .4rem .8rem rgba(0, 0, 0, 0.25)",
     input: "inset 0 0.2rem 0.2rem rgba(0, 0, 0, 0.1)",
     grey: "0 0 0.2rem 0.2rem lightgrey",
+    green: "0 0 0.2rem 0.2rem #7cb342",
   },
   breakpoints: [
     "@media (min-width: 41.25em)",
@@ -97,6 +106,23 @@ export const theme: Theme = {
       flex: {
         center: { ...helpers.flex.center },
         column: { ...helpers.flex.center, flexDirection: "column" },
+      },
+      absolute: {
+        center: {
+          position: "absolute",
+          left: "50%",
+          top: "50%",
+          transform: "translate(-50%, -50%)",
+        },
+      },
+      product: {
+        wrapper: {
+          minWidth: "auto",
+          border: "lightgrey",
+          p: "0.8rem 2.4rem",
+          bg: "background.main",
+          borderRadius: 1,
+        },
       },
     },
     headers: {
@@ -118,11 +144,16 @@ export const theme: Theme = {
         mt: 4,
         mb: 3,
       },
+      title: {
+        fontSize: 5,
+        fontWeight: "600",
+        color: "text.main",
+      },
     },
     buttons: {
       standard: {
         border: "none",
-        fontWeight: "700",
+        fontWeight: "heading",
         textTransform: "uppercase",
         fontSize: 2,
         padding: "2rem 4rem",
@@ -130,6 +161,18 @@ export const theme: Theme = {
         cursor: "pointer",
         letterSpacing: "buttons",
         transition: "all .4s ease",
+      },
+      toggle: {
+        variant: "styles.buttons.standard",
+        fontSize: 0,
+        padding: "1.2rem 2.4rem",
+        bg: "background.main",
+        color: "text.main",
+        border: "grey",
+        "&:hover": {
+          bg: "background.third",
+          color: "primary.main",
+        },
       },
       primary: {
         variant: "styles.buttons.standard",
@@ -146,11 +189,31 @@ export const theme: Theme = {
         color: "error",
         gap: 4,
         ...helpers.flex.center,
+        "&:hover": { color: "text.main" },
       },
       error: {
         variant: "styles.buttons.standard",
         bg: "error",
         color: "white",
+      },
+      plus: {
+        width: "2.4rem",
+        height: "2.4rem",
+        cursor: "pointer",
+        display: "flex",
+        borderRadius: 0,
+        boxShadow: "green",
+        position: "relative",
+        bg: "primary.second",
+        color: "white",
+      },
+      list: {
+        borderRadius: 0,
+        width: "3.2rem",
+        height: "3.2rem",
+        border: "lightgrey",
+        position: "relative",
+        cursor: "pointer",
       },
     },
     forms: {

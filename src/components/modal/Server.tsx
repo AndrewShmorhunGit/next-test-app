@@ -26,7 +26,11 @@ export function ModalBackground({ children }: { children: React.ReactNode }) {
   );
 }
 
-export function ModalDeleteProduct({ product }: { product: ICatProduct }) {
+export function ModalDeleteProduct({
+  product,
+}: {
+  product: ICatProduct | ICatProduct[];
+}) {
   return (
     <div sx={{ display: "flex", flexDirection: "column" }}>
       <ModalMessage
@@ -77,45 +81,56 @@ export function ModalFooterWrapper({
   );
 }
 
-export function ModalBody({ product }: { product: ICatProduct }) {
+export function ModalBody({
+  product,
+}: {
+  product: ICatProduct | ICatProduct[];
+}) {
   return (
-    <div
-      sx={{
-        p: "1.6rem 2.4rem",
-        ...createGrid("4rem 6rem auto", 1),
-        columnGap: "2.8rem",
-      }}
-    >
-      <StatusIndicator status={product.status} />
-      <div sx={{ variant: "styles.box.flex.center" }}>
-        <img
-          sx={{ maxHeight: "3.2rem" }}
-          src={product.image}
-          alt={product.position.name}
-        />
-      </div>
-      <div sx={{ alignSelf: "center", paddingLeft: "2rem" }}>
-        <p
+    <>
+      {Array.isArray(product) ? (
+        product.map((prod) => <ModalBody product={prod} />)
+      ) : (
+        <div
           sx={{
-            textDecoration: "underline lightgrey",
-            color: palette.text_dark,
-            fontSize: "1.2rem",
-            fontWeight: 500,
+            p: "1.6rem 2.4rem",
+            columnGap: "2.8rem",
+            borderBottom: "1px lightgrey solid",
+            ...createGrid("4rem 6rem auto", 1),
           }}
         >
-          {product.position.name}
-        </p>
-        <p
-          sx={{
-            textDecoration: "underline lightgrey",
-            color: "grey",
-            fontSize: "1.2rem",
-            fontWeight: 500,
-          }}
-        >
-          {product.position.code}
-        </p>
-      </div>
-    </div>
+          <StatusIndicator status={product.status} />
+          <div sx={{ variant: "styles.box.flex.center" }}>
+            <img
+              sx={{ maxHeight: "3.2rem" }}
+              src={product.image}
+              alt={product.position.name}
+            />
+          </div>
+          <div sx={{ alignSelf: "center", paddingLeft: "2rem" }}>
+            <p
+              sx={{
+                textDecoration: "underline lightgrey",
+                color: palette.text_dark,
+                fontSize: "1.2rem",
+                fontWeight: 500,
+              }}
+            >
+              {product.position.name}
+            </p>
+            <p
+              sx={{
+                textDecoration: "underline lightgrey",
+                color: "grey",
+                fontSize: "1.2rem",
+                fontWeight: 500,
+              }}
+            >
+              {product.position.code}
+            </p>
+          </div>
+        </div>
+      )}
+    </>
   );
 }

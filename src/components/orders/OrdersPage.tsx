@@ -14,28 +14,15 @@ import {
   ProductStatus,
   ScrollContainer,
 } from "components/products/Server";
-import { catProducts } from "data/products";
-import { ICatProduct } from "interfaces/IProducts";
+import { catProducts } from "data/income";
 import { useEffect, useState } from "react";
 import { BsListUl, BsPlus } from "react-icons/bs";
 import { IoIosArrowForward } from "react-icons/io";
 import { Box, Grid } from "theme-ui";
-import { GroupInfoHeader } from "./Client";
-import { GroupCloseX } from "components/modal/Client";
+import { GroupInfoHeader, GroupCloseX } from "./Client";
+import { createGroups, getGroupData } from "data/groups";
 
-const products = catProducts;
-const groupsArray = products.map(({ group }) => {
-  return group;
-});
-const groupsSet = new Set(groupsArray);
-const groupsArrayFromSet = Array.from(groupsSet);
-const groups: Map<string, ICatProduct[]> = new Map();
-groupsArrayFromSet.forEach((group) =>
-  groups.set(
-    group,
-    products.filter((prod) => prod.group === group)
-  )
-);
+const { groups } = createGroups(catProducts);
 
 export function OrdersPage() {
   return (
@@ -69,7 +56,7 @@ export function GroupHeader() {
         <BsPlus color={"white"} size={14} />
       </Box>
       <h2 sx={{ variant: "styles.headers.title" }}>
-        Income / {products.length}
+        Income / {catProducts.length}
       </h2>
     </Box>
   );
@@ -88,7 +75,7 @@ export function Groups() {
     <div sx={{ pt: "2rem" }}>
       <Grid gap={3} columns={toggle ? "36rem 1fr" : 1}>
         <Box>
-          {groupsArrayFromSet.map((group) => (
+          {Array.from(groups.keys()).map((group: string) => (
             <Group group={group} toggle={toggle} />
           ))}
         </Box>
@@ -101,14 +88,12 @@ export function Groups() {
 export function Group({ group, toggle }: { group: string; toggle: boolean }) {
   const selectedGroup = useSelector((store) => store.groups.select);
   const dispatch = useAppDispatch();
-  const groupProducts = groups.get(group);
-  const amount = groupProducts && groupProducts.length;
-  const groupTotalPrice =
-    groupProducts &&
-    groupProducts.reduce((total, { price }) => {
-      total = total + price.usd;
-      return total;
-    }, 0);
+
+  const {
+    groupProducts,
+    amountOfIncomes: amount,
+    totalGroupPrice: price,
+  } = getGroupData(groups, group);
 
   return (
     <Grid
@@ -173,10 +158,10 @@ export function Group({ group, toggle }: { group: string; toggle: boolean }) {
         />
       )}
       <Box sx={{ pt: 1 }}>
-        <ProductPrice price={groupTotalPrice || 0} />
+        <ProductPrice price={price || 0} />
       </Box>
       {!toggle ? (
-        <IncomeDeleteButton product={groupProducts[0]} />
+        <IncomeDeleteButton product={groupProducts} />
       ) : (
         <Box
           sx={{
@@ -195,46 +180,50 @@ export function Group({ group, toggle }: { group: string; toggle: boolean }) {
 export function GroupInfo({ toggle }: { toggle: boolean }) {
   const selectedGroup = useSelector((store) => store.groups.select);
   return (
-    <Box sx={{ minWidth: "100%" }}>
-      <div
-        sx={{
-          border: "light",
-          borderRadius: 1,
-          bg: "background.main",
-          width: toggle ? "86rem" : "0rem",
-          maxHeight: toggle ? "100rem" : "0rem",
-          mb: 4,
-          mr: "5rem",
-          opacity: toggle ? 1 : 0,
-          transition: `max-height ${toggle ? 1 : 0}s ease`,
-          position: "relative",
-          overflow: !toggle && "hidden",
-        }}
-      >
-        {toggle && <GroupCloseX />}
-        <GroupInfoHeader />
-        {selectedGroup !== "none" &&
-          groups.get(selectedGroup)?.map((product) => {
-            return (
+    <Box
+      sx={{
+        position: "relative",
+        border: "light",
+        borderRadius: 1,
+        bg: "background.main",
+        minWidth: "100%",
+        mb: 11,
+        mr: "5rem",
+        maxWidth: toggle ? "86rem" : "0rem",
+        maxHeight: toggle ? "100rem" : "0rem",
+        opacity: toggle ? 1 : 0,
+        transition: `max-height ${toggle ? 1 : 0}s ease`,
+        overflow: !toggle && "hidden",
+      }}
+    >
+      {toggle && <GroupCloseX />}
+      <GroupInfoHeader />
+      {selectedGroup !== "none" &&
+        groups.get(selectedGroup)?.map((product) => {
+          return (
+            <Grid
+              gap={0}
+              sx={{
+                "&:hover": {
+                  boxShadow: "standard",
+                },
+              }}
+              columns={["1fr 16rem"]}
+              key={product.id}
+            >
+              <ModalBody product={product} />
               <Grid
-                gap={4}
+                columns={["5fr 2fr"]}
                 sx={{
-                  pr: 3,
-                  borderTop: "1px solid lightgrey",
-                  "&:hover": {
-                    boxShadow: "standard",
-                  },
+                  borderBottom: "lightgrey 1px solid",
                 }}
-                columns={["2fr 8rem 2rem"]}
-                key={product.id}
               >
-                <ModalBody product={product} />
                 <ProductStatus status={product.status} />
                 <ProductDeleteButton product={product} />
               </Grid>
-            );
-          })}
-      </div>
+            </Grid>
+          );
+        })}
     </Box>
   );
 }

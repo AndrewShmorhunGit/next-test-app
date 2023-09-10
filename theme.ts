@@ -215,6 +215,18 @@ export const theme: Theme = {
         position: "relative",
         cursor: "pointer",
       },
+      x: {
+        position: "absolute",
+        width: "3.2rem",
+        height: "3.2rem",
+        top: "-1.6rem",
+        right: "-1.6rem",
+        borderRadius: "50%",
+        bg: "background.second",
+        boxShadow: ".4rem .4rem .2rem rgba(0, 0, 0, 0.25)",
+        display: "grid",
+        cursor: "pointer",
+      },
     },
     forms: {
       input: {

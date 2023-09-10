@@ -3,7 +3,10 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { ICatProduct } from "interfaces/IProducts";
 
-const initialState: { value: string; data: ICatProduct | null } = {
+const initialState: {
+  value: string;
+  data: ICatProduct | ICatProduct[] | null;
+} = {
   value: "none",
   data: null,
 };
@@ -14,7 +17,10 @@ export const modalSlice = createSlice({
   reducers: {
     setModal: (
       state,
-      action: PayloadAction<{ value: string; data: ICatProduct | null }>
+      action: PayloadAction<{
+        value: string;
+        data: ICatProduct | ICatProduct[] | null;
+      }>
     ) => {
       state.value = action.payload.value;
       state.data = action.payload.data;

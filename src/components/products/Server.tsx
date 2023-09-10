@@ -7,10 +7,34 @@ import {
 } from "utils/functions";
 import { ICatProduct } from "interfaces/IProducts";
 import { ProductDeleteButton, ProductImage } from "./Client";
-import { catProducts } from "data/products";
+import { catProducts } from "data/income";
 import { Box, Grid } from "theme-ui";
 
 const products = catProducts;
+
+export function Product({ product }: { product: ICatProduct }) {
+  return (
+    <ProductWrapper>
+      <StatusIndicator status={product.status} />
+      <ProductImage image={product.image} altText={product.position.name} />
+      <ProductInfo name={product.position.name} code={product.position.code} />
+      <ProductStatus status={product.status} />
+      <DateRange
+        from={transformDateFormat(product.date.from)[0]}
+        to={transformDateFormat(product.date.from)[0]}
+      />
+      <div sx={{ alignSelf: "center", fontSize: 1 }}>
+        <p>{product.state.new ? "new" : "used"}</p>
+      </div>
+      <ProductPrice price={product.price.usd} />
+      <ProductGroup group={product.group} />
+      <ProductSupplier supplier={product.supplier} />
+      <ProductIncome income={product.income} />
+      <Guaranty guaranty={product.guaranty} from={product.date.from} />
+      <ProductDeleteButton product={product} />
+    </ProductWrapper>
+  );
+}
 
 export const StatusIndicator = ({ status }: { status: string }) => (
   <div sx={{ alignSelf: "center", paddingLeft: "1.6rem" }}>
@@ -127,6 +151,54 @@ export function ProductPrice({ price }: { price: number }) {
   );
 }
 
+export function ProductSupplier({ supplier }: { supplier: string }) {
+  return (
+    <div sx={{ alignSelf: "center" }}>
+      <p
+        sx={{
+          fontSize: 3,
+          color: "text.tables",
+          textDecoration: supplier && "underline lightgrey",
+        }}
+      >
+        {supplier || "__"}
+      </p>
+    </div>
+  );
+}
+
+export function ProductGroup({ group }: { group: string }) {
+  return (
+    <div sx={{ alignSelf: "center" }}>
+      <p
+        sx={{
+          fontSize: 3,
+          textDecoration: "underline lightgrey",
+          color: "text.tables",
+        }}
+      >
+        {group}
+      </p>
+    </div>
+  );
+}
+
+export function ProductIncome({ income }: { income: string }) {
+  return (
+    <div sx={{ alignSelf: "center" }}>
+      <p
+        sx={{
+          fontSize: 3,
+          color: "text.tables",
+          textDecoration: "underline lightgrey",
+        }}
+      >
+        {income}
+      </p>
+    </div>
+  );
+}
+
 export function ProductWrapper({ children }: { children: React.ReactNode }) {
   return (
     <Grid
@@ -140,69 +212,6 @@ export function ProductWrapper({ children }: { children: React.ReactNode }) {
     >
       {children}
     </Grid>
-  );
-}
-
-export function Product({ product }: { product: ICatProduct }) {
-  return (
-    <ProductWrapper>
-      <StatusIndicator status={product.status} />
-      <ProductImage image={product.image} altText={product.position.name} />
-      <ProductInfo name={product.position.name} code={product.position.code} />
-      <div sx={{ alignSelf: "center", color: "blue" }}>
-        <p
-          sx={{
-            fontSize: 1,
-            color: product.status === "available" ? "primary.main" : "error",
-          }}
-        >
-          {product.status}
-        </p>
-      </div>
-      <DateRange
-        from={transformDateFormat(product.date.from)[0]}
-        to={transformDateFormat(product.date.from)[0]}
-      />
-      <div sx={{ alignSelf: "center", fontSize: 1 }}>
-        <p>{product.state.new ? "new" : "used"}</p>
-      </div>
-      <ProductPrice price={product.price.usd} />
-      <div sx={{ alignSelf: "center" }}>
-        <p
-          sx={{
-            fontSize: 3,
-            textDecoration: "underline lightgrey",
-            color: "text.tables",
-          }}
-        >
-          {product.group}
-        </p>
-      </div>
-      <div sx={{ alignSelf: "center" }}>
-        <p
-          sx={{
-            fontSize: 3,
-            color: "text.tables",
-            textDecoration: product.supplier && "underline lightgrey",
-          }}
-        >
-          {product.supplier || "__"}
-        </p>
-      </div>
-      <div sx={{ alignSelf: "center" }}>
-        <p
-          sx={{
-            fontSize: 3,
-            color: "text.tables",
-            textDecoration: "underline lightgrey",
-          }}
-        >
-          {product.income}
-        </p>
-      </div>
-      <Guaranty guaranty={product.guaranty} from={product.date.from} />
-      <ProductDeleteButton product={product} />
-    </ProductWrapper>
   );
 }
 

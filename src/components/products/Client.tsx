@@ -18,7 +18,11 @@ export function ProductDeleteButton({ product }: { product: ICatProduct }) {
   );
 }
 
-export function IncomeDeleteButton({ product }: { product: ICatProduct }) {
+export function IncomeDeleteButton({
+  product,
+}: {
+  product: ICatProduct | ICatProduct[];
+}) {
   const dispatch = useAppDispatch();
   return (
     <div sx={{ alignSelf: "center" }}>

@@ -7,8 +7,8 @@ const headerHeight = 10;
 
 export const getNavigationData = () => {
   const navigationData = [
-    { name: "income", link: "products" },
-    { name: "groups", link: "orders" },
+    { name: "income", link: "income" },
+    { name: "groups", link: "groups" },
     { name: "products", link: "error" },
     { name: "users", link: "error" },
     { name: "settings", link: "error" },

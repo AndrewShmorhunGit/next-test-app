@@ -64,33 +64,3 @@ export function ModalCloseX() {
     </div>
   );
 }
-
-export function GroupCloseX() {
-  const dispatch = useAppDispatch();
-  return (
-    <div
-      sx={{
-        position: "absolute",
-        width: "3.2rem",
-        height: "3.2rem",
-        top: "-1.6rem",
-        right: "-1.6rem",
-        borderRadius: "50%",
-        bg: "background.second",
-        boxShadow: ".4rem .4rem .2rem rgba(0, 0, 0, 0.25)",
-        display: "grid",
-        cursor: "pointer",
-      }}
-      onClick={() => dispatch(setGroup("none"))}
-    >
-      <IoMdClose
-        sx={{
-          ...absoluteCenter,
-          color: "text.main",
-          opacity: 0.6,
-        }}
-        size={20}
-      />
-    </div>
-  );
-}

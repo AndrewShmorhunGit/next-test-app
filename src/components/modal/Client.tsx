@@ -1,6 +1,6 @@
 /** @jsxImportSource theme-ui */
 "use client";
-import { setModal, useAppDispatch, useSelector } from "app/redux";
+import { setGroup, setModal, useAppDispatch, useSelector } from "app/redux";
 import { RootState } from "app/redux/store";
 import { absoluteCenter } from "app/styles/services/styles";
 import { useClickOutside } from "hooks/useClickOutside";
@@ -56,6 +56,36 @@ export function ModalCloseX() {
         sx={{
           ...absoluteCenter,
           zIndex: 10,
+          color: "text.main",
+          opacity: 0.6,
+        }}
+        size={20}
+      />
+    </div>
+  );
+}
+
+export function GroupCloseX() {
+  const dispatch = useAppDispatch();
+  return (
+    <div
+      sx={{
+        position: "absolute",
+        width: "3.2rem",
+        height: "3.2rem",
+        top: "-1.6rem",
+        right: "-1.6rem",
+        borderRadius: "50%",
+        bg: "background.second",
+        boxShadow: ".4rem .4rem .2rem rgba(0, 0, 0, 0.25)",
+        display: "grid",
+        cursor: "pointer",
+      }}
+      onClick={() => dispatch(setGroup("none"))}
+    >
+      <IoMdClose
+        sx={{
+          ...absoluteCenter,
           color: "text.main",
           opacity: 0.6,
         }}

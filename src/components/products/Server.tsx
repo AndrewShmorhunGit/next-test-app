@@ -12,7 +12,7 @@ import { Box, Grid } from "theme-ui";
 
 const products = catProducts;
 
-const StatusIndicator = ({ status }: { status: string }) => (
+export const StatusIndicator = ({ status }: { status: string }) => (
   <div sx={{ alignSelf: "center", paddingLeft: "1.6rem" }}>
     <div
       sx={{
@@ -47,6 +47,25 @@ const ProductInfo = ({ name, code }: { name: string; code: string }) => (
     </p>
   </div>
 );
+
+export function ProductStatus({
+  status,
+}: {
+  status: "available" | "not available";
+}) {
+  return (
+    <div sx={{ alignSelf: "center", color: "blue" }}>
+      <p
+        sx={{
+          fontSize: 1,
+          color: status === "available" ? "primary.main" : "error",
+        }}
+      >
+        {status}
+      </p>
+    </div>
+  );
+}
 
 const DateRange = ({ from, to }: { from: string; to: string }) => (
   <Grid

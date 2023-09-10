@@ -6,6 +6,7 @@ import { ICatProduct } from "interfaces/IProducts";
 // import Image from "next/image";
 import { CloseModalButton, ModalDeleteButton } from "components/lib/Buttons";
 import { ModalCloseX } from "./Client";
+import { StatusIndicator } from "components/products/Server";
 
 export function ModalBackground({ children }: { children: React.ReactNode }) {
   return (
@@ -17,6 +18,7 @@ export function ModalBackground({ children }: { children: React.ReactNode }) {
         minWidth: "100%",
         background: "rgba(0, 0, 0, 0.5)",
         cursor: "pointer",
+        zIndex: 99,
       }}
     >
       {children}
@@ -75,7 +77,7 @@ export function ModalFooterWrapper({
   );
 }
 
-function ModalBody({ product }: { product: ICatProduct }) {
+export function ModalBody({ product }: { product: ICatProduct }) {
   return (
     <div
       sx={{
@@ -84,23 +86,8 @@ function ModalBody({ product }: { product: ICatProduct }) {
         columnGap: "2.8rem",
       }}
     >
-      <div
-        sx={{
-          alignSelf: "center",
-          paddingLeft: "1.6rem",
-        }}
-      >
-        <div
-          sx={{
-            ...flexCenter,
-            width: "0.8rem",
-            height: "0.8rem",
-            background: palette.main_primary,
-            borderRadius: "50%",
-          }}
-        ></div>
-      </div>
-      <div sx={{ alignSelf: "center" }}>
+      <StatusIndicator status={product.status} />
+      <div sx={{ variant: "styles.box.flex.center" }}>
         <img
           sx={{ maxHeight: "3.2rem" }}
           src={product.image}

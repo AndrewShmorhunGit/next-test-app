@@ -13,7 +13,7 @@ import {
   toggleNav,
 } from "app/redux/features/navigation/navigation.slice";
 import { productsToggle } from "app/redux/features/products/products.slice";
-
+import { setGroup } from "app/redux/features/groups/groups.slice";
 export {
   useAppSelector as useSelector,
   setModal,
@@ -24,5 +24,6 @@ export {
   unselectNav,
   toggleNav,
   productsToggle,
+  setGroup,
   useAppDispatch,
 };

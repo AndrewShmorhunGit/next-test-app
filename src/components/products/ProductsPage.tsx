@@ -6,7 +6,6 @@ import { ActivePageWrapper } from "./Client";
 export default function ProductsPage() {
   return (
     <ActivePageWrapper>
-      <ProductsHeader />
       <Products />
     </ActivePageWrapper>
   );

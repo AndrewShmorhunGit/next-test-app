@@ -8,11 +8,19 @@ import {
 import { ICatProduct } from "interfaces/IProducts";
 import { ProductDeleteButton, ProductImage } from "./Client";
 import { catProducts } from "data/income";
-import { Box, Grid } from "theme-ui";
+import { Box, Grid, Spinner } from "theme-ui";
+import { httpExchange, httpProducts } from "utils/http.requests";
+import { Suspense } from "react";
 
 const products = catProducts;
 
-export function Product({ product }: { product: ICatProduct }) {
+export function Product({
+  product,
+  course,
+}: {
+  product: ICatProduct;
+  course: number;
+}) {
   return (
     <ProductWrapper>
       <StatusIndicator status={product.status} />
@@ -26,7 +34,9 @@ export function Product({ product }: { product: ICatProduct }) {
       <div sx={{ alignSelf: "center", fontSize: 1 }}>
         <p>{product.state.new ? "new" : "used"}</p>
       </div>
-      <ProductPrice price={product.price.usd} />
+      <Suspense fallback={<Spinner />}>
+        <ProductPrice price={product.price.usd} course={course} />
+      </Suspense>
       <ProductGroup group={product.group} />
       <ProductSupplier supplier={product.supplier} />
       <ProductIncome income={product.income} />
@@ -142,11 +152,21 @@ export function Guaranty({
   );
 }
 
-export function ProductPrice({ price }: { price: number }) {
+export function ProductPrice({
+  price,
+  course,
+}: {
+  price: number;
+  course: number;
+}) {
   return (
     <Box>
-      <p sx={{ fontSize: 0, color: "text.light" }}>{formatUsdPrice(price)}</p>
-      <p sx={{ fontSize: 1 }}>{formatHrnPrice(price * 38.2)} ₴</p>
+      <>
+        <p sx={{ fontSize: 0, color: "text.light" }}>{formatUsdPrice(price)}</p>
+        {course && (
+          <p sx={{ fontSize: 1 }}>{formatHrnPrice(price * course)} ₴</p>
+        )}
+      </>
     </Box>
   );
 }
@@ -216,12 +236,23 @@ export function ProductWrapper({ children }: { children: React.ReactNode }) {
 }
 
 export const Products = async () => {
+  const course = await httpExchange();
+  // const products = await httpProducts()
   return (
-    <ScrollContainer>
-      {products.map((product: ICatProduct) => {
-        return <Product key={product.position.name} product={product} />;
-      })}
-    </ScrollContainer>
+    <>
+      <ProductsHeader />
+      <ScrollContainer>
+        {products.map((product: ICatProduct) => {
+          return (
+            <Product
+              key={product.position.name}
+              product={product}
+              course={course || 38}
+            />
+          );
+        })}
+      </ScrollContainer>
+    </>
   );
 };
 

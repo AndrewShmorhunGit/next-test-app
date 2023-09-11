@@ -1,4 +1,5 @@
 import { ICatProduct } from "interfaces/IProducts";
+import { httpExchange } from "utils/http.requests";
 
 export function createGroups(products: ICatProduct[]) {
   const groupsArray = products.map(({ group }) => {

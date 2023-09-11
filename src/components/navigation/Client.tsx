@@ -1,32 +1,27 @@
+/** @jsxImportSource theme-ui */
 "use client";
 import { palette } from "app/styles/services/palette";
-import {
-  absoluteCenter,
-  appShadows,
-  flexCenter,
-} from "app/styles/services/styles";
-import { RiSettings5Fill } from "react-icons/ri";
 import { HiArrowSmLeft } from "react-icons/hi";
 import { getNavigationData } from "data/static.components";
 import { useSelector, useAppDispatch, selectNav, toggleNav } from "app/redux";
-import Link from "next/link";
-import React from "react";
+import React, { useCallback } from "react";
 import { RootState } from "app/redux/store";
-import { useMedia } from "hooks/useMedia";
-import { UserButton } from "@clerk/nextjs";
+import { Settings, UserImage } from "./Server";
+import NavLink from "next/link";
+import { mq } from "app/styles/services/media-queries";
+import { usePathname } from "next/navigation";
 
 const { navigationData: navigation } = getNavigationData();
 
 export function MenuWrapper({ children }: { children: React.ReactNode }) {
-  const { setMedia } = useMedia();
   // toggle navigation management
   const isModal = useSelector((state: RootState) => state.modal.value);
   const isToggle = useSelector((state: RootState) => state.navigation.toggle);
   const dispatch = useAppDispatch();
 
-  const [isSaveToggle, setSaveToggle] = React.useState(true);
+  const [isSaveToggle, setSaveToggle] = React.useState(false);
 
-  React.useEffect(() => {
+  const handleNavToggle = useCallback(() => {
     if (isToggle) {
       if (isModal !== "none") {
         setSaveToggle(true);
@@ -38,30 +33,36 @@ export function MenuWrapper({ children }: { children: React.ReactNode }) {
       if (isModal === "none") dispatch(toggleNav(isSaveToggle));
       return;
     }
-  }, [isModal]);
+  }, [dispatch, isModal, isSaveToggle, isToggle]);
+
+  React.useEffect(() => {
+    handleNavToggle();
+  }, [isModal, handleNavToggle]);
 
   // size management
   const [isWindowHeight, setWindowHeight] = React.useState(500);
 
   React.useEffect(() => {
     setWindowHeight(global.innerHeight);
-  }, [global.innerHeight]);
+  }, []);
 
   return (
     <div
       id="navigation"
-      style={{
+      sx={{
         transition: `${isToggle ? 0.3 : 0.2}s min-width ease`,
         minWidth: isToggle ? "20rem" : "2rem",
+        pt: "4rem",
         gridTemplateRows: "2",
         gridTemplateColumns: "1/2",
         display: "block",
         minHeight: isWindowHeight >= 400 ? `calc(100vh - 10rem)` : "100vh",
-        boxShadow: appShadows.header,
-        paddingBottom: `${setMedia(8, 6, 5.2, 4)}rem`,
+        boxShadow: "standard",
         position: "relative",
         cursor:
           isModal === "none" && isToggle === false ? "pointer" : "default",
+        [mq.medium]: { pt: "3.2rem" },
+        [mq.small]: { pt: "2.8rem" },
       }}
       onClick={() =>
         isModal === "none" &&
@@ -70,13 +71,13 @@ export function MenuWrapper({ children }: { children: React.ReactNode }) {
       }
     >
       <div
-        style={{
+        sx={{
           position: "absolute",
           right: 0,
           top: "2rem",
           width: "2rem",
           height: "2rem",
-          background: palette.background_main,
+          bg: "background.main",
           borderTopLeftRadius: "50%",
           borderBottomLeftRadius: "50%",
           border: `solid 0.2rem ${palette.main_primary_dark}`,
@@ -87,7 +88,8 @@ export function MenuWrapper({ children }: { children: React.ReactNode }) {
         onClick={() => isModal === "none" && dispatch(toggleNav(!isToggle))}
       >
         <HiArrowSmLeft
-          style={{
+          sx={{
+            color: "text.main",
             position: "absolute",
             left: "60%",
             top: "50%",
@@ -96,7 +98,6 @@ export function MenuWrapper({ children }: { children: React.ReactNode }) {
               : "translate(-50%, -50%) rotate(0.5turn)",
           }}
           size={16}
-          color={palette.main_primary_dark}
         />
       </div>
       {children}
@@ -105,120 +106,87 @@ export function MenuWrapper({ children }: { children: React.ReactNode }) {
 }
 
 export function User() {
-  const { setMedia } = useMedia();
   const isToggle = useSelector((state: RootState) => state.navigation.toggle);
   return (
     <div
-      style={{
-        padding: `${setMedia(8, 6, 5.2, 4)}rem 4rem`,
-        ...flexCenter,
+      sx={{
+        p: ["8rem", "6rem", "5.2rem", "4ren"],
+        variant: "styles.box.flex.center",
         transition: `${isToggle ? 0.5 : 0.3}s transform ease`,
         transform: isToggle ? "translateX(0rem)" : "translateX(-20rem)",
       }}
     >
-      <div style={{ position: "relative", width: "9.6rem" }}>
-        <UserImage />
-        <Settings />
-      </div>
-    </div>
-  );
-}
-
-export function UserImage() {
-  return (
-    <div
-      style={{
-        background: palette.background_third,
-        overflow: "hidden",
-        width: "9.6rem",
-        height: "9.6rem",
-        borderRadius: "50%",
-        position: "relative",
-      }}
-    >
-      <div
-        style={{
-          position: "absolute",
-          left: "50%",
-          top: "50%",
-          transform: "translate(-50%, -50%) scale(5)",
-          // transform: "scale(3)",
-        }}
-      >
-        <UserButton afterSignOutUrl="/" />
-      </div>
-    </div>
-  );
-}
-
-export function Settings() {
-  return (
-    <div style={{ position: "absolute", right: "0rem", bottom: "0rem" }}>
-      <div
-        style={{
-          boxShadow: appShadows.settings,
-          background: palette.background_second,
-          width: "2.8rem",
-          height: "2.8rem",
-          borderRadius: "50%",
-          position: "relative",
-        }}
-      >
-        <RiSettings5Fill
-          size={16}
-          color={palette.main_primary_dark}
-          style={{
-            ...absoluteCenter,
-          }}
-        />
+      <div sx={{ position: "relative", width: "9.6rem" }}>
+        <>
+          <UserImage />
+          <Settings />
+        </>
       </div>
     </div>
   );
 }
 
 export function Menu() {
-  const select = useSelector((state: RootState) => state.navigation.selector);
   const isToggle = useSelector((state: RootState) => state.navigation.toggle);
   const dispatch = useAppDispatch();
+  const path = usePathname();
+  console.log(path?.slice(1));
+  dispatch(selectNav(path?.slice(1)));
+  // React.useEffect(() => {dispatch(selectNav(name))}, []);
 
   return (
     <div
-      style={{
+      sx={{
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
         gap: "1.2rem",
+        pb: 4,
         transition: `${isToggle ? 0.5 : 0.3}s transform ease`,
         transform: isToggle ? "translateX(0rem)" : "translateX(-20rem)",
       }}
     >
       {navigation.map(({ name, link }) => {
-        return (
-          <Link
-            key={name}
-            style={{
-              display: "block",
-              textDecoration: "none",
-              padding: "0 0.4rem",
-              border: "none",
-              background: "transparent",
-              color: palette.text_dark,
-              fontSize: "1.6rem",
-              fontWeight: "600",
-              textAlign: "center",
-              cursor: "pointer",
-              textTransform: "uppercase",
-              borderBottom: `solid 0.4rem ${
-                select === name ? palette.main_primary_dark : "transparent"
-              }`,
-            }}
-            href={`/${link}`}
-            onClick={() => dispatch(selectNav(name))}
-          >
-            {name}
-          </Link>
-        );
+        return <NavigationLink key={name} name={name} link={link} />;
       })}
     </div>
+  );
+}
+
+function NavigationLink({
+  name,
+  link,
+}: {
+  name: string;
+  link: string;
+}): React.JSX.Element {
+  const select = useSelector((state: RootState) => state.navigation.selector);
+  const dispatch = useAppDispatch();
+
+  return (
+    <NavLink
+      key={name}
+      sx={{
+        display: "block",
+        textDecoration: "none",
+        p: "0 0.4rem",
+        border: "none",
+        background: "transparent",
+        color: "text.main",
+        fontSize: 2,
+        fontWeight: "nav",
+        textAlign: "center",
+        cursor: "pointer",
+        textTransform: "uppercase",
+        borderBottom: `solid 0.4rem ${
+          select === name ? palette.main_primary_dark : "transparent"
+        }`,
+        "&:hover": { borderBottom: "solid 0.4rem #689e30", color: "text.main" },
+      }}
+      href={`/${link}`}
+      onClick={() => dispatch(selectNav(name))}
+    >
+      {name}
+    </NavLink>
   );
 }

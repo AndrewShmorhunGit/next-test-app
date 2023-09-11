@@ -1,7 +1,7 @@
 "use client";
 import { io as ClientIO } from "socket.io-client";
 import { createContext, useContext, useEffect, useState } from "react";
-import { useAppDispatch, increment, decrement } from "app/redux";
+// import { increment, decrement, useAppDispatch } from "app/redux";
 
 type SocketContentType = {
   socket: any | null;
@@ -18,7 +18,7 @@ export const useSocket = () => {
 };
 
 export const SocketProvider = ({ children }: { children: React.ReactNode }) => {
-  const dispatch = useAppDispatch();
+  // const dispatch = useAppDispatch();
   const [isSocket, setSocket] = useState(null);
   const [isConnected, setIsConnected] = useState(false);
 
@@ -31,16 +31,14 @@ export const SocketProvider = ({ children }: { children: React.ReactNode }) => {
       }
     );
 
-    console.log(socketInstance);
-
     socketInstance.on("connect", () => {
       setIsConnected(true);
-      dispatch(increment());
+      // dispatch(increment());
     });
 
     socketInstance.on("disconnect", () => {
       setIsConnected(false);
-      dispatch(decrement());
+      // dispatch(decrement());
     });
 
     setSocket(socketInstance);

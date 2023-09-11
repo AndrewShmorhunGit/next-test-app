@@ -1,7 +1,10 @@
+/** @jsxImportSource theme-ui */
 import { getFooterData } from "data/static.components";
 import Link from "next/link";
+import { FooterText } from "./Client";
+import { FlexBox } from "components/lib/Boxes";
 
-const { links } = getFooterData();
+const { footerHight, links } = getFooterData();
 
 function FooterLinks() {
   return (
@@ -14,11 +17,29 @@ function FooterLinks() {
             target="_blank"
             rel="noopener noreferrer"
           >
-            <div>{icon}</div>
+            {icon}
           </Link>
         );
       })}
     </>
+  );
+}
+
+export function FooterWrapper({ children }: { children: React.ReactNode }) {
+  return (
+    <FlexBox
+      sx={{
+        maxHeight: `${footerHight}rem`,
+        gap: "0.4rem",
+        pb: 1,
+      }}
+      flex={"column"}
+    >
+      <div sx={{ variant: "styles.box.flex.center", gap: "2rem" }}>
+        {children}
+      </div>
+      <FooterText />
+    </FlexBox>
   );
 }
 

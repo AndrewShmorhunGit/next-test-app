@@ -1,3 +1,4 @@
+/** @jsxImportSource theme-ui */
 "use client";
 import { RootState } from "app/redux/store";
 import { Footer } from "components/footer/Footer";
@@ -6,10 +7,9 @@ import React from "react";
 import { useSelector } from "app/redux";
 
 export function LayoutSubWrapper({ children }: { children: React.ReactNode }) {
-  const isModal = useSelector((store) => store.modal.value);
   return (
     <div
-      style={{
+      sx={{
         display: "grid",
         gridTemplateColumns: "1fr 100fr",
         gridTemplateRows: "10rem 100fr",
@@ -26,7 +26,7 @@ export function PageWrapper({ children }: { children: React.ReactNode }) {
     <div>
       {isModal !== "none" && <Modal />}
       <div
-        style={{
+        sx={{
           overflow: "hidden",
           display: "flex",
           justifyContent: "center",
@@ -49,10 +49,8 @@ export function FooterExtraWrapper({
 }) {
   return (
     <div
-      style={{
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
+      sx={{
+        variant: "styles.box.flex.center",
         height: "10%",
       }}
     >

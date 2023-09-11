@@ -44,3 +44,21 @@ export function transformDateFormat(dateString: string): string[] {
 
   return [format1, format2, format3];
 }
+
+export function formatUsdPrice(price: number): string {
+  const priceStr = price.toString().split("").reverse().join("");
+  const formattedPrice = priceStr
+    .replace(/(\d{3})/g, "$1 ")
+    .split("")
+    .reverse()
+    .join("")
+    .trim();
+
+  return `${formattedPrice} $`;
+}
+
+export function formatHrnPrice(price: number): string {
+  const roundedPrice = price.toFixed(2);
+  const formattedPrice = roundedPrice.replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+  return formattedPrice;
+}

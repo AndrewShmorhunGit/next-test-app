@@ -7,8 +7,8 @@ const headerHeight = 10;
 
 export const getNavigationData = () => {
   const navigationData = [
-    { name: "income", link: "products" },
-    { name: "groups", link: "orders" },
+    { name: "income", link: "income" },
+    { name: "groups", link: "groups" },
     { name: "products", link: "error" },
     { name: "users", link: "error" },
     { name: "settings", link: "error" },
@@ -26,11 +26,11 @@ export const getFooterData = () => {
 
   const links = [
     {
-      icon: <AiFillGithub size={24} color={palette.main_primary_dark} />,
+      icon: <AiFillGithub size={20} color={palette.main_primary_dark} />,
       link: "https://github.com/AndrewShmorhunGit/next-test-app",
     },
     {
-      icon: <AiFillLinkedin size={24} color={palette.main_primary_dark} />,
+      icon: <AiFillLinkedin size={20} color={palette.main_primary_dark} />,
       link: "https://www.linkedin.com/in/andrew-shmorhun-850a76209/",
     },
   ];

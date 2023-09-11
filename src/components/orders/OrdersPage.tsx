@@ -1,12 +1,17 @@
+/** @jsxImportSource theme-ui */
 "use client";
 
-import { useMedia } from "hooks/useMedia";
+import { ActivePageWrapper } from "components/products/Client";
+import { ScrollContainer } from "components/products/Server";
+import { GroupsHeader, Groups } from "./Client";
 
 export function OrdersPage() {
-  const { setMedia } = useMedia();
   return (
-    <div style={{ background: setMedia("inherit", "green", "blue", "yellow") }}>
-      <h1>Order Page</h1>
-    </div>
+    <ActivePageWrapper>
+      <GroupsHeader />
+      <ScrollContainer>
+        <Groups />
+      </ScrollContainer>
+    </ActivePageWrapper>
   );
 }

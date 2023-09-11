@@ -1,81 +1,12 @@
-"use client";
+/** @jsxImportSource theme-ui */
 
-import React from "react";
-import { palette } from "app/styles/services/palette";
-import { RootState } from "app/redux/store";
-import { ModalDeleteProduct, ModalTestContent } from "./Components";
-import { IoMdClose } from "react-icons/io";
-import { absoluteCenter, appShadows } from "app/styles/services/styles";
-import { useClickOutside } from "hooks/useClickOutside";
-import { setModal, useAppDispatch, useSelector } from "app/redux";
+import { ModalBackground } from "./Server";
+import { ModalContent } from "./Client";
 
 export function Modal() {
-  const refClickOutside = React.useRef<HTMLDivElement | null>(null);
-  const isModal = useSelector((state: RootState) => state.modal);
-  const dispatch = useAppDispatch();
-  useClickOutside(refClickOutside, () =>
-    dispatch(setModal({ value: "none", data: null }))
-  );
-
   return (
-    <div
-      style={{
-        boxShadow: "border-box",
-        position: "fixed",
-        height: "100%",
-        minWidth: "100%",
-        display: "flex",
-        // inset: 0,
-        alignItems: "center",
-        justifyContent: "center",
-        background: "rgba(0, 0, 0, 0.5)",
-        cursor: "pointer",
-        zIndex: 1,
-        // opacity: 1,
-      }}
-    >
-      <div
-        ref={refClickOutside}
-        style={{
-          width: "80rem",
-          background: palette.background_main,
-          cursor: "auto",
-          transform: "translate(0, -5rem)",
-          position: "relative",
-          display: "flex",
-          flexDirection: "column",
-        }}
-      >
-        {isModal.value === "test" && <ModalTestContent />}
-        {isModal.value === "delete" && isModal.data !== null && (
-          <ModalDeleteProduct product={isModal.data} />
-        )}
-
-        <div
-          style={{
-            position: "absolute",
-            width: "3.2rem",
-            height: "3.2rem",
-            top: "-1.6rem",
-            right: "-1.6rem",
-            borderRadius: "50%",
-            background: palette.background_second,
-            boxShadow: appShadows.header,
-            display: "grid",
-            cursor: "pointer",
-          }}
-          onClick={() => dispatch(setModal({ value: "none", data: null }))}
-        >
-          <IoMdClose
-            style={{
-              ...absoluteCenter,
-              opacity: 0.5,
-            }}
-            color={palette.text_dark}
-            size={20}
-          />
-        </div>
-      </div>
-    </div>
+    <ModalBackground>
+      <ModalContent />
+    </ModalBackground>
   );
 }

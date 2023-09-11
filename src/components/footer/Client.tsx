@@ -1,27 +1,16 @@
-import { flexCenter } from "app/styles/services/styles";
+/** @jsxImportSource theme-ui */
 import { getFooterData } from "data/static.components";
 import { useMedia } from "hooks/useMedia";
-import React from "react";
 
-const { footerHight, content, year } = getFooterData();
+const { content, year } = getFooterData();
 
-function FooterWrapper({ children }: { children: React.ReactNode }) {
+export function FooterText() {
   const { isMedia } = useMedia();
   return (
-    <div
-      style={{
-        maxHeight: `${footerHight}rem`,
-        display: "flex",
-        flexDirection: "column",
-        gap: "0.8rem",
-      }}
-    >
-      <div style={{ ...flexCenter, gap: "2rem" }}>{children}</div>
+    <>
       {(isMedia.big || isMedia.medium) && (
-        <p style={{ fontSize: "1rem" }}> &copy; {content + " " + year}</p>
+        <p sx={{ fontSize: "1rem" }}> &copy; {content + " " + year}</p>
       )}
-    </div>
+    </>
   );
 }
-
-export { FooterWrapper };

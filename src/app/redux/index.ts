@@ -12,7 +12,10 @@ import {
   unselectNav,
   toggleNav,
 } from "app/redux/features/navigation/navigation.slice";
-import { productsToggle } from "app/redux/features/products/products.slice";
+import {
+  setStatusFilter,
+  setStateFilter,
+} from "app/redux/features/products/products.slice";
 import { setGroup } from "app/redux/features/groups/groups.slice";
 export {
   useAppSelector as useSelector,
@@ -23,7 +26,8 @@ export {
   selectNav,
   unselectNav,
   toggleNav,
-  productsToggle,
   setGroup,
+  setStatusFilter,
+  setStateFilter,
   useAppDispatch,
 };

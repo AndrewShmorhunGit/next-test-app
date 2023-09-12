@@ -1,13 +1,7 @@
 /** @jsxImportSource theme-ui */
 "use client";
 
-import {
-  productsToggle,
-  selectNav,
-  setModal,
-  useAppDispatch,
-  useSelector,
-} from "app/redux";
+import { selectNav, setModal, useAppDispatch, useSelector } from "app/redux";
 import Link from "next/link";
 import { BsTrashFill } from "react-icons/bs";
 import { Button } from "theme-ui";
@@ -56,19 +50,19 @@ function ModalDeleteButton() {
   );
 }
 
-export function ProductsToggleInfoButton() {
-  const toggle = useSelector((store) => store.products.toggle);
-  const dispatch = useAppDispatch();
-  return (
-    // Change button style
-    <Button
-      mr={2}
-      variant="styles.buttons.toggle"
-      onClick={() => dispatch(productsToggle())}
-    >
-      {toggle ? "show" : "hide"}
-    </Button>
-  );
-}
+// export function ProductsToggleInfoButton() {
+//   const toggle = useSelector((store) => store.products.toggle);
+//   const dispatch = useAppDispatch();
+//   return (
+//     // Change button style
+//     <Button
+//       mr={2}
+//       variant="styles.buttons.toggle"
+//       onClick={() => dispatch(productsToggle())}
+//     >
+//       {toggle ? "show" : "hide"}
+//     </Button>
+//   );
+// }
 
 export { ErrorButton, CloseModalButton, ModalDeleteButton };

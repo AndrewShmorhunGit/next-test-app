@@ -1,3 +1,4 @@
+/** @jsxImportSource theme-ui */
 "use client";
 import { palette } from "app/styles/services/palette";
 import { AiFillGithub, AiFillLinkedin } from "react-icons/ai";
@@ -26,11 +27,11 @@ export const getFooterData = () => {
 
   const links = [
     {
-      icon: <AiFillGithub size={20} color={palette.main_primary_dark} />,
+      icon: <AiFillGithub size={20} sx={{ color: "primary.second" }} />,
       link: "https://github.com/AndrewShmorhunGit/next-test-app",
     },
     {
-      icon: <AiFillLinkedin size={20} color={palette.main_primary_dark} />,
+      icon: <AiFillLinkedin size={20} sx={{ color: "primary.second" }} />,
       link: "https://www.linkedin.com/in/andrew-shmorhun-850a76209/",
     },
   ];

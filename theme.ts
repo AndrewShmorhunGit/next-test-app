@@ -121,6 +121,7 @@ export const theme: Theme = {
           border: "lightgrey",
           p: "0.8rem 2.4rem",
           bg: "background.main",
+          minHeight: "8rem",
           borderRadius: 1,
         },
       },

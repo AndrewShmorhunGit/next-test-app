@@ -1,21 +1,33 @@
 "use client";
 
-import { createSlice } from "@reduxjs/toolkit";
+import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
-const initialState: { toggle: boolean } = {
+const initialState: {
+  toggle: boolean;
+  isStateFilter: "all" | "new" | "used";
+  isStatusFilter: "all" | "available" | "not available";
+} = {
   toggle: false,
+  isStateFilter: "all",
+  isStatusFilter: "all",
 };
 
 export const productsSlice = createSlice({
   name: "products",
   initialState,
   reducers: {
-    productsToggle: (state) => {
-      state.toggle = !state.toggle;
+    setStateFilter: (state, action: PayloadAction<"all" | "new" | "used">) => {
+      state.isStateFilter = action.payload;
+    },
+    setStatusFilter: (
+      state,
+      action: PayloadAction<"all" | "available" | "not available">
+    ) => {
+      state.isStatusFilter = action.payload;
     },
   },
 });
 
-export const { productsToggle } = productsSlice.actions;
+export const { setStatusFilter, setStateFilter } = productsSlice.actions;
 
 export default productsSlice.reducer;

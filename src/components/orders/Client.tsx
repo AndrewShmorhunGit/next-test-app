@@ -6,6 +6,7 @@ import { ModalBody } from "components/modal/Server";
 import {
   IncomeDeleteButton,
   ProductDeleteButton,
+  ProductsAmount,
 } from "components/products/Client";
 import {
   Guaranty,
@@ -14,7 +15,6 @@ import {
 } from "components/products/Server";
 import { createGroups, getGroupData } from "data/groups";
 import { catProducts } from "data/income";
-import { useAsync } from "hooks/useAsync";
 import { useState, useEffect } from "react";
 import { BsListUl, BsPlus } from "react-icons/bs";
 import { IoIosArrowForward, IoMdClose } from "react-icons/io";
@@ -30,7 +30,7 @@ export function GroupsHeader() {
         display: "flex",
         alignItems: "center",
         gap: "3rem",
-        pb: "6rem",
+        pb: "3.2rem",
       }}
     >
       <Box
@@ -43,9 +43,7 @@ export function GroupsHeader() {
       >
         <BsPlus color={"white"} size={14} />
       </Box>
-      <h2 sx={{ variant: "styles.headers.title" }}>
-        Income / {catProducts.length}
-      </h2>
+      <ProductsAmount title={"Incomes"} />
     </Box>
   );
 }
@@ -61,7 +59,7 @@ export function Groups() {
   }, [selectedGroup]);
 
   useEffect(() => {
-    httpExchange().then((data) => setExchangeRate(data ? data : 36));
+    httpExchange().then((data) => setExchangeRate(data ? data : 38));
   }, []);
 
   return (
@@ -69,7 +67,12 @@ export function Groups() {
       <Grid gap={3} columns={toggle ? "36rem 1fr" : 1}>
         <Box>
           {Array.from(groups.keys()).map((group: string) => (
-            <Group group={group} toggle={toggle} rate={isExchangeRate} />
+            <Group
+              key={group}
+              group={group}
+              toggle={toggle}
+              rate={isExchangeRate}
+            />
           ))}
         </Box>
         <GroupInfo toggle={toggle} />
@@ -186,11 +189,10 @@ export function GroupInfo({ toggle }: { toggle: boolean }) {
         position: "relative",
         border: "light",
         borderRadius: 1,
-        bg: "background.main",
         minWidth: "100%",
         mb: 11,
         mr: "5rem",
-        maxWidth: toggle ? "86rem" : "0rem",
+        maxWidth: toggle ? "86re=" : "0rem",
         maxHeight: toggle ? "100rem" : "0rem",
         opacity: toggle ? 1 : 0,
         transition: `opacity ${toggle ? 0.8 : 0}s ease`,
@@ -205,6 +207,7 @@ export function GroupInfo({ toggle }: { toggle: boolean }) {
             <Grid
               gap={0}
               sx={{
+                backgroundColor: "background.main",
                 "&:hover": {
                   boxShadow: "standard",
                 },
@@ -232,7 +235,7 @@ export function GroupInfo({ toggle }: { toggle: boolean }) {
 export function GroupInfoHeader() {
   const group = useSelector((store) => store.groups.select);
   return (
-    <Box sx={{ borderBottom: "lightgrey 1px solid" }}>
+    <Box sx={{ borderBottom: "lightgrey 1px solid", bg: "background.main" }}>
       <h2 sx={{ variant: "styles.headers.title", pl: 4, pb: 3 }}>{group}</h2>
       <div
         sx={{

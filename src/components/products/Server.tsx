@@ -6,20 +6,71 @@ import {
   transformDateFormat,
 } from "utils/functions";
 import { ICatProduct } from "interfaces/IProducts";
-import { ProductDeleteButton, ProductImage } from "./Client";
+import {
+  ProductDeleteButton,
+  ProductImage,
+  ProductsAmount,
+  ProductsWithFilter,
+  StateSelect,
+  StatusSelect,
+} from "./Client";
 import { catProducts } from "data/income";
-import { Box, Grid, Spinner } from "theme-ui";
+import { Box, Grid } from "theme-ui";
 import { httpExchange, httpProducts } from "utils/http.requests";
-import { Suspense } from "react";
 
 const products = catProducts;
 
+export function ProductsHeader() {
+  return (
+    <Box
+      sx={{
+        display: "flex",
+        alignItems: "center",
+        gap: "12rem",
+        pb: "3.2rem",
+      }}
+    >
+      <ProductsAmount title={"Products"} />
+      <ProductsSelects />
+    </Box>
+  );
+}
+
+export async function Products() {
+  const rate = await httpExchange();
+  // const products = await httpProducts()
+  return (
+    <>
+      <ProductsHeader />
+      <ScrollContainer>
+        <ProductsWithFilter rate={rate || 38} products={products} />
+      </ScrollContainer>
+    </>
+  );
+}
+
+export function ProductWrapper({ children }: { children: React.ReactNode }) {
+  return (
+    <Grid
+      gap={4}
+      columns={[
+        "4rem 6rem 36rem 8rem 12rem 6rem minmax(9rem,18rem) minmax(16rem,32rem) 18rem 24rem 15rem 6rem",
+      ]}
+      sx={{
+        variant: "styles.box.product.wrapper",
+      }}
+    >
+      {children}
+    </Grid>
+  );
+}
+
 export function Product({
   product,
-  course,
+  rate,
 }: {
   product: ICatProduct;
-  course: number;
+  rate: number;
 }) {
   return (
     <ProductWrapper>
@@ -31,12 +82,8 @@ export function Product({
         from={transformDateFormat(product.date.from)[0]}
         to={transformDateFormat(product.date.from)[0]}
       />
-      <div sx={{ alignSelf: "center", fontSize: 1 }}>
-        <p>{product.state.new ? "new" : "used"}</p>
-      </div>
-      <Suspense fallback={<Spinner />}>
-        <ProductPrice price={product.price.usd} course={course} />
-      </Suspense>
+      <ProductState condition={product.state.new} />
+      <ProductPrice price={product.price.usd} course={rate} />
       <ProductGroup group={product.group} />
       <ProductSupplier supplier={product.supplier} />
       <ProductIncome income={product.income} />
@@ -121,6 +168,14 @@ const DateRange = ({ from, to }: { from: string; to: string }) => (
   </Grid>
 );
 
+function ProductState({ condition }: { condition: boolean }) {
+  return (
+    <div sx={{ alignSelf: "center", fontSize: 1 }}>
+      <p>{condition ? "new" : "used"}</p>
+    </div>
+  );
+}
+
 export function Guaranty({
   guaranty,
   from,
@@ -171,7 +226,7 @@ export function ProductPrice({
   );
 }
 
-export function ProductSupplier({ supplier }: { supplier: string }) {
+function ProductSupplier({ supplier }: { supplier: string }) {
   return (
     <div sx={{ alignSelf: "center" }}>
       <p
@@ -187,7 +242,7 @@ export function ProductSupplier({ supplier }: { supplier: string }) {
   );
 }
 
-export function ProductGroup({ group }: { group: string }) {
+function ProductGroup({ group }: { group: string }) {
   return (
     <div sx={{ alignSelf: "center" }}>
       <p
@@ -203,7 +258,7 @@ export function ProductGroup({ group }: { group: string }) {
   );
 }
 
-export function ProductIncome({ income }: { income: string }) {
+function ProductIncome({ income }: { income: string }) {
   return (
     <div sx={{ alignSelf: "center" }}>
       <p
@@ -215,66 +270,6 @@ export function ProductIncome({ income }: { income: string }) {
       >
         {income}
       </p>
-    </div>
-  );
-}
-
-export function ProductWrapper({ children }: { children: React.ReactNode }) {
-  return (
-    <Grid
-      gap={4}
-      columns={[
-        "4rem 6rem 36rem 8rem 12rem 6rem minmax(9rem,18rem) minmax(16rem,32rem) 18rem 24rem 15rem 6rem",
-      ]}
-      sx={{
-        variant: "styles.box.product.wrapper",
-      }}
-    >
-      {children}
-    </Grid>
-  );
-}
-
-export const Products = async () => {
-  const course = await httpExchange();
-  // const products = await httpProducts()
-  return (
-    <>
-      <ProductsHeader />
-      <ScrollContainer>
-        {products.map((product: ICatProduct) => {
-          return (
-            <Product
-              key={product.position.name}
-              product={product}
-              course={course || 38}
-            />
-          );
-        })}
-      </ScrollContainer>
-    </>
-  );
-};
-
-export function ProductsHeader() {
-  return (
-    <div
-      sx={{
-        display: "flex",
-        alignItems: "center",
-        gap: "6rem",
-        pb: "6rem",
-      }}
-    >
-      <h2 sx={{ variant: "styles.headers.title" }}>
-        Products / {products.length}
-      </h2>
-      <div>
-        <label htmlFor="">
-          status
-          <select></select>
-        </label>
-      </div>
     </div>
   );
 }
@@ -291,7 +286,7 @@ export function ScrollContainer({ children }: { children: React.ReactNode }) {
     >
       <div
         sx={{
-          maxHeight: "calc(100vh - 40rem)",
+          maxHeight: "calc(100vh - 36rem)",
           pr: "2rem",
           rowGap: "1.6rem",
           ...createGrid(1, 1),
@@ -300,5 +295,18 @@ export function ScrollContainer({ children }: { children: React.ReactNode }) {
         {children}
       </div>
     </div>
+  );
+}
+
+function ProductsSelects() {
+  return (
+    <Grid
+      columns={[2]}
+      gap={6}
+      sx={{ fontSize: 2, fontWeight: "nav", width: "auto" }}
+    >
+      <StateSelect />
+      <StatusSelect />
+    </Grid>
   );
 }

@@ -2,9 +2,8 @@
 import { getFooterData } from "data/static.components";
 import { useMedia } from "hooks/useMedia";
 
-const { content, year } = getFooterData();
-
 export function FooterText() {
+  const { content, year } = getFooterData();
   const { isMedia } = useMedia();
   return (
     <>

@@ -1,13 +1,12 @@
-import config from "config";
-import { ICatProduct } from "interfaces/IProducts";
+import { ICatProduct, IProductsResponseData } from "interfaces/IProducts";
+import { config } from "config/index";
+import { transformFetchedProducts } from "./functions";
 
-export async function httpProducts(
-  endpoint?: string
-): Promise<ICatProduct[] | void> {
+export async function httpProducts(): Promise<ICatProduct[] | void> {
   try {
-    const response = await fetch(config.api.products + "/products" + endpoint);
-    const products = await response.json();
-    return products;
+    const response = await fetch(config.api.products);
+    const products: IProductsResponseData = await response.json();
+    return transformFetchedProducts(products);
   } catch (error) {
     console.error("Error:", error);
   }
@@ -15,10 +14,7 @@ export async function httpProducts(
 
 export async function httpExchange(): Promise<number | void> {
   try {
-    const res: any = await fetch(
-      "https://api.exchangerate.host/latest?base=USD"
-    );
-    console.log("data fetched!");
+    const res: any = await fetch(config.api.exchange);
     const data = await res.json();
     const course: number = data.rates["UAH"];
     return course;

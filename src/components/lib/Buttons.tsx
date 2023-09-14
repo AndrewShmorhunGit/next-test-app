@@ -2,9 +2,12 @@
 "use client";
 
 import { selectNav, setModal, useAppDispatch, useSelector } from "app/redux";
+import { ICatProduct } from "interfaces/IProducts";
 import Link from "next/link";
-import { BsTrashFill } from "react-icons/bs";
-import { Button } from "theme-ui";
+import { useState } from "react";
+import { BsPlus, BsTrashFill } from "react-icons/bs";
+import { Box, Button } from "theme-ui";
+import { newProd } from "utils/actions";
 
 function ErrorButton() {
   const dispatch = useAppDispatch();
@@ -50,19 +53,29 @@ function ModalDeleteButton() {
   );
 }
 
-// export function ProductsToggleInfoButton() {
-//   const toggle = useSelector((store) => store.products.toggle);
-//   const dispatch = useAppDispatch();
-//   return (
-//     // Change button style
-//     <Button
-//       mr={2}
-//       variant="styles.buttons.toggle"
-//       onClick={() => dispatch(productsToggle())}
-//     >
-//       {toggle ? "show" : "hide"}
-//     </Button>
-//   );
+// export function AddProductButton({ product }: { product: ICatProduct }) {
+//    const [isProd, setProd] = useState<ICatProduct[]>(products);
+
+//   const addProd = (product: ICatProduct) => {
+//     setProd(
+//       isProd.filter((prod: ICatProduct) => prod.id !== product.id && prod)
+//     );
+//     newProd(product);
+//   return <Box
+//               sx={{
+//                 bg: "primary.second",
+//                 height: "2rem",
+//                 width: "2rem",
+//                 borderRadius: 0,
+//                 variant: "styles.box.flex.center",
+//                 boxShadow: "green",
+//                 cursor: "pointer",
+//                 ml: 3,
+//               }}
+//               onClick={() => addProd(prod)}
+//             >
+//               <BsPlus color={"white"} size={14} />
+//             </Box>;
 // }
 
 export { ErrorButton, CloseModalButton, ModalDeleteButton };

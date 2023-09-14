@@ -3,7 +3,7 @@
 import user from "data/content/images/navigation/user.jpg";
 
 import Image from "next/image";
-import { Box } from "theme-ui";
+// import { Box } from "theme-ui";
 
 export function AuthUserMenu() {
   return (

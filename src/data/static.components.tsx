@@ -1,18 +1,16 @@
 /** @jsxImportSource theme-ui */
-"use client";
-import { palette } from "app/styles/services/palette";
 import { AiFillGithub, AiFillLinkedin } from "react-icons/ai";
 
 // handle that as dependency
-const headerHeight = 10;
+// const headerHeight = 10;
 
 export const getNavigationData = () => {
   const navigationData = [
     { name: "income", link: "income" },
     { name: "groups", link: "groups" },
-    { name: "products", link: "error" },
-    { name: "users", link: "error" },
-    { name: "settings", link: "error" },
+    { name: "products", link: "products" },
+    { name: "users", link: "users" },
+    { name: "settings", link: "settings" },
   ];
   return { navigationData };
 };

@@ -3,7 +3,6 @@
 import { palette } from "app/styles/services/palette";
 import { createGrid, flexCenter } from "app/styles/services/styles";
 import { ICatProduct } from "interfaces/IProducts";
-// import Image from "next/image";
 import { CloseModalButton, ModalDeleteButton } from "components/lib/Buttons";
 import { ModalCloseX } from "./Client";
 import { StatusIndicator } from "components/products/Server";

@@ -130,9 +130,7 @@ export function Menu() {
   const isToggle = useSelector((state: RootState) => state.navigation.toggle);
   const dispatch = useAppDispatch();
   const path = usePathname();
-  console.log(path?.slice(1));
   dispatch(selectNav(path?.slice(1)));
-  // React.useEffect(() => {dispatch(selectNav(name))}, []);
 
   return (
     <div

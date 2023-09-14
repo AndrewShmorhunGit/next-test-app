@@ -15,6 +15,10 @@ import {
 import {
   setStatusFilter,
   setStateFilter,
+  fetchingProducts,
+  fetchProductsSuccess,
+  setProductsLocalStorage,
+  fetchProductsError,
 } from "app/redux/features/products/products.slice";
 import { setGroup } from "app/redux/features/groups/groups.slice";
 export {
@@ -29,5 +33,9 @@ export {
   setGroup,
   setStatusFilter,
   setStateFilter,
+  fetchingProducts,
+  fetchProductsSuccess,
+  setProductsLocalStorage,
+  fetchProductsError,
   useAppDispatch,
 };

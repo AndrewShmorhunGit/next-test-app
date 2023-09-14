@@ -14,14 +14,12 @@ import {
   ProductStatus,
 } from "components/products/Server";
 import { createGroups, getGroupData } from "data/groups";
-import { catProducts } from "data/income";
+import { ICatProduct } from "interfaces/IProducts";
 import { useState, useEffect } from "react";
 import { BsListUl, BsPlus } from "react-icons/bs";
 import { IoIosArrowForward, IoMdClose } from "react-icons/io";
 import { Box, Grid } from "theme-ui";
-import { httpExchange } from "utils/http.requests";
-
-const { groups } = createGroups(catProducts);
+import { httpExchange, httpProducts } from "utils/http.requests";
 
 export function GroupsHeader() {
   return (
@@ -49,18 +47,25 @@ export function GroupsHeader() {
 }
 
 export function Groups() {
-  const [toggle, setToggle] = useState(false);
-  const selectedGroup = useSelector((store) => store.groups.select);
+  // Custom hook
+  ////////////////////////////////////////////////////
+  // const [isProducts, setProducts] = useState<ICatProduct[]>([]);
+  const { products } = useSelector((store) => store.products);
   const [isExchangeRate, setExchangeRate] = useState(38);
+  useEffect(() => {
+    httpExchange().then((data) => setExchangeRate(data ? data : 38));
+    // httpProducts().then((data) => data && setProducts(data));
+  }, []);
+  const { groups } = createGroups(products);
 
+  // Custom hook
+  ////////////////////////////////////////////////////
+  const selectedGroup = useSelector((store) => store.groups.select);
+  const [toggle, setToggle] = useState(false);
   useEffect(() => {
     if (selectedGroup !== "none") setToggle(true);
     if (selectedGroup === "none") setToggle(false);
   }, [selectedGroup]);
-
-  useEffect(() => {
-    httpExchange().then((data) => setExchangeRate(data ? data : 38));
-  }, []);
 
   return (
     <div sx={{ pt: "2rem" }}>
@@ -69,29 +74,34 @@ export function Groups() {
           {Array.from(groups.keys()).map((group: string) => (
             <Group
               key={group}
+              groups={groups}
               group={group}
               toggle={toggle}
               rate={isExchangeRate}
             />
           ))}
         </Box>
-        <GroupInfo toggle={toggle} />
+        <GroupInfo toggle={toggle} groups={groups} />
       </Grid>
     </div>
   );
 }
 
 export function Group({
+  groups,
   group,
   toggle,
   rate,
 }: {
+  groups: Map<string, ICatProduct[]>;
   group: string;
   toggle: boolean;
   rate: number;
 }) {
   const selectedGroup = useSelector((store) => store.groups.select);
   const dispatch = useAppDispatch();
+  // const { products } = useSelector((store) => store.products);
+  // const { groups } = createGroups(products);
 
   const {
     groupProducts,
@@ -132,7 +142,6 @@ export function Group({
         }}
         onClick={() => {
           dispatch(setGroup(group === selectedGroup ? "none" : group));
-          console.log(groups.get(group));
         }}
       >
         <BsListUl
@@ -181,7 +190,13 @@ export function Group({
   );
 }
 
-export function GroupInfo({ toggle }: { toggle: boolean }) {
+export function GroupInfo({
+  toggle,
+  groups,
+}: {
+  toggle: boolean;
+  groups: Map<string, ICatProduct[]>;
+}) {
   const selectedGroup = useSelector((store) => store.groups.select);
   return (
     <Box

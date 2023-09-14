@@ -1,12 +1,19 @@
 "use client";
 
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
+import { ICatProduct } from "interfaces/IProducts";
 
 const initialState: {
+  loading: boolean;
+  error: string;
+  products: ICatProduct[];
   toggle: boolean;
   isStateFilter: "all" | "new" | "used";
   isStatusFilter: "all" | "available" | "not available";
 } = {
+  loading: false,
+  error: "",
+  products: [],
   toggle: false,
   isStateFilter: "all",
   isStatusFilter: "all",
@@ -16,6 +23,21 @@ export const productsSlice = createSlice({
   name: "products",
   initialState,
   reducers: {
+    fetchingProducts: (state) => {
+      state.loading = true;
+      state.error = "";
+    },
+    fetchProductsSuccess: (state, action: PayloadAction<ICatProduct[]>) => {
+      state.products = action.payload;
+      state.loading = false;
+    },
+    setProductsLocalStorage: (_state, action) => {
+      localStorage.setItem("products", JSON.stringify(action.payload));
+    },
+    fetchProductsError: (state, action) => {
+      state.loading = false;
+      state.error = action.payload.message;
+    },
     setStateFilter: (state, action: PayloadAction<"all" | "new" | "used">) => {
       state.isStateFilter = action.payload;
     },
@@ -28,6 +50,13 @@ export const productsSlice = createSlice({
   },
 });
 
-export const { setStatusFilter, setStateFilter } = productsSlice.actions;
+export const {
+  setStatusFilter,
+  setStateFilter,
+  fetchingProducts,
+  fetchProductsSuccess,
+  setProductsLocalStorage,
+  fetchProductsError,
+} = productsSlice.actions;
 
 export default productsSlice.reducer;

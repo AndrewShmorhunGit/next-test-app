@@ -14,11 +14,8 @@ import {
   StateSelect,
   StatusSelect,
 } from "./Client";
-import { catProducts } from "data/income";
 import { Box, Grid } from "theme-ui";
 import { httpExchange, httpProducts } from "utils/http.requests";
-
-const products = catProducts;
 
 export function ProductsHeader() {
   return (
@@ -38,12 +35,12 @@ export function ProductsHeader() {
 
 export async function Products() {
   const rate = await httpExchange();
-  // const products = await httpProducts()
+  const products = await httpProducts();
   return (
     <>
       <ProductsHeader />
       <ScrollContainer>
-        <ProductsWithFilter rate={rate || 38} products={products} />
+        <ProductsWithFilter rate={rate || 38} products={products || []} />
       </ScrollContainer>
     </>
   );
@@ -129,11 +126,7 @@ const ProductInfo = ({ name, code }: { name: string; code: string }) => (
   </div>
 );
 
-export function ProductStatus({
-  status,
-}: {
-  status: "available" | "not available";
-}) {
+export function ProductStatus({ status }: { status: string }) {
   return (
     <div sx={{ alignSelf: "center", color: "blue" }}>
       <p

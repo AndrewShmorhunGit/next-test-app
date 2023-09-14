@@ -1,7 +1,7 @@
 /** @jsxImportSource theme-ui */
 "use client";
 import { ICatProduct } from "interfaces/IProducts";
-import { BsTrashFill } from "react-icons/bs";
+import { BsPlus, BsTrashFill } from "react-icons/bs";
 import {
   setModal,
   setStateFilter,
@@ -10,10 +10,12 @@ import {
   useSelector,
 } from "app/redux";
 import { RootState } from "app/redux/store";
-import { Grid, Box } from "theme-ui";
+import { Box } from "theme-ui";
 import { checkState, checkStatus, filterProducts } from "utils/filters";
 import { Product } from "./Server";
-import { Select } from "components/lib/Servet";
+import { Select } from "components/lib/Server";
+import { useState } from "react";
+import { ModalBody } from "components/modal/Server";
 
 export function ProductDeleteButton({ product }: { product: ICatProduct }) {
   const dispatch = useAppDispatch();
@@ -140,4 +142,44 @@ export function StatusSelect() {
       onChange={(e) => dispatch(setStatusFilter(checkStatus(e.target.value)))}
     />
   );
+}
+
+export function ProductToAdd({ prod }: { prod: ICatProduct }) {
+  const [isProd, setProd] = useState(false);
+
+  const addProd = () => {
+    setProd(true);
+  };
+  if (!isProd)
+    return (
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+          bg: "white",
+        }}
+      >
+        <Box sx={{ width: "54rem" }}>
+          <ModalBody product={prod} />
+        </Box>
+        <Box sx={{ p: 2 }}>
+          <Box
+            sx={{
+              bg: "primary.second",
+              height: "2rem",
+              width: "2rem",
+              borderRadius: 0,
+              variant: "styles.box.flex.center",
+              boxShadow: "green",
+              cursor: "pointer",
+              ml: 3,
+            }}
+            onClick={() => addProd()}
+          >
+            <BsPlus color={"white"} size={14} />
+          </Box>
+        </Box>
+      </Box>
+    );
 }

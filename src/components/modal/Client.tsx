@@ -1,6 +1,6 @@
 /** @jsxImportSource theme-ui */
 "use client";
-import { setGroup, setModal, useAppDispatch, useSelector } from "app/redux";
+import { setModal, useAppDispatch, useSelector } from "app/redux";
 import { RootState } from "app/redux/store";
 import { absoluteCenter } from "app/styles/services/styles";
 import { useClickOutside } from "hooks/useClickOutside";

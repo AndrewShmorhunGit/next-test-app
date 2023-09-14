@@ -1,3 +1,9 @@
+import {
+  ICatProduct,
+  IProductsResponseData,
+  IResponseProduct,
+} from "interfaces/IProducts";
+
 export function getDate() {
   const [day, month, dayOfMonth, year] = new Date()
     .toLocaleDateString("en-US", {
@@ -61,4 +67,37 @@ export function formatHrnPrice(price: number): string {
   const roundedPrice = price.toFixed(2);
   const formattedPrice = roundedPrice.replace(/\B(?=(\d{3})+(?!\d))/g, " ");
   return formattedPrice;
+}
+
+export function transformFetchedProducts(
+  response: IProductsResponseData
+): ICatProduct[] {
+  const products = transformDbProducts(response.data);
+  return products;
+}
+
+export function transformDbProducts(data: IResponseProduct[]) {
+  const products = data.map((prod: IResponseProduct) => {
+    return {
+      id: prod.id,
+      image: prod.image,
+      position: { name: prod.name, code: prod.code },
+      status: prod.status,
+      date: {
+        from: prod.from,
+        to: prod.to,
+      },
+      state: {
+        new: prod.new,
+      },
+      price: {
+        usd: +prod.price,
+      },
+      group: prod.group,
+      income: prod.income,
+      supplier: prod.supplier,
+      guaranty: prod.guaranty || "",
+    };
+  });
+  return products;
 }

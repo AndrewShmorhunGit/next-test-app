@@ -1,6 +1,5 @@
 /** @jsxImportSource theme-ui */
 import { RiSettings5Fill } from "react-icons/ri";
-import { palette } from "app/styles/services/palette";
 import { absoluteCenter } from "app/styles/services/styles";
 import { AuthUserMenu } from "./AuthUserButton";
 
@@ -33,7 +32,7 @@ export function UserImage() {
   return (
     <div
       sx={{
-        background: palette.background_third,
+        bg: "background.third",
         overflow: "hidden",
         width: "9.6rem",
         height: "9.6rem",

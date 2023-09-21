@@ -4,6 +4,7 @@ import {
   transformDbProducts,
   transformProductToDbProduct,
 } from "utils/functions";
+import { revalidatePath } from "next/cache";
 
 export async function getDbProducts() {
   const response: IResponseProduct[] = await db.product.findMany({});
@@ -13,4 +14,5 @@ export async function getDbProducts() {
 
 export async function addProduct(product: IProduct) {
   const prod = await db.product.create(transformProductToDbProduct(product));
+  revalidatePath("/products");
 }

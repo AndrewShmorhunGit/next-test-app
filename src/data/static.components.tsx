@@ -1,9 +1,6 @@
 /** @jsxImportSource theme-ui */
 import { AiFillGithub, AiFillLinkedin } from "react-icons/ai";
 
-// handle that as dependency
-// const headerHeight = 10;
-
 export const getNavigationData = () => {
   const navigationData = [
     { name: "income", link: "income" },

@@ -17,20 +17,22 @@ import {
 import { Box, Grid } from "theme-ui";
 import { httpExchange, httpProducts } from "utils/http/http";
 
-export function ProductsHeader() {
-  return (
-    <Box
-      sx={{
-        display: "flex",
-        alignItems: "center",
-        gap: "12rem",
-        pb: "3.2rem",
-      }}
-    >
-      <ProductsAmount title={"Products"} />
-      <ProductsSelects />
-    </Box>
-  );
+export async function ProductsHeader() {
+  const products = await httpProducts();
+  if (products)
+    return (
+      <Box
+        sx={{
+          display: "flex",
+          alignItems: "center",
+          gap: "12rem",
+          pb: "3.2rem",
+        }}
+      >
+        <ProductsAmount title={"Products"} amount={products.length} />
+        <ProductsSelects />
+      </Box>
+    );
 }
 
 export async function Products() {

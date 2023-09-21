@@ -6,10 +6,11 @@ import { IProduct } from "interfaces/IProducts";
 import { CloseModalButton, ModalDeleteButton } from "components/lib/Buttons";
 import { ModalCloseX } from "./Client";
 import { StatusIndicator } from "components/incomes/Server";
+import { Box } from "theme-ui";
 
 export function ModalBackground({ children }: { children: React.ReactNode }) {
   return (
-    <div
+    <Box
       sx={{
         variant: "styles.box.flex.center",
         position: "fixed",
@@ -21,7 +22,7 @@ export function ModalBackground({ children }: { children: React.ReactNode }) {
       }}
     >
       {children}
-    </div>
+    </Box>
   );
 }
 
@@ -31,7 +32,7 @@ export function ModalDeleteProduct({
   product: IProduct | IProduct[];
 }) {
   return (
-    <div sx={{ display: "flex", flexDirection: "column" }}>
+    <Box sx={{ display: "flex", flexDirection: "column" }}>
       <ModalMessage
         message={"Are you sure that you want to delete this income?"}
       />
@@ -41,13 +42,13 @@ export function ModalDeleteProduct({
         <CloseModalButton />
         <ModalDeleteButton />
       </ModalFooterWrapper>
-    </div>
+    </Box>
   );
 }
 
 function ModalMessage({ message }: { message: string }) {
   return (
-    <div
+    <Box
       sx={{
         height: "8rem",
         padding: "2.4rem 3.2rem",
@@ -55,7 +56,7 @@ function ModalMessage({ message }: { message: string }) {
       }}
     >
       <h2 sx={{ color: "text", fontSize: 3 }}>{message}</h2>
-    </div>
+    </Box>
   );
 }
 
@@ -65,7 +66,7 @@ export function ModalFooterWrapper({
   children: React.ReactNode;
 }) {
   return (
-    <div
+    <Box
       sx={{
         height: "10rem",
         background: palette.main_primary,
@@ -76,7 +77,7 @@ export function ModalFooterWrapper({
       }}
     >
       {children}
-    </div>
+    </Box>
   );
 }
 
@@ -86,7 +87,7 @@ export function ModalBody({ product }: { product: IProduct | IProduct[] }) {
       {Array.isArray(product) ? (
         product.map((prod) => <ModalBody product={prod} />)
       ) : (
-        <div
+        <Box
           sx={{
             p: "1.6rem 2.4rem",
             columnGap: "2.8rem",
@@ -95,14 +96,14 @@ export function ModalBody({ product }: { product: IProduct | IProduct[] }) {
           }}
         >
           <StatusIndicator status={product.status} />
-          <div sx={{ variant: "styles.box.flex.center" }}>
+          <Box sx={{ variant: "styles.box.flex.center" }}>
             <img
               sx={{ maxHeight: "3.2rem" }}
               src={product.image}
               alt={product.position.name}
             />
-          </div>
-          <div sx={{ alignSelf: "center", paddingLeft: "2rem" }}>
+          </Box>
+          <Box sx={{ alignSelf: "center", paddingLeft: "2rem" }}>
             <p
               sx={{
                 textDecoration: "underline lightgrey",
@@ -123,8 +124,8 @@ export function ModalBody({ product }: { product: IProduct | IProduct[] }) {
             >
               {product.position.code}
             </p>
-          </div>
-        </div>
+          </Box>
+        </Box>
       )}
     </>
   );

@@ -22,6 +22,12 @@ import { Box, Grid } from "theme-ui";
 import { httpExchange, httpProducts } from "utils/http/http";
 
 export function GroupsHeader() {
+  const [isState, setState] = useState(0);
+
+  useEffect(() => {
+    httpProducts().then((data) => data && setState(data.length));
+  }, []);
+
   return (
     <Box
       sx={{
@@ -41,7 +47,7 @@ export function GroupsHeader() {
       >
         <BsPlus color={"white"} size={14} />
       </Box>
-      <ProductsAmount title={"Incomes"} />
+      <ProductsAmount title={"Incomes"} amount={isState} />
     </Box>
   );
 }
@@ -49,7 +55,6 @@ export function GroupsHeader() {
 export function Groups() {
   // Custom hook
   ////////////////////////////////////////////////////
-  // const [isProducts, setProducts] = useState<ICatProduct[]>([]);
   const { products } = useSelector((store) => store.products);
   const [isExchangeRate, setExchangeRate] = useState(38);
   useEffect(() => {

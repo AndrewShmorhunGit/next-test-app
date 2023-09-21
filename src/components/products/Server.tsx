@@ -1,5 +1,5 @@
 import { Box } from "theme-ui";
-import { ProductToAdd } from "../incomes/Client";
+import { ProductToAdd } from "./Client";
 import { IProduct } from "interfaces/IProducts";
 import { getProductsToAdd } from "data/products";
 

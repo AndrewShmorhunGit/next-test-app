@@ -1,7 +1,7 @@
 /** @jsxImportSource theme-ui */
 "use client";
 import { IProduct } from "interfaces/IProducts";
-import { BsPlus, BsTrashFill } from "react-icons/bs";
+import { BsTrashFill } from "react-icons/bs";
 import {
   setModal,
   setStateFilter,
@@ -14,8 +14,8 @@ import { Box } from "theme-ui";
 import { checkState, checkStatus, filterProducts } from "utils/filters";
 import { Product } from "./Server";
 import { Select } from "components/lib/Server";
-import { useState } from "react";
-import { ModalBody } from "components/modal/Server";
+import { httpProducts } from "utils/http/http";
+import { useEffect, useState } from "react";
 
 export function ProductDeleteButton({ product }: { product: IProduct }) {
   const dispatch = useAppDispatch();
@@ -82,11 +82,16 @@ export const ProductImage = ({
   </Box>
 );
 
-export function ProductsAmount({ title }: { title: string }) {
-  // const { products } = useSelector(store => store.products);
+export function ProductsAmount({
+  title,
+  amount,
+}: {
+  title: string;
+  amount: number;
+}) {
   return (
     <h2 sx={{ variant: "styles.headers.title" }}>
-      {title} / {/* {products.length} */}
+      {title} / {amount}
     </h2>
   );
 }
@@ -142,44 +147,4 @@ export function StatusSelect() {
       onChange={(e) => dispatch(setStatusFilter(checkStatus(e.target.value)))}
     />
   );
-}
-
-export function ProductToAdd({ prod }: { prod: IProduct }) {
-  const [isProd, setProd] = useState(false);
-
-  const addProd = () => {
-    setProd(true);
-  };
-  if (!isProd)
-    return (
-      <Box
-        sx={{
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
-          bg: "white",
-        }}
-      >
-        <Box sx={{ width: "54rem" }}>
-          <ModalBody product={prod} />
-        </Box>
-        <Box sx={{ p: 2 }}>
-          <Box
-            sx={{
-              bg: "primary.second",
-              height: "2rem",
-              width: "2rem",
-              borderRadius: 0,
-              variant: "styles.box.flex.center",
-              boxShadow: "green",
-              cursor: "pointer",
-              ml: 3,
-            }}
-            onClick={() => addProd()}
-          >
-            <BsPlus color={"white"} size={14} />
-          </Box>
-        </Box>
-      </Box>
-    );
 }

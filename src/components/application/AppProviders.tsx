@@ -3,7 +3,7 @@
 import Providers from "app/redux/provider";
 import { SocketProvider } from "providers/socket.provider";
 import { ThemeUIProvider } from "theme-ui";
-import { theme } from "../../../theme";
+import { theme } from "../../app/styles/theme";
 import "app/styles/globals.css";
 
 export function AppProviders({ children }: { children: React.ReactNode }) {

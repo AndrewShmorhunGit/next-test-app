@@ -1,13 +1,12 @@
-import { ICatProduct } from "interfaces/IProducts";
-import { httpExchange } from "utils/http.requests";
+import { IProduct } from "interfaces/IProducts";
 
-export function createGroups(products: ICatProduct[]) {
+export function createGroups(products: IProduct[]) {
   const groupsArray = products.map(({ group }) => {
     return group;
   });
   const groupsSet = new Set(groupsArray);
   const groupsArrayFromSet = Array.from(groupsSet);
-  const groups: Map<string, ICatProduct[]> = new Map();
+  const groups: Map<string, IProduct[]> = new Map();
   groupsArrayFromSet.forEach((group) =>
     groups.set(
       group,
@@ -18,10 +17,10 @@ export function createGroups(products: ICatProduct[]) {
 }
 
 function getGroupProducts(
-  groups: Map<string, ICatProduct[]>,
+  groups: Map<string, IProduct[]>,
   group: string
-): ICatProduct[] {
-  const emptyProduct: ICatProduct[] = [
+): IProduct[] {
+  const emptyProduct: IProduct[] = [
     {
       id: "123dfaf0",
       image: "default image",
@@ -40,11 +39,8 @@ function getGroupProducts(
   return groups.has(group) ? groups.get(group) : emptyProduct;
 }
 
-export function getGroupData(
-  groups: Map<string, ICatProduct[]>,
-  group: string
-) {
-  const groupProducts: ICatProduct[] = getGroupProducts(groups, group);
+export function getGroupData(groups: Map<string, IProduct[]>, group: string) {
+  const groupProducts: IProduct[] = getGroupProducts(groups, group);
 
   const amountOfIncomes = groupProducts && groupProducts.length;
 

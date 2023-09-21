@@ -7,19 +7,19 @@ import {
   IncomeDeleteButton,
   ProductDeleteButton,
   ProductsAmount,
-} from "components/products/Client";
+} from "components/incomes/Client";
 import {
   Guaranty,
   ProductPrice,
   ProductStatus,
-} from "components/products/Server";
+} from "components/incomes/Server";
 import { createGroups, getGroupData } from "data/groups";
-import { ICatProduct } from "interfaces/IProducts";
+import { IProduct } from "interfaces/IProducts";
 import { useState, useEffect } from "react";
 import { BsListUl, BsPlus } from "react-icons/bs";
 import { IoIosArrowForward, IoMdClose } from "react-icons/io";
 import { Box, Grid } from "theme-ui";
-import { httpExchange, httpProducts } from "utils/http.requests";
+import { httpExchange, httpProducts } from "utils/http/http";
 
 export function GroupsHeader() {
   return (
@@ -93,7 +93,7 @@ export function Group({
   toggle,
   rate,
 }: {
-  groups: Map<string, ICatProduct[]>;
+  groups: Map<string, IProduct[]>;
   group: string;
   toggle: boolean;
   rate: number;
@@ -195,7 +195,7 @@ export function GroupInfo({
   groups,
 }: {
   toggle: boolean;
-  groups: Map<string, ICatProduct[]>;
+  groups: Map<string, IProduct[]>;
 }) {
   const selectedGroup = useSelector((store) => store.groups.select);
   return (

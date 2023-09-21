@@ -2,12 +2,12 @@
 "use client";
 
 import { selectNav, setModal, useAppDispatch, useSelector } from "app/redux";
-import { ICatProduct } from "interfaces/IProducts";
+import { IProduct } from "interfaces/IProducts";
 import Link from "next/link";
 import { useState } from "react";
 import { BsPlus, BsTrashFill } from "react-icons/bs";
 import { Box, Button } from "theme-ui";
-import { newProd } from "utils/actions";
+import { newProd } from "utils/db/db.actions";
 
 function ErrorButton() {
   const dispatch = useAppDispatch();

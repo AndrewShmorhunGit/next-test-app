@@ -1,6 +1,6 @@
-import { ICatProduct } from "interfaces/IProducts";
+import { IProduct } from "interfaces/IProducts";
 
-export const catProducts: ICatProduct[] = [
+export const productsList: IProduct[] = [
   {
     id: "1",
     image:

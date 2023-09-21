@@ -1,9 +1,9 @@
 "use server";
 
-import { ICatProduct } from "interfaces/IProducts";
+import { IProduct } from "interfaces/IProducts";
 import db from "./db";
 
-export const newProd = async (product: ICatProduct) => {
+export const newProd = async (product: IProduct) => {
   const prod = await db.product.create({
     data: {
       image: product.image,

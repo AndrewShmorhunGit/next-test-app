@@ -1,6 +1,9 @@
 import { config } from "config/index";
 
-async function client(endpoint: string, customConfig = {}): Promise<Response> {
+export async function client(
+  endpoint: string,
+  customConfig = {}
+): Promise<Response> {
   const requestConfig = {
     method: "GET",
     "Content-Type": "application/json",
@@ -18,5 +21,3 @@ async function client(endpoint: string, customConfig = {}): Promise<Response> {
     return Promise.reject(data);
   }
 }
-
-export { client };

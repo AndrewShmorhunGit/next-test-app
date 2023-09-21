@@ -1,17 +1,16 @@
 "use client";
-import { AddProductsPage } from "components/products/AddProductsPage";
-import { ProductsToAdd } from "components/products/ProductsToAdd";
-
+import { ProductsPage } from "components/products/AddProductsPage";
+import { ProductsToAdd } from "components/products/Server";
 import { Metadata } from "next/types";
 
 export const metadata: Metadata = {
-  title: "Add Products",
+  title: "Products",
 };
 
 export default function Products() {
   return (
-    <AddProductsPage>
+    <ProductsPage>
       <ProductsToAdd />
-    </AddProductsPage>
+    </ProductsPage>
   );
 }

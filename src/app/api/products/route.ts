@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import db from "utils/db";
+import db from "utils/db/db";
 
 export const GET = async (request: Request) => {
   const products = await db.product.findMany();

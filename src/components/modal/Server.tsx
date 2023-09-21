@@ -2,10 +2,10 @@
 
 import { palette } from "app/styles/services/palette";
 import { createGrid, flexCenter } from "app/styles/services/styles";
-import { ICatProduct } from "interfaces/IProducts";
+import { IProduct } from "interfaces/IProducts";
 import { CloseModalButton, ModalDeleteButton } from "components/lib/Buttons";
 import { ModalCloseX } from "./Client";
-import { StatusIndicator } from "components/products/Server";
+import { StatusIndicator } from "components/incomes/Server";
 
 export function ModalBackground({ children }: { children: React.ReactNode }) {
   return (
@@ -28,7 +28,7 @@ export function ModalBackground({ children }: { children: React.ReactNode }) {
 export function ModalDeleteProduct({
   product,
 }: {
-  product: ICatProduct | ICatProduct[];
+  product: IProduct | IProduct[];
 }) {
   return (
     <div sx={{ display: "flex", flexDirection: "column" }}>
@@ -80,11 +80,7 @@ export function ModalFooterWrapper({
   );
 }
 
-export function ModalBody({
-  product,
-}: {
-  product: ICatProduct | ICatProduct[];
-}) {
+export function ModalBody({ product }: { product: IProduct | IProduct[] }) {
   return (
     <>
       {Array.isArray(product) ? (

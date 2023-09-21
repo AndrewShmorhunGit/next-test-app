@@ -7,7 +7,7 @@ import {
   setProductsLocalStorage,
 } from "app/redux";
 import { AppDispatch } from "app/redux/store";
-import { httpProducts } from "utils/http.requests";
+import { httpProducts } from "utils/http/http";
 
 export const fetchProductsAction = () => {
   return async (dispatch: AppDispatch) => {

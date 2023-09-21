@@ -1,8 +1,8 @@
-import { ICatProduct, IProductsResponseData } from "interfaces/IProducts";
+import { IProduct, IProductsResponseData } from "interfaces/IProducts";
 import { config } from "config/index";
-import { transformFetchedProducts } from "./functions";
+import { transformFetchedProducts } from "../functions";
 
-export async function httpProducts(): Promise<ICatProduct[] | void> {
+export async function httpProducts(): Promise<IProduct[] | void> {
   try {
     const response = await fetch(config.api.products);
     const products: IProductsResponseData = await response.json();

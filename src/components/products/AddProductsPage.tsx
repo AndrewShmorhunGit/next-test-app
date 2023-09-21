@@ -1,8 +1,8 @@
 "use client";
-import { ActivePageWrapper } from "./Client";
-import { ScrollContainer } from "./Server";
+import { ActivePageWrapper } from "../incomes/Client";
+import { ScrollContainer } from "../incomes/Server";
 
-export function AddProductsPage({ children }: { children: React.ReactNode }) {
+export function ProductsPage({ children }: { children: React.ReactNode }) {
   return (
     <ActivePageWrapper>
       <ScrollContainer>{children}</ScrollContainer>

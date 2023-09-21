@@ -1,11 +1,11 @@
 "use client";
 
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { ICatProduct } from "interfaces/IProducts";
+import { IProduct } from "interfaces/IProducts";
 
 const initialState: {
   value: string;
-  data: ICatProduct | ICatProduct[] | null;
+  data: IProduct | IProduct[] | null;
 } = {
   value: "none",
   data: null,
@@ -19,7 +19,7 @@ export const modalSlice = createSlice({
       state,
       action: PayloadAction<{
         value: string;
-        data: ICatProduct | ICatProduct[] | null;
+        data: IProduct | IProduct[] | null;
       }>
     ) => {
       state.value = action.payload.value;

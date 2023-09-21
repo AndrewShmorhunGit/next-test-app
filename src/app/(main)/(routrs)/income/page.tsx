@@ -1,10 +1,10 @@
-import ProductsPage from "components/products/ProductsPage";
+import ProductsPage from "components/incomes/ProductsPage";
 import { Metadata } from "next/types";
 
 export const metadata: Metadata = {
-  title: "Products",
+  title: "Income",
 };
 
-export default function Products() {
+export default function Income() {
   return <ProductsPage />;
 }

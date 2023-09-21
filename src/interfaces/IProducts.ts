@@ -1,4 +1,4 @@
-export interface ICatProduct {
+export interface IProduct {
   id: string;
   image: string;
   position: { name: string; code: string };

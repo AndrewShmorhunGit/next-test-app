@@ -1,5 +1,5 @@
 import {
-  ICatProduct,
+  IProduct,
   IProductsResponseData,
   IResponseProduct,
 } from "interfaces/IProducts";
@@ -71,7 +71,7 @@ export function formatHrnPrice(price: number): string {
 
 export function transformFetchedProducts(
   response: IProductsResponseData
-): ICatProduct[] {
+): IProduct[] {
   const products = transformDbProducts(response.data);
   return products;
 }
@@ -101,3 +101,22 @@ export function transformDbProducts(data: IResponseProduct[]) {
   });
   return products;
 }
+
+export const transformProductToDbProduct = (product: IProduct) => {
+  return {
+    data: {
+      image: product.image,
+      name: product.position.name,
+      code: product.position.code,
+      status: product.status,
+      from: product.date.from,
+      to: product.date.to,
+      new: product.state.new,
+      price: product.price.usd.toString(),
+      group: product.group,
+      income: product.income,
+      supplier: product.supplier,
+      guaranty: product.guaranty || "",
+    },
+  };
+};

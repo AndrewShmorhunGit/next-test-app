@@ -1,12 +1,12 @@
 "use client";
 
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { ICatProduct } from "interfaces/IProducts";
+import { IProduct } from "interfaces/IProducts";
 
 const initialState: {
   loading: boolean;
   error: string;
-  products: ICatProduct[];
+  products: IProduct[];
   toggle: boolean;
   isStateFilter: "all" | "new" | "used";
   isStatusFilter: "all" | "available" | "not available";
@@ -27,7 +27,7 @@ export const productsSlice = createSlice({
       state.loading = true;
       state.error = "";
     },
-    fetchProductsSuccess: (state, action: PayloadAction<ICatProduct[]>) => {
+    fetchProductsSuccess: (state, action: PayloadAction<IProduct[]>) => {
       state.products = action.payload;
       state.loading = false;
     },

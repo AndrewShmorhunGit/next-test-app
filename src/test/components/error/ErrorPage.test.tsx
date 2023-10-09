@@ -3,7 +3,7 @@
  */
 import React from "react";
 import { render } from "@testing-library/react";
-import { ErrorPage } from "../../../components/error/ErrorPage";
+import { ErrorPage } from "../../../components/pages/ErrorPage";
 
 describe("ErrorPage", () => {
   it("renders without errors", () => {

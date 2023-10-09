@@ -14,7 +14,7 @@ import { Box } from "theme-ui";
 import { checkState, checkStatus, filterProducts } from "utils/filters";
 import { Product } from "./Server";
 import { Select } from "components/lib/Server";
-import { httpProducts } from "utils/http/http";
+import { httpGetAllProducts } from "utils/http/http";
 import { useEffect, useState } from "react";
 
 export function ProductDeleteButton({ product }: { product: IProduct }) {

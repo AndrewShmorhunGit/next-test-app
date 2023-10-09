@@ -1,7 +1,7 @@
 /** @jsxImportSource theme-ui */
 "use client";
-import { Products } from "./Server";
-import { ActivePageWrapper } from "./Client";
+import { Products } from "../incomes/Server";
+import { ActivePageWrapper } from "../incomes/Client";
 
 export default function ProductsPage() {
   return (

@@ -19,13 +19,13 @@ import { useState, useEffect } from "react";
 import { BsListUl, BsPlus } from "react-icons/bs";
 import { IoIosArrowForward, IoMdClose } from "react-icons/io";
 import { Box, Grid } from "theme-ui";
-import { httpExchange, httpProducts } from "utils/http/http";
+import { httpExchange, httpGetAllProducts } from "utils/http/http";
 
 export function GroupsHeader() {
   const [isState, setState] = useState(0);
 
   useEffect(() => {
-    httpProducts().then((data) => data && setState(data.length));
+    httpGetAllProducts().then((data) => data && setState(data.length));
   }, []);
 
   return (

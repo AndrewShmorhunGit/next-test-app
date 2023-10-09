@@ -1,5 +1,5 @@
 "use client";
-import { ProductsPage } from "components/products/AddProductsPage";
+import { ProductsPage } from "components/pages/AddProductsPage";
 import { ProductsToAdd } from "components/products/Server";
 import { Metadata } from "next/types";
 

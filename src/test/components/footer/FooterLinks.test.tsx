@@ -20,12 +20,12 @@ describe("FooterLinks", () => {
     const { getByRole } = render(<FooterLinks />);
     const githubLink = getByRole("link", { name: /GitHub/i });
     const linkedinLink = getByRole("link", { name: /LinkedIn/i });
-    // @ts-ignore
+
     expect(githubLink).toHaveAttribute(
       "href",
       "https://github.com/AndrewShmorhunGit/next-test-app"
     );
-    // @ts-ignore
+
     expect(linkedinLink).toHaveAttribute(
       "href",
       "https://www.linkedin.com/in/andrew-shmorhun-850a76209/"

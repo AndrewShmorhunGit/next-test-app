@@ -1,5 +1,5 @@
 import { Metadata } from "next/types";
-import { AppProviders } from "components/application/AppProviders";
+import { AppProviders } from "components/application/providers/AppProviders";
 
 export const metadata: Metadata = {
   title: "Next.js Web App",

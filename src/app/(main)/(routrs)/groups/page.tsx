@@ -1,4 +1,4 @@
-import { OrdersPage } from "components/groups/OrdersPage";
+import { OrdersPage } from "components/pages/OrdersPage";
 import { Metadata } from "next/types";
 
 export const metadata: Metadata = {

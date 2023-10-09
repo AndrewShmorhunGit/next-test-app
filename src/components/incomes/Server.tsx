@@ -15,10 +15,10 @@ import {
   StatusSelect,
 } from "./Client";
 import { Box, Grid } from "theme-ui";
-import { httpExchange, httpProducts } from "utils/http/http";
+import { httpExchange, httpGetAllProducts } from "utils/http/http";
 
 export async function ProductsHeader() {
-  const products = await httpProducts();
+  const products = await httpGetAllProducts();
   if (products)
     return (
       <Box
@@ -37,7 +37,7 @@ export async function ProductsHeader() {
 
 export async function Products() {
   const rate = await httpExchange();
-  const products = await httpProducts();
+  const products = await httpGetAllProducts();
   if (rate && products)
     return (
       <>
@@ -72,25 +72,29 @@ export function Product({
   product: IProduct;
   rate: number;
 }) {
-  return (
-    <ProductWrapper>
-      <StatusIndicator status={product.status} />
-      <ProductImage image={product.image} altText={product.position.name} />
-      <ProductInfo name={product.position.name} code={product.position.code} />
-      <ProductStatus status={product.status} />
-      <DateRange
-        from={transformDateFormat(product.date.from)[0]}
-        to={transformDateFormat(product.date.from)[0]}
-      />
-      <ProductState condition={product.state.new} />
-      <ProductPrice price={product.price.usd} course={rate} />
-      <ProductGroup group={product.group} />
-      <ProductSupplier supplier={product.supplier} />
-      <ProductIncome income={product.income} />
-      <Guaranty guaranty={product.guaranty} from={product.date.from} />
-      <ProductDeleteButton product={product} />
-    </ProductWrapper>
-  );
+  if (rate && product)
+    return (
+      <ProductWrapper>
+        <StatusIndicator status={product.status} />
+        <ProductImage image={product.image} altText={product.position.name} />
+        <ProductInfo
+          name={product.position.name}
+          code={product.position.code}
+        />
+        <ProductStatus status={product.status} />
+        <DateRange
+          from={transformDateFormat(product.date.from)[0]}
+          to={transformDateFormat(product.date.from)[0]}
+        />
+        <ProductState condition={product.state.new} />
+        <ProductPrice price={product.price.usd} course={rate} />
+        <ProductGroup group={product.group} />
+        <ProductSupplier supplier={product.supplier} />
+        <ProductIncome income={product.income} />
+        <Guaranty guaranty={product.guaranty} from={product.date.from} />
+        <ProductDeleteButton product={product} />
+      </ProductWrapper>
+    );
 }
 
 export const StatusIndicator = ({ status }: { status: string }) => (

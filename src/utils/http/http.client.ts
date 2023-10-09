@@ -1,7 +1,7 @@
 import { config } from "config/index";
 
 export async function client(
-  endpoint: string,
+  endpoint: string = "",
   customConfig = {}
 ): Promise<Response> {
   const requestConfig = {
@@ -10,10 +10,7 @@ export async function client(
     ...customConfig,
   };
 
-  const response = await window.fetch(
-    config.api.products + endpoint,
-    requestConfig
-  );
+  const response = await fetch(config.api.products + endpoint, requestConfig);
   const data = response;
   if (response.ok) {
     return Promise.resolve(data);

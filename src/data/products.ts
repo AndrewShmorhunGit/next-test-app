@@ -1,8 +1,8 @@
-import { httpProducts } from "utils/http/http";
+import { httpGetAllProducts } from "utils/http/http";
 import { productsList } from "./income";
 
 export const getProductsToAdd = async () => {
-  const existedProducts = (await httpProducts()) || [];
+  const existedProducts = (await httpGetAllProducts()) || [];
   const existedProdNameList = existedProducts.map(
     ({ position: { name } }) => name
   );

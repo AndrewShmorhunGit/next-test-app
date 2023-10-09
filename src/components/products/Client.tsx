@@ -9,7 +9,7 @@ import { useEffect, useState } from "react";
 
 import { Box } from "theme-ui";
 import { addProductToDb } from "utils/db/db.actions";
-import { httpProducts } from "utils/http/http";
+import { httpGetAllProducts } from "utils/http/http";
 
 export function ProductToAdd({ prod }: { prod: IProduct }) {
   const dispatch = useAppDispatch();
@@ -49,7 +49,7 @@ export function ProductsHeader() {
   const { value } = useSelector((store) => store.counter);
   const dispatch = useAppDispatch();
   useEffect(() => {
-    httpProducts().then((data) => {
+    httpGetAllProducts().then((data) => {
       if (data) {
         const amount = data.length;
 

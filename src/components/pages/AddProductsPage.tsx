@@ -1,7 +1,7 @@
 "use client";
 import { ActivePageWrapper } from "../incomes/Client";
 import { ScrollContainer } from "../incomes/Server";
-import { ProductsHeader } from "./Client";
+import { ProductsHeader } from "../products/Client";
 
 export function ProductsPage({ children }: { children: React.ReactNode }) {
   return (

@@ -7,13 +7,13 @@ import {
   setProductsLocalStorage,
 } from "app/redux";
 import { AppDispatch } from "app/redux/store";
-import { httpProducts } from "utils/http/http";
+import { httpGetAllProducts } from "utils/http/http";
 
 export const fetchProductsAction = () => {
   return async (dispatch: AppDispatch) => {
     try {
       dispatch(fetchingProducts());
-      const products = await httpProducts();
+      const products = await httpGetAllProducts();
       dispatch(fetchProductsSuccess(products || []));
       dispatch(setProductsLocalStorage(products));
     } catch (error) {

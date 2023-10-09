@@ -1,12 +1,22 @@
 import { IProduct, IProductsResponseData } from "interfaces/IProducts";
 import { config } from "config/index";
 import { transformFetchedProducts } from "../functions";
+import { client } from "./http.client";
 
-export async function httpProducts(): Promise<IProduct[] | void> {
+export async function httpGetAllProducts(): Promise<IProduct[] | void> {
   try {
-    const response = await fetch(config.api.products);
+    const response = await client();
     const products: IProductsResponseData = await response.json();
     return transformFetchedProducts(products);
+  } catch (error) {
+    console.error("Error:", error);
+  }
+}
+export async function httpDeleteProduct(id: string) {
+  try {
+    await client(`?id=${id}`, {
+      method: "DELETE",
+    });
   } catch (error) {
     console.error("Error:", error);
   }

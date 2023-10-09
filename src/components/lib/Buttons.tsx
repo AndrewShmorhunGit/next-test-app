@@ -4,10 +4,11 @@
 import { selectNav, setModal, useAppDispatch, useSelector } from "app/redux";
 import { IProduct } from "interfaces/IProducts";
 import Link from "next/link";
-import { useState } from "react";
-import { BsPlus, BsTrashFill } from "react-icons/bs";
-import { Box, Button } from "theme-ui";
-import { newProd } from "utils/db/db.actions";
+import { useEffect, useState } from "react";
+import { BsTrashFill } from "react-icons/bs";
+
+import { Button } from "theme-ui";
+import { httpDeleteProduct } from "utils/http/http";
 
 function ErrorButton() {
   const dispatch = useAppDispatch();
@@ -44,38 +45,32 @@ function CloseModalButton() {
 }
 
 function ModalDeleteButton() {
+  const dispatch = useAppDispatch();
+  const data = useSelector((store) => store.modal.data);
+  const [isState, setState] = useState<IProduct | IProduct[] | null>(null);
+
+  useEffect(() => {
+    if (data) {
+      if (Array.isArray(data)) {
+        console.log(
+          "It is an array of products! Need to write special function for this request!"
+        );
+      } else {
+        data && httpDeleteProduct(data.id);
+      }
+    }
+  }, [isState]);
+
   return (
     <Button
       sx={{ variant: "styles.buttons.modal" }}
       children={[<BsTrashFill size={12} sx={{ color: "error" }} />, "delete"]}
-      onClick={() => console.log("del")}
+      onClick={() => {
+        setState(data);
+        dispatch(setModal({ value: "none", data: null }));
+      }}
     />
   );
 }
-
-// export function AddProductButton({ product }: { product: ICatProduct }) {
-//    const [isProd, setProd] = useState<ICatProduct[]>(products);
-
-//   const addProd = (product: ICatProduct) => {
-//     setProd(
-//       isProd.filter((prod: ICatProduct) => prod.id !== product.id && prod)
-//     );
-//     newProd(product);
-//   return <Box
-//               sx={{
-//                 bg: "primary.second",
-//                 height: "2rem",
-//                 width: "2rem",
-//                 borderRadius: 0,
-//                 variant: "styles.box.flex.center",
-//                 boxShadow: "green",
-//                 cursor: "pointer",
-//                 ml: 3,
-//               }}
-//               onClick={() => addProd(prod)}
-//             >
-//               <BsPlus color={"white"} size={14} />
-//             </Box>;
-// }
 
 export { ErrorButton, CloseModalButton, ModalDeleteButton };

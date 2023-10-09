@@ -23,7 +23,7 @@ export const getFooterData = () => {
   const links = [
     {
       icon: <AiFillGithub size={20} sx={{ color: "primary.second" }} />,
-      link: "https://github.com/AndrewShmorhunGit/next-test-app",
+      link: "https://github.com/AndrewShmorhunGit/next-test-app/tree/latest",
     },
     {
       icon: <AiFillLinkedin size={20} sx={{ color: "primary.second" }} />,
